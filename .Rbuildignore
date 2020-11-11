@@ -1,0 +1,14 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+dev_history.R
+^dev$
+$run_dev.*
+^README\.Rmd$
+^.inst\burocracias$
+^app\.R$
+^rsconnect$
+^Dockerfile$
+^_auth0.yml$
+^LICENSE.md$
+^LICENSE\.md$

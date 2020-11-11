@@ -1,0 +1,50 @@
+Package: ods6
+Title: ODS6 dashboard
+Authors@R: 
+    person(given = "William",
+           family = "Amorim",
+           role = c("aut", "cre"),
+           email = "wamorim@curso-r.com")
+Version: 1.0.0
+Description: Dashboard do projeto ODS6.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    shiny,
+    golem,
+    glue,
+    htmltools,
+    dplyr,
+    stringr,
+    lubridate,
+    bs4Dash,
+    httr,
+    purrr,
+    scales,
+    jsonlite,
+    pkgload,
+    auth0,
+    reactable,
+    forcats,
+    ggplot2,
+    readr,
+    readxl,
+    shinyWidgets,
+    shinyalert,
+    tibble,
+    stringi,
+    magrittr,
+    shinyjs,
+    fresh,
+    config,
+    shinycssloaders,
+    sparkline,
+    datasets,
+    usethis,
+    fs
+Remotes: 
+    Thinkr-open/golem
+RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
