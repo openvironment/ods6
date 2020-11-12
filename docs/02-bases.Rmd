@@ -10,122 +10,49 @@ A seguir, documentamos o processo de extração de dados e contrução das bases
 
 Do portal Sidra, do IBGE, baixamos dados de saneamento básico, abastecimento de água, ocupação de domicílios e população total referentes ao Censo de 2010.
 
+Para facilitar e melhor documentar a importação dos dados, baixamos os dados a partir da API do portal Sidra com o auxílio do pacote `sidrar`.
+
+A página [http://api.sidra.ibge.gov.br/](http://api.sidra.ibge.gov.br/) pode (e deve) ser utilizada para buscar os parâmetros disponíveis de cada uma das tabelas.
+
+O script em R utilizado para importação e limpeza dos dados pode ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/ibge.R).
+
 ### Saneamento
 
 Página: https://sidra.ibge.gov.br/tabela/1394
 
+Variáveis de interesse:
+
 - Código do município 
 - Nome do município
 - Número de municípios permanentes ocupados servidos por fossa
-
-A partir do arquivo baixado (`base_ibge_saneamento_original.xlsx`), construímos a tabela `ibge_saneamento_tidy`.
-
-```{r, eval = FALSE}
-ibge_saneamento <- readxl::read_excel(
-  "data-raw/base_ibge_saneamento_original.xlsx",
-  skip = 7,
-  col_names = c(
-    "nivel",
-    "munip_cod",
-    "munip_nome",
-    "condicao",
-    "variavel",
-    "valor"
-  )
-) %>% 
-  filter(nivel != "Fonte: IBGE - Censo Demográfico" | is.na(nivel))
-
-num_domicilios <- ibge_saneamento$valor %>% 
-  matrix(ncol = 8, byrow = TRUE) %>% 
-  `colnames<-`(c(
-    "domicilios_total",
-    "sanea_rede_esgoto",
-    "sanea_fossa_septica",
-    "sanea_fossa_rudimentar",
-    "sanea_vala",
-    "sanea_rio_lago_mar",
-    "sanea_outro",
-    "sanea_nao_tem"
-  )) %>% 
-  as_tibble() %>% 
-  mutate_all(list(as.numeric))
-
-ibge_saneamento_tidy <- ibge_saneamento %>% 
-  select(munip_cod, munip_nome) %>% 
-  filter(!is.na(munip_cod)) %>% 
-  bind_cols(num_domicilios) %>% 
-  filter(str_detect(munip_cod, "^35")) %>% 
-  mutate(munip_nome = str_remove(munip_nome, " [(]SP[)]")) 
-```
 
 
 ### Abastecimento
 
 Página: https://sidra.ibge.gov.br/tabela/3217
 
+Variáveis de interesse:
+
 - Código do município 
 - Nome do município
 - Número de Municípios permanentes ocupados abastecidos por poço e mina, localizados na propriedade
 
-A partir do arquivo baixado (`base_ibge_abastecimento_original.xlsx`), construímos a tabela `ibge_abastecimento_tidy`.
-
-```{r, eval = FALSE}
-ibge_abastecimento <- readxl::read_excel(
-  "data-raw/base_ibge_abastecimento_original.xlsx",
-  skip = 5
-) %>% 
-  janitor::clean_names()
-
-ibge_abastecimento_tidy <- ibge_abastecimento %>% 
-  select(
-    munip_cod = x2,
-    abast_rede_geral = rede_geral,
-    abast_poco_na_propriedade = poco_ou_nascente_na_propriedade,
-    abast_poco_fora_propriedade = poco_ou_nascente_fora_da_propriedade,
-    abast_carro_pipa = carro_pipa,
-    abast_chuva_cisterna = agua_da_chuva_armazenada_em_cisterna,
-    abast_chuva_outro = agua_da_chuva_armazenada_de_outra_forma,
-    abast_rio_lago_igarape = rio_acude_lago_ou_igarape,
-    abst_poco_na_aldeia = poco_ou_nascente_na_aldeia,
-    abst_poco_fora_aldeia = poco_ou_nascente_fora_da_aldeia
-  ) %>% 
-  mutate_at(vars(-munip_cod), list(as.numeric)) %>% 
-  filter(str_detect(munip_cod, "^35"))
-```
-
-
 ### População total
 
 Páginas: https://sidra.ibge.gov.br/tabela/200
+
+Variáveis de interesse:
 
 - Código do município 
 - Nome do município
 - Número de municípios ocupados permanentes
 - População Total
 
-A partir do arquivo baixado (`base_ibge_pop_total.xlsx`), construímos a tabela `ibge_populacao_tidy`.
-
-```{r, eval = FALSE}
-ibge_populacao <- readxl::read_excel(
-  "data-raw/base_ibge_pop_total.xlsx",
-  skip = 5
-) %>% 
-  janitor::clean_names()
-
-ibge_populacao_tidy <- ibge_populacao %>% 
-  select(
-    munip_cod = x1,
-    pop_total = total
-  ) %>% 
-  filter(str_detect(munip_cod, "^35"))
-```
-
-
 ## IDH
 
-Os dados para IDH de 2010 foram baixados do portal do Atla de Desenvolvimento humano no Brasil: [http://www.atlasbrasil.org.br/2013/pt/download/](http://www.atlasbrasil.org.br/2013/pt/download/).
+Os dados para IDH de 2010 foram baixados do portal do Atla de Desenvolvimento humano no Brasil: [http://www.atlasbrasil.org.br/acervo/biblioteca](http://www.atlasbrasil.org.br/acervo/biblioteca).
 
-As seguintes variáveis foram extraídas para o ano de 2010:
+Foi feito o download da base *Censo Demográfico (1991, 2000 e 2010)*. Do arquivo *Atlas 2013_municipal, estadual e Brasil.xlsx*, foram extraídas as seguintes variáveis para o ano de 2010:
 
 - Código do município
 - IDH
@@ -133,26 +60,7 @@ As seguintes variáveis foram extraídas para o ano de 2010:
 - IDHL (longevidade)
 - IDHR (renda)
 
-A partir do arquivo baixado (`base_idh_original.xlsx`), construímos a tabela `pnud_idh`.
-
-```{r, eval = FALSE}
-idh <- readxl::read_excel("data-raw/base_idh_original.xlsx", sheet = 2) %>% 
-  janitor::clean_names()
-
-pnud_idh <- pnud %>%
-  filter(ano == 2010, uf == 35) %>% 
-  select(
-    ano,
-    munip_cod = codmun6,
-    idh = idhm,
-    idhm_e
-    idhm_l
-    idhm_r
-  )
-```
-
-
-
+O script em R utilizado para importação e limpeza dos dados pode ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/idh.R).
 
 ## SEADE
 
