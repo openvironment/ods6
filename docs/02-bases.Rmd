@@ -188,73 +188,48 @@ seade_tidy <- seade %>%
 
 O Sistema Nacional de Informações Sobre Saneamento (SNIS) possui bases de dados com informações e indicadores sobre a prestação de serviços de Água e Esgotos, Manejo de Resíduos Sólidos Urbanos e Drenagem e Manejo das Águas Pluviais Urbanas.
 
-No portal [http://app4.cidades.gov.br/serieHistorica/#](http://app4.cidades.gov.br/serieHistorica/#), buscamos as bases com as seguintes variáveis:
+No portal [http://app4.mdr.gov.br/serieHistorica](http://app4.mdr.gov.br/serieHistorica), buscamos as bases com as seguintes variáveis:
 
 - Código do prestador
 - Nome do Prestador
 - Natureza jurídica do prestador
-- AG013 - quantidade de economias residenciais ativas de água
 - AG002  - quantidade de ligações ativas de água
 - AG004 - quantidade de ligações ativas de água micromedidas
 - AG008 - volume de água micromedido
 - AG010 - volume de água consumido
 - AG012 - volume de água macromedido
+- AG013 - quantidade de economias residenciais ativas de água
 - AG014 - quantidade de economias ativas micromedidas
-- ES008 - quantidade de economias residenciais ativas de esgoto
 - ES006 - volume de esgoto tratado
+- ES008 - quantidade de economias residenciais ativas de esgoto
 - FN001 - receita operacional direta total
-- FN015 - despesas de exploração (DEX)
 - FN002 - receita operacional direta de água
+- FN015 - despesas de exploração (DEX)
 - AG011 - volume de água faturado
 - AG018 - volume de água tratada importado
 - AG019 - volume de água faturado exportado
 
-**Nota**: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel.
+Para isso, fizemos a seguinte busca no portal:
 
-A partir da base do original extraída do portal `base_snis_original.xlsx`, criamos a base tratada `snis_tidy`:
+- No menu Água e Esgoto, selecionamos a opção **Informações e indicadores desagregados**. 
 
-```{r, eval = FALSE}
-snis <- readxl::read_excel(
-  "data-raw/base_snis_original.xlsx", 
-  sheet = "Sheet 1 - snis", 
-  skip = 1
-)
+- Nos filtros, utilizamos:
+    - Ano de referência: todos
+    - Abrangência: todos
+    - Tipo de serviço: todos
+    - Natureza jurídica: todos
+    - Região: sudeste
+    - Estado: São Paulo
+    
+- Nas colunas, selecionamos:
+    - Família de informações e indicadores: informações financeiras, informações de água e informações de esgoto.
+    - Informações e indicadores: todos (91 selecionados)
+    
+Foi então baixado um arquivo CSV.
 
-snis <- snis %>% 
-  janitor::clean_names() %>% 
-  filter(municipio != "---", !is.na(municipio))
+**Nota**: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel. Possível causa: o arquivo CSV era um arquivo binário.
 
-snis_tidy <- snis %>% 
-  select(
-    munip_cod = codigo_do_municipio,
-    ano = ano_de_referencia,
-    prestador_cod = codigo_do_prestador,
-    prestador_nome = prestador,
-    prestador_sigla = sigla_do_prestador,
-    prestador_nt_juridica = natureza_juridica,
-    ind_ag013 = starts_with("ag013"),
-    ind_ag002 = starts_with("ag002"),
-    ind_ag004 = starts_with("ag004"),
-    ind_ag008 = starts_with("ag008"),
-    ind_ag010 = starts_with("ag010"),
-    ind_ag012 = starts_with("ag012"),
-    ind_ag014 = starts_with("ag014"),
-    ind_es008 = starts_with("es008"),
-    ind_es006 = starts_with("es006"),
-    ind_fn001 = starts_with("fn001"),
-    ind_fn015 = starts_with("fn015"),
-    ind_fn002 = starts_with("fn002"),
-    ind_ag011 = starts_with("ag011"),
-    ind_ag006 = starts_with("ag006"),
-    ind_ag018 = starts_with("ag018"),
-    ind_ag019 = starts_with("ag019")
-  ) %>% 
-  mutate_at(
-    vars(starts_with("ind"), ano), 
-    list(parse_number),
-    locale = locale(decimal_mark = ",", grouping_mark = ".")
-  )
-```
+O script utilizado para importação e limpeza da base por ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/snis.R).
 
 
 ## Base completa
