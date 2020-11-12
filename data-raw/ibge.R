@@ -106,4 +106,9 @@ ibge <- saneamento %>%
   left_join(abastecimento, by = c("munip_cod", "ano")) %>% 
   left_join(populacao, by = c("munip_cod", "ano"))
 
+ibge <- ibge %>% 
+  mutate(
+    munip_nome = str_remove(munip_nome, " - SP")
+  )
+
 usethis::use_data(ibge, overwrite = TRUE)
