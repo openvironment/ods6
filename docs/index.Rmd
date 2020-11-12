@@ -3,6 +3,8 @@ title: "ODS6"
 author: "Adelaide Nardocci, Americo Sampaio, William Amorim"
 date: "`r paste('Última atualização: ', Sys.Date())`"
 site: bookdown::bookdown_site
+output:
+  bookdown::gitbook: default
 documentclass: book
 biblio-style: apalike
 link-citations: yes
