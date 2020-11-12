@@ -1,0 +1,59 @@
+--- 
+title: "ODS6"
+author: "Adelaide Nardocci, Americo Sampaio, William Amorim"
+date: "`r paste('Última atualização: ', Sys.Date())`"
+site: bookdown::bookdown_site
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+description: "Documentação do projeto ODS6."
+---
+
+# Sobre {-}
+
+Este texto tem como objetivo documentar as atividades realizadas no projeto "ODS6".
+
+## Responsáveis {-}
+
+- Adelaide Nardocci
+    - nardocci@usp.br 
+- Americo Sampaio
+    - mecosamp@gmail.com
+- William Amorim
+    - thewilliam89@gmail.com
+
+## Atividades {-}
+
+Atividades realizadas no projeto, responsável e softwares utilizados.
+
+- Extração dos dados
+    - Responsáveis: Adelaide Nardocci, William Amorim
+    - Software utilizado: R/RStudio
+- Preparação das bases
+    - Responsáveis: William Amorim
+    - Software utilizado: R/RStudio
+- Costrução de indicadores
+    - Responsáveis: Americo Sampaio, William Amorim
+    - Software utilizado: R/RStudio
+- Análise descritiva
+    - Responsáveis: William Amorim
+    - Software utilizado: R/RStudio
+- Documentação da análise
+    - Responsáveis: William Amorim
+    - Software utilizado: R/RStudio, bookdown
+
+## Registro de atividades {-}
+
+- Julho de 2019
+    - definição do problema
+    - definição dos dados necessários
+    - extração dos dados
+- Agosto de 2019
+    - limpeza das bases
+    - criação da base completa
+    - definição dos indicadores
+- Setembro de 2019
+    - construção dos indicadores
+    - documentação dos indicadores
+- Janeiro de 2020
+    - documentação da extração das bases

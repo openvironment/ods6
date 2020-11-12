@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Bases de dados | ODS6</title>
+  <meta name="description" content="Documentação do projeto ODS6." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Bases de dados | ODS6" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Documentação do projeto ODS6." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Bases de dados | ODS6" />
+  
+  <meta name="twitter:description" content="Documentação do projeto ODS6." />
+  
+
+<meta name="author" content="Adelaide Nardocci, Americo Sampaio, William Amorim" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introdução.html"/>
+<link rel="next" href="indicadores.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/core-js-2.5.3/shim.min.js"></script>
+<script src="libs/react-16.8.6/react.min.js"></script>
+<script src="libs/react-16.8.6/react-dom.min.js"></script>
+<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/reactable-binding-0.1.0/reactable.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ODS6</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Sobre</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#responsáveis"><i class="fa fa-check"></i>Responsáveis</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#atividades"><i class="fa fa-check"></i>Atividades</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#registro-de-atividades"><i class="fa fa-check"></i>Registro de atividades</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
+<li class="chapter" data-level="2" data-path="bases-de-dados.html"><a href="bases-de-dados.html"><i class="fa fa-check"></i><b>2</b> Bases de dados</a><ul>
+<li class="chapter" data-level="2.1" data-path="bases-de-dados.html"><a href="bases-de-dados.html#ibge"><i class="fa fa-check"></i><b>2.1</b> IBGE</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="bases-de-dados.html"><a href="bases-de-dados.html#saneamento"><i class="fa fa-check"></i><b>2.1.1</b> Saneamento</a></li>
+<li class="chapter" data-level="2.1.2" data-path="bases-de-dados.html"><a href="bases-de-dados.html#abastecimento"><i class="fa fa-check"></i><b>2.1.2</b> Abastecimento</a></li>
+<li class="chapter" data-level="2.1.3" data-path="bases-de-dados.html"><a href="bases-de-dados.html#população-total"><i class="fa fa-check"></i><b>2.1.3</b> População total</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="bases-de-dados.html"><a href="bases-de-dados.html#idh"><i class="fa fa-check"></i><b>2.2</b> IDH</a></li>
+<li class="chapter" data-level="2.3" data-path="bases-de-dados.html"><a href="bases-de-dados.html#seade"><i class="fa fa-check"></i><b>2.3</b> SEADE</a></li>
+<li class="chapter" data-level="2.4" data-path="bases-de-dados.html"><a href="bases-de-dados.html#snis"><i class="fa fa-check"></i><b>2.4</b> SNIS</a></li>
+<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-completa"><i class="fa fa-check"></i><b>2.5</b> Base completa</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="indicadores.html"><a href="indicadores.html"><i class="fa fa-check"></i><b>3</b> Indicadores</a><ul>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppof---número-de-domicílios-particulares-permanentes-ocupados-servidos-por-fossa"><i class="fa fa-check"></i>DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppopm---número-de-domicílios-particulares-permanentes-ocupados-abastecidos-por-poços-ou-minas"><i class="fa fa-check"></i>DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#thd---taxa-média-de-habitantes-por-domicílio"><i class="fa fa-check"></i>THD - Taxa média de habitantes por domicílio</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#par---população-residente-servida-por-rede-pública-de-abastecimento-de-água"><i class="fa fa-check"></i>PAR - População residente servida por rede pública de abastecimento de água</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#papn---população-residente-servida-por-poço-ou-nascente"><i class="fa fa-check"></i>PAPN - População residente servida por poço ou nascente</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#pta---população-residente-total-servida-por-sistemas-de-abastecimento-de-água-sanitariamente-adequados"><i class="fa fa-check"></i>PTA - População residente total servida por sistemas de abastecimento de água sanitariamente adequados</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ppta---porcentagem-da-população-total-residente-servida-por-água-de-abastecimento"><i class="fa fa-check"></i>pPTA - Porcentagem da população total residente servida por água de abastecimento</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ppapn---porcentagem-da-população-total-residente-servida-por-poço-ou-nascentes"><i class="fa fa-check"></i>pPAPN - Porcentagem da população total residente servida por poço ou nascentes</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ppar---porcentagem-da-população-residente-servida-por-rede-pública-de-abastecimento-de-água"><i class="fa fa-check"></i>pPAR - Porcentagem da população residente servida por rede pública de abastecimento de água</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#pre---população-residente-servida-por-rede-coletora-de-esgoto"><i class="fa fa-check"></i>PRE - População residente servida por rede coletora de esgoto</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#psf---população-residente-servida-por-sistema-de-fossa-séptica"><i class="fa fa-check"></i>PSF - População residente servida por sistema de fossa séptica</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ptce---população-residente-total-servida-por-sistemas-de-coleta-de-esgoto"><i class="fa fa-check"></i>PTCE - População residente total servida por sistemas de coleta de esgoto</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#pptce---porcentagem-da-população-residente-servida-com-sistema-de-coleta-de-esgoto"><i class="fa fa-check"></i>pPTCE - Porcentagem da população residente servida com sistema de coleta de esgoto</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ppfs---porcentagem-da-população-residente-servida-por-fossa-séptica"><i class="fa fa-check"></i>pPFS - Porcentagem da população residente servida por fossa séptica</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ppre---porcentagem-da-população-residente-servida-por-sistema-rede-coletora-de-esgoto"><i class="fa fa-check"></i>pPRE - Porcentagem da população residente servida por sistema rede coletora de esgoto</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#vaed---volume-de-água-efetivamente-disponibilizado-para-consumo-no-município"><i class="fa fa-check"></i>VAED - Volume de água efetivamente disponibilizado para consumo no município</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#vatp---volume-total-de-água-perdido-na-rede-de-distribuição"><i class="fa fa-check"></i>VATP - Volume total de água perdido na rede de distribuição</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#vaec---volume-de-água-efetivamente-consumido-no-município"><i class="fa fa-check"></i>VAEC - Volume de água efetivamente consumido no município</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#cmpe---consumo-médio-per-capita-efetivo"><i class="fa fa-check"></i>CMPE - Consumo médio per capita efetivo</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#ippt---índice-percentual-de-perdas-de-água-na-rede-de-distribuição"><i class="fa fa-check"></i>IPPT - Índice percentual de perdas de água na rede de distribuição</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#veep---volume-efetivo-de-esgoto-produzido-no-município"><i class="fa fa-check"></i>VEEP - Volume efetivo de esgoto produzido no município</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#pte---porcentagem-do-esgoto-tratado-em-relação-ao-produzido"><i class="fa fa-check"></i>pTE - Porcentagem do Esgoto Tratado em Relação ao Produzido</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ODS6</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bases-de-dados" class="section level1">
+<h1><span class="header-section-number">2</span> Bases de dados</h1>
+<p>A seguir, documentamos o processo de extração de dados e contrução das bases.</p>
+<div id="ibge" class="section level2">
+<h2><span class="header-section-number">2.1</span> IBGE</h2>
+<p>Do portal Sidra, do IBGE, baixamos dados de saneamento básico, abastecimento de água, ocupação de domicílios e população total referentes ao Censo de 2010.</p>
+<div id="saneamento" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Saneamento</h3>
+<p>Página: <a href="https://sidra.ibge.gov.br/tabela/1394" class="uri">https://sidra.ibge.gov.br/tabela/1394</a></p>
+<ul>
+<li>Código do município</li>
+<li>Nome do município</li>
+<li>Número de municípios permanentes ocupados servidos por fossa</li>
+</ul>
+<p>A partir do arquivo baixado (<code>base_ibge_saneamento_original.xlsx</code>), construímos a tabela <code>ibge_saneamento_tidy</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">ibge_saneamento &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="st">&quot;data-raw/base_ibge_saneamento_original.xlsx&quot;</span>,</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">skip =</span> <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">col_names =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="st">&quot;nivel&quot;</span>,</a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="st">&quot;munip_cod&quot;</span>,</a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="st">&quot;munip_nome&quot;</span>,</a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="st">&quot;condicao&quot;</span>,</a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="st">&quot;variavel&quot;</span>,</a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="st">&quot;valor&quot;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  )</a>
+<a class="sourceLine" id="cb1-12" title="12">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">  </span><span class="kw">filter</span>(nivel <span class="op">!=</span><span class="st"> &quot;Fonte: IBGE - Censo Demográfico&quot;</span> <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(nivel))</a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15">num_domicilios &lt;-<span class="st"> </span>ibge_saneamento<span class="op">$</span>valor <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">8</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="st">  `</span><span class="dt">colnames&lt;-</span><span class="st">`</span>(<span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb1-18" title="18">    <span class="st">&quot;domicilios_total&quot;</span>,</a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="st">&quot;sanea_rede_esgoto&quot;</span>,</a>
+<a class="sourceLine" id="cb1-20" title="20">    <span class="st">&quot;sanea_fossa_septica&quot;</span>,</a>
+<a class="sourceLine" id="cb1-21" title="21">    <span class="st">&quot;sanea_fossa_rudimentar&quot;</span>,</a>
+<a class="sourceLine" id="cb1-22" title="22">    <span class="st">&quot;sanea_vala&quot;</span>,</a>
+<a class="sourceLine" id="cb1-23" title="23">    <span class="st">&quot;sanea_rio_lago_mar&quot;</span>,</a>
+<a class="sourceLine" id="cb1-24" title="24">    <span class="st">&quot;sanea_outro&quot;</span>,</a>
+<a class="sourceLine" id="cb1-25" title="25">    <span class="st">&quot;sanea_nao_tem&quot;</span></a>
+<a class="sourceLine" id="cb1-26" title="26">  )) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(as.numeric))</a>
+<a class="sourceLine" id="cb1-29" title="29"></a>
+<a class="sourceLine" id="cb1-30" title="30">ibge_saneamento_tidy &lt;-<span class="st"> </span>ibge_saneamento <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="st">  </span><span class="kw">select</span>(munip_cod, munip_nome) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-32" title="32"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(munip_cod)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-33" title="33"><span class="st">  </span><span class="kw">bind_cols</span>(num_domicilios) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-34" title="34"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(munip_cod, <span class="st">&quot;^35&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-35" title="35"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">munip_nome =</span> <span class="kw">str_remove</span>(munip_nome, <span class="st">&quot; [(]SP[)]&quot;</span>)) </a></code></pre></div>
+</div>
+<div id="abastecimento" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Abastecimento</h3>
+<p>Página: <a href="https://sidra.ibge.gov.br/tabela/3217" class="uri">https://sidra.ibge.gov.br/tabela/3217</a></p>
+<ul>
+<li>Código do município</li>
+<li>Nome do município</li>
+<li>Número de Municípios permanentes ocupados abastecidos por poço e mina, localizados na propriedade</li>
+</ul>
+<p>A partir do arquivo baixado (<code>base_ibge_abastecimento_original.xlsx</code>), construímos a tabela <code>ibge_abastecimento_tidy</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ibge_abastecimento &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="st">&quot;data-raw/base_ibge_abastecimento_original.xlsx&quot;</span>,</a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">skip =</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb2-4" title="4">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span>janitor<span class="op">::</span><span class="kw">clean_names</span>()</a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7">ibge_abastecimento_tidy &lt;-<span class="st"> </span>ibge_abastecimento <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="dt">munip_cod =</span> x2,</a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="dt">abast_rede_geral =</span> rede_geral,</a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="dt">abast_poco_na_propriedade =</span> poco_ou_nascente_na_propriedade,</a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="dt">abast_poco_fora_propriedade =</span> poco_ou_nascente_fora_da_propriedade,</a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="dt">abast_carro_pipa =</span> carro_pipa,</a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="dt">abast_chuva_cisterna =</span> agua_da_chuva_armazenada_em_cisterna,</a>
+<a class="sourceLine" id="cb2-15" title="15">    <span class="dt">abast_chuva_outro =</span> agua_da_chuva_armazenada_de_outra_forma,</a>
+<a class="sourceLine" id="cb2-16" title="16">    <span class="dt">abast_rio_lago_igarape =</span> rio_acude_lago_ou_igarape,</a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="dt">abst_poco_na_aldeia =</span> poco_ou_nascente_na_aldeia,</a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="dt">abst_poco_fora_aldeia =</span> poco_ou_nascente_fora_da_aldeia</a>
+<a class="sourceLine" id="cb2-19" title="19">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="op">-</span>munip_cod), <span class="kw">list</span>(as.numeric)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(munip_cod, <span class="st">&quot;^35&quot;</span>))</a></code></pre></div>
+</div>
+<div id="população-total" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> População total</h3>
+<p>Páginas: <a href="https://sidra.ibge.gov.br/tabela/200" class="uri">https://sidra.ibge.gov.br/tabela/200</a></p>
+<ul>
+<li>Código do município</li>
+<li>Nome do município</li>
+<li>Número de municípios ocupados permanentes</li>
+<li>População Total</li>
+</ul>
+<p>A partir do arquivo baixado (<code>base_ibge_pop_total.xlsx</code>), construímos a tabela <code>ibge_populacao_tidy</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">ibge_populacao &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="st">&quot;data-raw/base_ibge_pop_total.xlsx&quot;</span>,</a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">skip =</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb3-4" title="4">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span>janitor<span class="op">::</span><span class="kw">clean_names</span>()</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">ibge_populacao_tidy &lt;-<span class="st"> </span>ibge_populacao <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="dt">munip_cod =</span> x1,</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="dt">pop_total =</span> total</a>
+<a class="sourceLine" id="cb3-11" title="11">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(munip_cod, <span class="st">&quot;^35&quot;</span>))</a></code></pre></div>
+</div>
+</div>
+<div id="idh" class="section level2">
+<h2><span class="header-section-number">2.2</span> IDH</h2>
+<p>Os dados para IDH de 2010 foram baixados do portal do Atla de Desenvolvimento humano no Brasil: <a href="http://www.atlasbrasil.org.br/2013/pt/download/">http://www.atlasbrasil.org.br/2013/pt/download/</a>.</p>
+<p>As seguintes variáveis foram extraídas para o ano de 2010:</p>
+<ul>
+<li>Código do município</li>
+<li>IDH</li>
+<li>IDHE (educação)</li>
+<li>IDHL (longevidade)</li>
+<li>IDHR (renda)</li>
+</ul>
+<p>A partir do arquivo baixado (<code>base_idh_original.xlsx</code>), construímos a tabela <code>pnud_idh</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">idh &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data-raw/base_idh_original.xlsx&quot;</span>, <span class="dt">sheet =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span>janitor<span class="op">::</span><span class="kw">clean_names</span>()</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">pnud_idh &lt;-<span class="st"> </span>pnud <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">filter</span>(ano <span class="op">==</span><span class="st"> </span><span class="dv">2010</span>, uf <span class="op">==</span><span class="st"> </span><span class="dv">35</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb4-7" title="7">    ano,</a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="dt">munip_cod =</span> codmun6,</a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="dt">idh =</span> idhm,</a>
+<a class="sourceLine" id="cb4-10" title="10">    idhm_e</a>
+<a class="sourceLine" id="cb4-11" title="11">    idhm_l</a>
+<a class="sourceLine" id="cb4-12" title="12">    idhm_r</a>
+<a class="sourceLine" id="cb4-13" title="13">  )</a></code></pre></div>
+</div>
+<div id="seade" class="section level2">
+<h2><span class="header-section-number">2.3</span> SEADE</h2>
+<p>O SEADE é o portal de estatísticas do Estado de São Paulo. É fundação vinculada à Secretaria de Governo, com o objetivo de produzir e disseminar análises e estatísticas socioeconômicas e demográficas.</p>
+<p>No portal <a href="https://produtos.seade.gov.br/produtos/projpop/">https://produtos.seade.gov.br/produtos/projpop/</a>, buscamos as bases com as seguintes variáveis:</p>
+<ul>
+<li>Código do município</li>
+<li>Ano</li>
+<li>Projeção População Total (anos 2011 a 2017)</li>
+<li>Projeção do número de domicílios permanentes ocupados (anos 2011 a 2017)</li>
+</ul>
+<p>A partir do arquivo baixado (<code>base_pnud_original.xlsx</code>), construímos a tabela <code>pnud_tidy</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">seade &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_delim</span>(</a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="st">&quot;data-raw/base_seade_original.txt&quot;</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">delim =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">guess_max =</span> <span class="dv">10000</span></a>
+<a class="sourceLine" id="cb5-4" title="4">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(mun_id), ano <span class="op">%in%</span><span class="st"> </span><span class="dv">2011</span><span class="op">:</span><span class="dv">2017</span>) </a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">pop_total &lt;-<span class="st"> </span>seade <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;FM&quot;</span>), <span class="kw">starts_with</span>(<span class="st">&quot;FH&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="st">  </span><span class="kw">rowSums</span>()</a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11">seade_tidy &lt;-<span class="st"> </span>seade <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="st">  </span><span class="kw">select</span>(<span class="dt">munip_cod =</span> mun_id, <span class="dt">ano =</span> ano, <span class="dt">proj_domicilios =</span> DOM) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">proj_populacao =</span> pop_total)</a></code></pre></div>
+</div>
+<div id="snis" class="section level2">
+<h2><span class="header-section-number">2.4</span> SNIS</h2>
+<p>O Sistema Nacional de Informações Sobre Saneamento (SNIS) possui bases de dados com informações e indicadores sobre a prestação de serviços de Água e Esgotos, Manejo de Resíduos Sólidos Urbanos e Drenagem e Manejo das Águas Pluviais Urbanas.</p>
+<p>No portal <a href="http://app4.cidades.gov.br/serieHistorica/#">http://app4.cidades.gov.br/serieHistorica/#</a>, buscamos as bases com as seguintes variáveis:</p>
+<ul>
+<li>Código do prestador</li>
+<li>Nome do Prestador</li>
+<li>Natureza jurídica do prestador</li>
+<li>AG013 - quantidade de economias residenciais ativas de água</li>
+<li>AG002 - quantidade de ligações ativas de água</li>
+<li>AG004 - quantidade de ligações ativas de água micromedidas</li>
+<li>AG008 - volume de água micromedido</li>
+<li>AG010 - volume de água consumido</li>
+<li>AG012 - volume de água macromedido</li>
+<li>AG014 - quantidade de economias ativas micromedidas</li>
+<li>ES008 - quantidade de economias residenciais ativas de esgoto</li>
+<li>ES006 - volume de esgoto tratado</li>
+<li>FN001 - receita operacional direta total</li>
+<li>FN015 - despesas de exploração (DEX)</li>
+<li>FN002 - receita operacional direta de água</li>
+<li>AG011 - volume de água faturado</li>
+<li>AG018 - volume de água tratada importado</li>
+<li>AG019 - volume de água faturado exportado</li>
+</ul>
+<p><strong>Nota</strong>: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel.</p>
+<p>A partir da base do original extraída do portal <code>base_snis_original.xlsx</code>, criamos a base tratada <code>snis_tidy</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">snis &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="st">&quot;data-raw/base_snis_original.xlsx&quot;</span>, </a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">sheet =</span> <span class="st">&quot;Sheet 1 - snis&quot;</span>, </a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">skip =</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-5" title="5">)</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">snis &lt;-<span class="st"> </span>snis <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="st">  </span>janitor<span class="op">::</span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="st">  </span><span class="kw">filter</span>(municipio <span class="op">!=</span><span class="st"> &quot;---&quot;</span>, <span class="op">!</span><span class="kw">is.na</span>(municipio))</a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11">snis_tidy &lt;-<span class="st"> </span>snis <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="st">  </span><span class="kw">select</span>(</a>
+<a class="sourceLine" id="cb6-13" title="13">    <span class="dt">munip_cod =</span> codigo_do_municipio,</a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="dt">ano =</span> ano_de_referencia,</a>
+<a class="sourceLine" id="cb6-15" title="15">    <span class="dt">prestador_cod =</span> codigo_do_prestador,</a>
+<a class="sourceLine" id="cb6-16" title="16">    <span class="dt">prestador_nome =</span> prestador,</a>
+<a class="sourceLine" id="cb6-17" title="17">    <span class="dt">prestador_sigla =</span> sigla_do_prestador,</a>
+<a class="sourceLine" id="cb6-18" title="18">    <span class="dt">prestador_nt_juridica =</span> natureza_juridica,</a>
+<a class="sourceLine" id="cb6-19" title="19">    <span class="dt">ind_ag013 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag013&quot;</span>),</a>
+<a class="sourceLine" id="cb6-20" title="20">    <span class="dt">ind_ag002 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag002&quot;</span>),</a>
+<a class="sourceLine" id="cb6-21" title="21">    <span class="dt">ind_ag004 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag004&quot;</span>),</a>
+<a class="sourceLine" id="cb6-22" title="22">    <span class="dt">ind_ag008 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag008&quot;</span>),</a>
+<a class="sourceLine" id="cb6-23" title="23">    <span class="dt">ind_ag010 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag010&quot;</span>),</a>
+<a class="sourceLine" id="cb6-24" title="24">    <span class="dt">ind_ag012 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag012&quot;</span>),</a>
+<a class="sourceLine" id="cb6-25" title="25">    <span class="dt">ind_ag014 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag014&quot;</span>),</a>
+<a class="sourceLine" id="cb6-26" title="26">    <span class="dt">ind_es008 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;es008&quot;</span>),</a>
+<a class="sourceLine" id="cb6-27" title="27">    <span class="dt">ind_es006 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;es006&quot;</span>),</a>
+<a class="sourceLine" id="cb6-28" title="28">    <span class="dt">ind_fn001 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;fn001&quot;</span>),</a>
+<a class="sourceLine" id="cb6-29" title="29">    <span class="dt">ind_fn015 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;fn015&quot;</span>),</a>
+<a class="sourceLine" id="cb6-30" title="30">    <span class="dt">ind_fn002 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;fn002&quot;</span>),</a>
+<a class="sourceLine" id="cb6-31" title="31">    <span class="dt">ind_ag011 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag011&quot;</span>),</a>
+<a class="sourceLine" id="cb6-32" title="32">    <span class="dt">ind_ag006 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag006&quot;</span>),</a>
+<a class="sourceLine" id="cb6-33" title="33">    <span class="dt">ind_ag018 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag018&quot;</span>),</a>
+<a class="sourceLine" id="cb6-34" title="34">    <span class="dt">ind_ag019 =</span> <span class="kw">starts_with</span>(<span class="st">&quot;ag019&quot;</span>)</a>
+<a class="sourceLine" id="cb6-35" title="35">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-36" title="36"><span class="st">  </span><span class="kw">mutate_at</span>(</a>
+<a class="sourceLine" id="cb6-37" title="37">    <span class="kw">vars</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ind&quot;</span>), ano), </a>
+<a class="sourceLine" id="cb6-38" title="38">    <span class="kw">list</span>(parse_number),</a>
+<a class="sourceLine" id="cb6-39" title="39">    <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">decimal_mark =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>)</a>
+<a class="sourceLine" id="cb6-40" title="40">  )</a></code></pre></div>
+</div>
+<div id="base-completa" class="section level2">
+<h2><span class="header-section-number">2.5</span> Base completa</h2>
+<p>A base completa foi construída por meio da junção das bases <em>tidy</em> citadas acima. Essa base contempla as características de cada município para um determinado ano.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3">ibge &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data/base_ibge_2010.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="dt">munip_cod =</span> <span class="kw">str_sub</span>(munip_cod, <span class="dv">1</span>, <span class="dv">6</span>), </a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="dt">ano =</span> <span class="dv">2010</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  )</a>
+<a class="sourceLine" id="cb7-8" title="8">seade &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data/base_seade_proj_2011_2017.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">munip_cod =</span> <span class="kw">str_sub</span>(munip_cod, <span class="dv">1</span>, <span class="dv">6</span>))</a>
+<a class="sourceLine" id="cb7-10" title="10">pnud &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data/base_pnud_idh_2010.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">munip_cod =</span> <span class="kw">as.character</span>(munip_cod))</a>
+<a class="sourceLine" id="cb7-12" title="12">snis &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&quot;data/base_snis_saneamento_2010_2017.xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb7-13" title="13"></a>
+<a class="sourceLine" id="cb7-14" title="14">base_censo &lt;-<span class="st"> </span><span class="kw">left_join</span>(ibge, pnud, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;munip_cod&quot;</span>, <span class="st">&quot;ano&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">num_domicilios =</span> domicilios_total, <span class="dt">populacao =</span> pop_total) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="st">  </span><span class="kw">rename_at</span>(<span class="kw">vars</span>(<span class="op">-</span>munip_cod, <span class="op">-</span>munip_nome, <span class="op">-</span>ano), <span class="op">~</span><span class="kw">paste0</span>(.x, <span class="st">&quot;_censo&quot;</span>))</a>
+<a class="sourceLine" id="cb7-17" title="17">base_censo &lt;-<span class="st"> </span><span class="kw">map_dfr</span>(<span class="dv">2010</span><span class="op">:</span><span class="dv">2017</span>, <span class="op">~</span><span class="kw">mutate</span>(base_censo, <span class="dt">ano =</span> .x))</a>
+<a class="sourceLine" id="cb7-18" title="18"></a>
+<a class="sourceLine" id="cb7-19" title="19">base_completa &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb7-20" title="20">  <span class="dt">munip_cod =</span> <span class="kw">c</span>(ibge<span class="op">$</span>munip_cod, seade<span class="op">$</span>munip_cod),</a>
+<a class="sourceLine" id="cb7-21" title="21">  <span class="dt">ano =</span> <span class="kw">c</span>(ibge<span class="op">$</span>ano, seade<span class="op">$</span>ano),</a>
+<a class="sourceLine" id="cb7-22" title="22">  <span class="dt">num_domicilios =</span> <span class="kw">c</span>(ibge<span class="op">$</span>domicilios_total, seade<span class="op">$</span>proj_domicilios),</a>
+<a class="sourceLine" id="cb7-23" title="23">  <span class="dt">populacao =</span> <span class="kw">c</span>(ibge<span class="op">$</span>pop_total, seade<span class="op">$</span>proj_populacao)</a>
+<a class="sourceLine" id="cb7-24" title="24">) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-25" title="25"><span class="st">  </span><span class="kw">left_join</span>(base_censo, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;munip_cod&quot;</span>, <span class="st">&quot;ano&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-26" title="26"><span class="st">  </span><span class="kw">left_join</span>(snis, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;munip_cod&quot;</span>, <span class="st">&quot;ano&quot;</span>))</a>
+<a class="sourceLine" id="cb7-27" title="27"></a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="kw">write_rds</span>(base_completa, <span class="st">&quot;data/base_completa.rds&quot;</span>)</a></code></pre></div>
+<p>A tabela a seguir apresenta as dez primeiras linhas da base completa:</p>
+<div id="htmlwidget-365b27d24af383a4da97" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-365b27d24af383a4da97">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"munip_cod":["350010","350020","350030","350040","350050","350055","350060","350070","350075","350080"],"ano":[2010,2010,2010,2010,2010,2010,2010,2010,2010,2010],"num_domicilios":[11328,1200,9881,2506,5595,1871,990,10171,1525,1348],"populacao":[33797,3557,32148,7584,17266,5601,2707,34524,4884,3891],"munip_nome":["Adamantina","Adolfo","Aguaí","Águas da Prata","Águas de Lindóia","Águas de Santa Bárbara","Águas de São Pedro","Agudos","Alambari","Alfredo Marcondes"],"num_domicilios_censo":[11328,1200,9881,2506,5595,1871,990,10171,1525,1348],"sanea_rede_esgoto_censo":[10704,1037,8854,1987,5006,1085,965,9488,800,1104],"sanea_fossa_septica_censo":[164,96,91,159,212,329,5,198,92,35],"sanea_fossa_rudimentar_censo":[438,66,872,243,315,406,8,350,631,197],"sanea_vala_censo":[10,1,34,26,18,"NA",9,4,"NA",8],"sanea_rio_lago_mar_censo":["NA","NA",13,89,34,41,"NA",114,"NA","NA"],"sanea_outro_censo":[3,"NA",8,1,4,4,3,4,"NA",4],"sanea_nao_tem_censo":[9,"NA",9,1,6,6,"NA",13,2,"NA"],"abast_rede_geral_censo":[10785,1046,8896,2165,5184,1425,989,9692,1098,1144],"abast_poco_na_propriedade_censo":[505,127,876,282,305,289,1,358,395,191],"abast_poco_fora_propriedade_censo":[33,27,90,58,103,17,"NA",43,26,13],"abast_carro_pipa_censo":["NA","NA","NA","NA","NA",87,"NA",2,"NA","NA"],"abast_chuva_cisterna_censo":["NA","NA",1,"NA","NA","NA","NA","NA","NA","NA"],"abast_chuva_outro_censo":["NA","NA",1,"NA",1,"NA","NA","NA","NA","NA"],"abast_rio_lago_igarape_censo":["NA","NA",1,"NA",1,2,"NA",65,1,"NA"],"abst_poco_na_aldeia_censo":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"abst_poco_fora_aldeia_censo":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"populacao_censo":[33797,3557,32148,7584,17266,5601,2707,34524,4884,3891],"idh_censo":[0.79,0.73,0.715,0.781,0.745,0.757,0.854,0.745,0.712,0.741],"idhm_e_censo":[0.75,0.648,0.606,0.716,0.675,0.695,0.825,0.694,0.658,0.71],"idhm_l_censo":[0.852,0.844,0.858,0.886,0.846,0.84,0.89,0.845,0.805,0.84],"idhm_r_censo":[0.772,0.71,0.703,0.75,0.725,0.744,0.849,0.705,0.682,0.682],"prestador_cod":["35503000","35503000","35003011","35503000","35005011","35503000","35503000","35503000","35503000","35503000"],"prestador_nome":["Companhia de Saneamento Básico do Estado de São Paulo","Companhia de Saneamento Básico do Estado de São Paulo","Prefeitura Municipal de Águaí","Companhia de Saneamento Básico do Estado de São Paulo","Saneamento Ambiental de Águas de Lindóia","Companhia de Saneamento Básico do Estado de São Paulo","Companhia de Saneamento Básico do Estado de São Paulo","Companhia de Saneamento Básico do Estado de São Paulo","Companhia de Saneamento Básico do Estado de São Paulo","Companhia de Saneamento Básico do Estado de São Paulo"],"prestador_sigla":["SABESP","SABESP","DAE","SABESP","SAAE","SABESP","SABESP","SABESP","SABESP","SABESP"],"prestador_nt_juridica":["Sociedade de economia mista com administração pública","Sociedade de economia mista com administração pública","Administração pública direta","Sociedade de economia mista com administração pública","Autarquia","Sociedade de economia mista com administração pública","Sociedade de economia mista com administração pública","Sociedade de economia mista com administração pública","Sociedade de economia mista com administração pública","Sociedade de economia mista com administração pública"],"ind_ag0131":[11595,1200,"NA",3179,7751,1916,1928,10013,1318,1294],"ind_ag0132":[11342,1146,"NA",3112,7992,1873,1825,9723,1245,1255],"ind_ag0021":[12923,1275,9266,3397,6258,2086,1992,10652,1402,1421],"ind_ag0022":[12619,1222,9212,3323,6147,2033,1951,10322,1325,1373],"ind_ag0041":[12923,1275,220,3396,6258,2084,1992,10652,1402,1421],"ind_ag0042":[12619,1222,220,3323,6147,2033,1951,10322,1325,1373],"ind_ag008":[2190.5,191.5,0,532.9,983.65,306.6,439.7,2049.9,198,207.9],"ind_ag010":[2190.5,191.5,5949,533.1,983.65,306.9,439.7,2049.9,198,207.9],"ind_ag012":[2885.4,234.9,0,649.1,2088,662.7,783.1,3378.9,248.4,249.1],"ind_ag0141":[13041,1298,220,3513,8194,2101,2157,10965,1417,1425],"ind_ag0142":[12736,1245,220,3435,8383,2055,2058,10622,1341,1373],"ind_es0081":[11405,1201,8813,2801,7189,1282,1831,0,879,1209],"ind_es0082":[11195,1150,8760,2761,7992,1250,1730,0,805,1171],"ind_es006":[1030.8,152.8,0,350.4,275.57,0,0,0,102.9,154.7],"ind_fn001":[7785388.99,676403.1,1413103.19,2038690.88,4078427.08,1083956.98,2275374.29,4229780.71,637149.79,678896.9],"ind_fn015":[6448528.7,526148.81,2676180.59,2697876.26,2527988.69,1038209.25,1801014.33,5247866.5,463558.22,767177.54],"ind_fn002":[4370736.16,372764.39,1046229.41,1207666.62,1936823.24,705307.27,1298556.05,4229780.71,420419.09,390307.04],"ind_ag011":[2452.6,217.5,5949,633,1784.17,375.2,517.6,2230.4,239.2,240.8],"ind_ag006":[2885.4,234.9,6368,649.1,2106.28,662.7,783.1,3378.9,248.4,249.1],"ind_ag018":[0,0,0,0,0,0,0,0,0,0],"ind_ag019":[0,0,0,0,0,0,0,0,0,0]},"columns":[{"accessor":"munip_cod","name":"munip_cod","type":"character","maxWidth":200},{"accessor":"ano","name":"ano","type":"numeric","maxWidth":200},{"accessor":"num_domicilios","name":"num_domicilios","type":"numeric","maxWidth":200},{"accessor":"populacao","name":"populacao","type":"numeric","maxWidth":200},{"accessor":"munip_nome","name":"munip_nome","type":"character","maxWidth":200},{"accessor":"num_domicilios_censo","name":"num_domicilios_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_rede_esgoto_censo","name":"sanea_rede_esgoto_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_fossa_septica_censo","name":"sanea_fossa_septica_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_fossa_rudimentar_censo","name":"sanea_fossa_rudimentar_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_vala_censo","name":"sanea_vala_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_rio_lago_mar_censo","name":"sanea_rio_lago_mar_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_outro_censo","name":"sanea_outro_censo","type":"numeric","maxWidth":200},{"accessor":"sanea_nao_tem_censo","name":"sanea_nao_tem_censo","type":"numeric","maxWidth":200},{"accessor":"abast_rede_geral_censo","name":"abast_rede_geral_censo","type":"numeric","maxWidth":200},{"accessor":"abast_poco_na_propriedade_censo","name":"abast_poco_na_propriedade_censo","type":"numeric","maxWidth":200},{"accessor":"abast_poco_fora_propriedade_censo","name":"abast_poco_fora_propriedade_censo","type":"numeric","maxWidth":200},{"accessor":"abast_carro_pipa_censo","name":"abast_carro_pipa_censo","type":"numeric","maxWidth":200},{"accessor":"abast_chuva_cisterna_censo","name":"abast_chuva_cisterna_censo","type":"numeric","maxWidth":200},{"accessor":"abast_chuva_outro_censo","name":"abast_chuva_outro_censo","type":"numeric","maxWidth":200},{"accessor":"abast_rio_lago_igarape_censo","name":"abast_rio_lago_igarape_censo","type":"numeric","maxWidth":200},{"accessor":"abst_poco_na_aldeia_censo","name":"abst_poco_na_aldeia_censo","type":"numeric","maxWidth":200},{"accessor":"abst_poco_fora_aldeia_censo","name":"abst_poco_fora_aldeia_censo","type":"numeric","maxWidth":200},{"accessor":"populacao_censo","name":"populacao_censo","type":"numeric","maxWidth":200},{"accessor":"idh_censo","name":"idh_censo","type":"numeric","maxWidth":200},{"accessor":"idhm_e_censo","name":"idhm_e_censo","type":"numeric","maxWidth":200},{"accessor":"idhm_l_censo","name":"idhm_l_censo","type":"numeric","maxWidth":200},{"accessor":"idhm_r_censo","name":"idhm_r_censo","type":"numeric","maxWidth":200},{"accessor":"prestador_cod","name":"prestador_cod","type":"character","maxWidth":200},{"accessor":"prestador_nome","name":"prestador_nome","type":"character","maxWidth":200},{"accessor":"prestador_sigla","name":"prestador_sigla","type":"character","maxWidth":200},{"accessor":"prestador_nt_juridica","name":"prestador_nt_juridica","type":"character","maxWidth":200},{"accessor":"ind_ag0131","name":"ind_ag0131","type":"numeric","maxWidth":200},{"accessor":"ind_ag0132","name":"ind_ag0132","type":"numeric","maxWidth":200},{"accessor":"ind_ag0021","name":"ind_ag0021","type":"numeric","maxWidth":200},{"accessor":"ind_ag0022","name":"ind_ag0022","type":"numeric","maxWidth":200},{"accessor":"ind_ag0041","name":"ind_ag0041","type":"numeric","maxWidth":200},{"accessor":"ind_ag0042","name":"ind_ag0042","type":"numeric","maxWidth":200},{"accessor":"ind_ag008","name":"ind_ag008","type":"numeric","maxWidth":200},{"accessor":"ind_ag010","name":"ind_ag010","type":"numeric","maxWidth":200},{"accessor":"ind_ag012","name":"ind_ag012","type":"numeric","maxWidth":200},{"accessor":"ind_ag0141","name":"ind_ag0141","type":"numeric","maxWidth":200},{"accessor":"ind_ag0142","name":"ind_ag0142","type":"numeric","maxWidth":200},{"accessor":"ind_es0081","name":"ind_es0081","type":"numeric","maxWidth":200},{"accessor":"ind_es0082","name":"ind_es0082","type":"numeric","maxWidth":200},{"accessor":"ind_es006","name":"ind_es006","type":"numeric","maxWidth":200},{"accessor":"ind_fn001","name":"ind_fn001","type":"numeric","maxWidth":200},{"accessor":"ind_fn015","name":"ind_fn015","type":"numeric","maxWidth":200},{"accessor":"ind_fn002","name":"ind_fn002","type":"numeric","maxWidth":200},{"accessor":"ind_ag011","name":"ind_ag011","type":"numeric","maxWidth":200},{"accessor":"ind_ag006","name":"ind_ag006","type":"numeric","maxWidth":200},{"accessor":"ind_ag018","name":"ind_ag018","type":"numeric","maxWidth":200},{"accessor":"ind_ag019","name":"ind_ag019","type":"numeric","maxWidth":200}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"16da41718f621094bf614c8208975443"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introdução.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="indicadores.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["temp.pdf", "temp.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+# Bases de dados
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+A seguir, documentamos o processo de extração de dados e contrução das bases.
+
+## IBGE
+
+Do portal Sidra, do IBGE, baixamos dados de saneamento básico, abastecimento de água, ocupação de domicílios e população total referentes ao Censo de 2010.
+
+### Saneamento
+
+Página: https://sidra.ibge.gov.br/tabela/1394
+
+- Código do município 
+- Nome do município
+- Número de municípios permanentes ocupados servidos por fossa
+
+A partir do arquivo baixado (`base_ibge_saneamento_original.xlsx`), construímos a tabela `ibge_saneamento_tidy`.
+
+```{r, eval = FALSE}
+ibge_saneamento <- readxl::read_excel(
+  "data-raw/base_ibge_saneamento_original.xlsx",
+  skip = 7,
+  col_names = c(
+    "nivel",
+    "munip_cod",
+    "munip_nome",
+    "condicao",
+    "variavel",
+    "valor"
+  )
+) %>% 
+  filter(nivel != "Fonte: IBGE - Censo Demográfico" | is.na(nivel))
+
+num_domicilios <- ibge_saneamento$valor %>% 
+  matrix(ncol = 8, byrow = TRUE) %>% 
+  `colnames<-`(c(
+    "domicilios_total",
+    "sanea_rede_esgoto",
+    "sanea_fossa_septica",
+    "sanea_fossa_rudimentar",
+    "sanea_vala",
+    "sanea_rio_lago_mar",
+    "sanea_outro",
+    "sanea_nao_tem"
+  )) %>% 
+  as_tibble() %>% 
+  mutate_all(list(as.numeric))
+
+ibge_saneamento_tidy <- ibge_saneamento %>% 
+  select(munip_cod, munip_nome) %>% 
+  filter(!is.na(munip_cod)) %>% 
+  bind_cols(num_domicilios) %>% 
+  filter(str_detect(munip_cod, "^35")) %>% 
+  mutate(munip_nome = str_remove(munip_nome, " [(]SP[)]")) 
+```
+
+
+### Abastecimento
+
+Página: https://sidra.ibge.gov.br/tabela/3217
+
+- Código do município 
+- Nome do município
+- Número de Municípios permanentes ocupados abastecidos por poço e mina, localizados na propriedade
+
+A partir do arquivo baixado (`base_ibge_abastecimento_original.xlsx`), construímos a tabela `ibge_abastecimento_tidy`.
+
+```{r, eval = FALSE}
+ibge_abastecimento <- readxl::read_excel(
+  "data-raw/base_ibge_abastecimento_original.xlsx",
+  skip = 5
+) %>% 
+  janitor::clean_names()
+
+ibge_abastecimento_tidy <- ibge_abastecimento %>% 
+  select(
+    munip_cod = x2,
+    abast_rede_geral = rede_geral,
+    abast_poco_na_propriedade = poco_ou_nascente_na_propriedade,
+    abast_poco_fora_propriedade = poco_ou_nascente_fora_da_propriedade,
+    abast_carro_pipa = carro_pipa,
+    abast_chuva_cisterna = agua_da_chuva_armazenada_em_cisterna,
+    abast_chuva_outro = agua_da_chuva_armazenada_de_outra_forma,
+    abast_rio_lago_igarape = rio_acude_lago_ou_igarape,
+    abst_poco_na_aldeia = poco_ou_nascente_na_aldeia,
+    abst_poco_fora_aldeia = poco_ou_nascente_fora_da_aldeia
+  ) %>% 
+  mutate_at(vars(-munip_cod), list(as.numeric)) %>% 
+  filter(str_detect(munip_cod, "^35"))
+```
+
+
+### População total
+
+Páginas: https://sidra.ibge.gov.br/tabela/200
+
+- Código do município 
+- Nome do município
+- Número de municípios ocupados permanentes
+- População Total
+
+A partir do arquivo baixado (`base_ibge_pop_total.xlsx`), construímos a tabela `ibge_populacao_tidy`.
+
+```{r, eval = FALSE}
+ibge_populacao <- readxl::read_excel(
+  "data-raw/base_ibge_pop_total.xlsx",
+  skip = 5
+) %>% 
+  janitor::clean_names()
+
+ibge_populacao_tidy <- ibge_populacao %>% 
+  select(
+    munip_cod = x1,
+    pop_total = total
+  ) %>% 
+  filter(str_detect(munip_cod, "^35"))
+```
+
+
+## IDH
+
+Os dados para IDH de 2010 foram baixados do portal do Atla de Desenvolvimento humano no Brasil: [http://www.atlasbrasil.org.br/2013/pt/download/](http://www.atlasbrasil.org.br/2013/pt/download/).
+
+As seguintes variáveis foram extraídas para o ano de 2010:
+
+- Código do município
+- IDH
+- IDHE (educação)
+- IDHL (longevidade)
+- IDHR (renda)
+
+A partir do arquivo baixado (`base_idh_original.xlsx`), construímos a tabela `pnud_idh`.
+
+```{r, eval = FALSE}
+idh <- readxl::read_excel("data-raw/base_idh_original.xlsx", sheet = 2) %>% 
+  janitor::clean_names()
+
+pnud_idh <- pnud %>%
+  filter(ano == 2010, uf == 35) %>% 
+  select(
+    ano,
+    munip_cod = codmun6,
+    idh = idhm,
+    idhm_e
+    idhm_l
+    idhm_r
+  )
+```
+
+
+
+
+## SEADE
+
+O SEADE é o portal de estatísticas do Estado de São Paulo. É fundação vinculada à Secretaria de Governo, com o objetivo de produzir e disseminar análises e estatísticas socioeconômicas e demográficas.
+
+No portal [https://produtos.seade.gov.br/produtos/projpop/](https://produtos.seade.gov.br/produtos/projpop/), buscamos as bases com as seguintes variáveis:
+
+- Código do município
+- Ano
+- Projeção População Total (anos 2011 a 2017)
+- Projeção do número de domicílios permanentes ocupados (anos 2011 a 2017)
+
+A partir do arquivo baixado (`base_pnud_original.xlsx`), construímos a tabela `pnud_tidy`.
+
+```{r, eval = FALSE}
+seade <- readr::read_delim(
+  "data-raw/base_seade_original.txt",
+  delim = ";", guess_max = 10000
+) %>% 
+  filter(!is.na(mun_id), ano %in% 2011:2017) 
+
+pop_total <- seade %>% 
+  select(starts_with("FM"), starts_with("FH")) %>% 
+  rowSums()
+
+seade_tidy <- seade %>% 
+  select(munip_cod = mun_id, ano = ano, proj_domicilios = DOM) %>% 
+  mutate(proj_populacao = pop_total)
+```
+
+
+## SNIS
+
+O Sistema Nacional de Informações Sobre Saneamento (SNIS) possui bases de dados com informações e indicadores sobre a prestação de serviços de Água e Esgotos, Manejo de Resíduos Sólidos Urbanos e Drenagem e Manejo das Águas Pluviais Urbanas.
+
+No portal [http://app4.cidades.gov.br/serieHistorica/#](http://app4.cidades.gov.br/serieHistorica/#), buscamos as bases com as seguintes variáveis:
+
+- Código do prestador
+- Nome do Prestador
+- Natureza jurídica do prestador
+- AG013 - quantidade de economias residenciais ativas de água
+- AG002  - quantidade de ligações ativas de água
+- AG004 - quantidade de ligações ativas de água micromedidas
+- AG008 - volume de água micromedido
+- AG010 - volume de água consumido
+- AG012 - volume de água macromedido
+- AG014 - quantidade de economias ativas micromedidas
+- ES008 - quantidade de economias residenciais ativas de esgoto
+- ES006 - volume de esgoto tratado
+- FN001 - receita operacional direta total
+- FN015 - despesas de exploração (DEX)
+- FN002 - receita operacional direta de água
+- AG011 - volume de água faturado
+- AG018 - volume de água tratada importado
+- AG019 - volume de água faturado exportado
+
+**Nota**: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel.
+
+A partir da base do original extraída do portal `base_snis_original.xlsx`, criamos a base tratada `snis_tidy`:
+
+```{r, eval = FALSE}
+snis <- readxl::read_excel(
+  "data-raw/base_snis_original.xlsx", 
+  sheet = "Sheet 1 - snis", 
+  skip = 1
+)
+
+snis <- snis %>% 
+  janitor::clean_names() %>% 
+  filter(municipio != "---", !is.na(municipio))
+
+snis_tidy <- snis %>% 
+  select(
+    munip_cod = codigo_do_municipio,
+    ano = ano_de_referencia,
+    prestador_cod = codigo_do_prestador,
+    prestador_nome = prestador,
+    prestador_sigla = sigla_do_prestador,
+    prestador_nt_juridica = natureza_juridica,
+    ind_ag013 = starts_with("ag013"),
+    ind_ag002 = starts_with("ag002"),
+    ind_ag004 = starts_with("ag004"),
+    ind_ag008 = starts_with("ag008"),
+    ind_ag010 = starts_with("ag010"),
+    ind_ag012 = starts_with("ag012"),
+    ind_ag014 = starts_with("ag014"),
+    ind_es008 = starts_with("es008"),
+    ind_es006 = starts_with("es006"),
+    ind_fn001 = starts_with("fn001"),
+    ind_fn015 = starts_with("fn015"),
+    ind_fn002 = starts_with("fn002"),
+    ind_ag011 = starts_with("ag011"),
+    ind_ag006 = starts_with("ag006"),
+    ind_ag018 = starts_with("ag018"),
+    ind_ag019 = starts_with("ag019")
+  ) %>% 
+  mutate_at(
+    vars(starts_with("ind"), ano), 
+    list(parse_number),
+    locale = locale(decimal_mark = ",", grouping_mark = ".")
+  )
+```
+
+
+## Base completa
+
+A base completa foi construída por meio da junção das bases *tidy* citadas acima. Essa base contempla as características de cada município para um determinado ano.
+ 
+```{r, eval = FALSE}
+library(tidyverse)
+
+ibge <- readxl::read_excel("data/base_ibge_2010.xlsx") %>% 
+  mutate(
+    munip_cod = str_sub(munip_cod, 1, 6), 
+    ano = 2010
+  )
+seade <- readxl::read_excel("data/base_seade_proj_2011_2017.xlsx") %>% 
+  mutate(munip_cod = str_sub(munip_cod, 1, 6))
+pnud <- readxl::read_excel("data/base_pnud_idh_2010.xlsx") %>% 
+  mutate(munip_cod = as.character(munip_cod))
+snis <- readxl::read_excel("data/base_snis_saneamento_2010_2017.xlsx")
+
+base_censo <- left_join(ibge, pnud, by = c("munip_cod", "ano")) %>% 
+  rename(num_domicilios = domicilios_total, populacao = pop_total) %>% 
+  rename_at(vars(-munip_cod, -munip_nome, -ano), ~paste0(.x, "_censo"))
+base_censo <- map_dfr(2010:2017, ~mutate(base_censo, ano = .x))
+
+base_completa <- tibble(
+  munip_cod = c(ibge$munip_cod, seade$munip_cod),
+  ano = c(ibge$ano, seade$ano),
+  num_domicilios = c(ibge$domicilios_total, seade$proj_domicilios),
+  populacao = c(ibge$pop_total, seade$proj_populacao)
+) %>%
+  left_join(base_censo, by = c("munip_cod", "ano")) %>% 
+  left_join(snis, by = c("munip_cod", "ano"))
+
+write_rds(base_completa, "data/base_completa.rds")
+
+```
+
+A tabela a seguir apresenta as dez primeiras linhas da base completa:
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(reactable)
+
+readr::read_rds("../ods6/data/base_completa.rds") %>% 
+  slice(1:10) %>% 
+  reactable(
+    defaultColDef = colDef(maxWidth = 200)
+  )
+```
+

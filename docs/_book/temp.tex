@@ -1,0 +1,974 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={ODS6},
+            pdfauthor={Adelaide Nardocci, Americo Sampaio, William Amorim},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{ODS6}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Adelaide Nardocci, Americo Sampaio, William Amorim}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Última atualização: 2020-01-22}
+
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{sobre}{%
+\chapter*{Sobre}\label{sobre}}
+\addcontentsline{toc}{chapter}{Sobre}
+
+Este texto tem como objetivo documentar as atividades realizadas no projeto ``ODS6''.
+
+\hypertarget{responsuxe1veis}{%
+\section*{Responsáveis}\label{responsuxe1veis}}
+\addcontentsline{toc}{section}{Responsáveis}
+
+\begin{itemize}
+\tightlist
+\item
+  Adelaide Nardocci
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{mailto:nardocci@usp.br}{\nolinkurl{nardocci@usp.br}}
+  \end{itemize}
+\item
+  Americo Sampaio
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{mailto:mecosamp@gmail.com}{\nolinkurl{mecosamp@gmail.com}}
+  \end{itemize}
+\item
+  William Amorim
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{mailto:thewilliam89@gmail.com}{\nolinkurl{thewilliam89@gmail.com}}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{atividades}{%
+\section*{Atividades}\label{atividades}}
+\addcontentsline{toc}{section}{Atividades}
+
+Atividades realizadas no projeto, responsável e softwares utilizados.
+
+\begin{itemize}
+\tightlist
+\item
+  Extração dos dados
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Responsáveis: Adelaide Nardocci, William Amorim
+  \item
+    Software utilizado: R/RStudio
+  \end{itemize}
+\item
+  Preparação das bases
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Responsáveis: William Amorim
+  \item
+    Software utilizado: R/RStudio
+  \end{itemize}
+\item
+  Costrução de indicadores
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Responsáveis: Americo Sampaio, William Amorim
+  \item
+    Software utilizado: R/RStudio
+  \end{itemize}
+\item
+  Análise descritiva
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Responsáveis: William Amorim
+  \item
+    Software utilizado: R/RStudio
+  \end{itemize}
+\item
+  Documentação da análise
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Responsáveis: William Amorim
+  \item
+    Software utilizado: R/RStudio, bookdown
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{registro-de-atividades}{%
+\section*{Registro de atividades}\label{registro-de-atividades}}
+\addcontentsline{toc}{section}{Registro de atividades}
+
+\begin{itemize}
+\tightlist
+\item
+  Julho de 2019
+
+  \begin{itemize}
+  \tightlist
+  \item
+    definição do problema
+  \item
+    definição dos dados necessários
+  \item
+    extração dos dados
+  \end{itemize}
+\item
+  Agosto de 2019
+
+  \begin{itemize}
+  \tightlist
+  \item
+    limpeza das bases
+  \item
+    criação da base completa
+  \item
+    definição dos indicadores
+  \end{itemize}
+\item
+  Setembro de 2019
+
+  \begin{itemize}
+  \tightlist
+  \item
+    construção dos indicadores
+  \item
+    documentação dos indicadores
+  \end{itemize}
+\item
+  Janeiro de 2020
+
+  \begin{itemize}
+  \tightlist
+  \item
+    documentação da extração das bases
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{introduuxe7uxe3o}{%
+\chapter{Introdução}\label{introduuxe7uxe3o}}
+
+\hypertarget{bases-de-dados}{%
+\chapter{Bases de dados}\label{bases-de-dados}}
+
+A seguir, documentamos o processo de extração de dados e contrução das bases.
+
+\hypertarget{ibge}{%
+\section{IBGE}\label{ibge}}
+
+\hypertarget{saneamento}{%
+\subsection{Saneamento}\label{saneamento}}
+
+\begin{itemize}
+\tightlist
+\item
+  Código do município
+\item
+  Nome do município
+\item
+  Número de municípios permanentes ocupados servidos por fossa (apenas do Censo 2010)
+\end{itemize}
+
+\hypertarget{abastecimento}{%
+\subsection{Abastecimento}\label{abastecimento}}
+
+\begin{itemize}
+\tightlist
+\item
+  Código do município
+\item
+  Nome do município
+\item
+  Número de Municípios permanentes ocupados abastecidos por poço e mina, localizados na propriedade (apenas para o Censo 2010)
+\end{itemize}
+
+\hypertarget{populauxe7uxe3o-total}{%
+\subsection{População total}\label{populauxe7uxe3o-total}}
+
+\begin{itemize}
+\tightlist
+\item
+  Código do município
+\item
+  Nome do município
+\item
+  Número de municípios ocupados permanentes (apenas do Censo 2010)
+\item
+  População Total (apenas Censo 2010)
+\end{itemize}
+
+\hypertarget{pnud}{%
+\section{PNUD}\label{pnud}}
+
+\begin{itemize}
+\tightlist
+\item
+  Código do município
+\item
+  IDH (2010)
+\end{itemize}
+
+\hypertarget{seade}{%
+\section{SEADE}\label{seade}}
+
+\begin{itemize}
+\tightlist
+\item
+  Projeção População Total (anos 2011 a 2017)
+\item
+  Projeção do número de domicílios permanentes ocupados ( anos 2011 a 2010)
+\item
+  IDH (anos 2010 a 2017)
+\end{itemize}
+
+\hypertarget{snis}{%
+\section{SNIS}\label{snis}}
+
+O Sistema Nacional de Informações Sobre Saneamento (SNIS) possui bases de dados com informações e indicadores sobre a prestação de serviços de Água e Esgotos, Manejo de Resíduos Sólidos Urbanos e Drenagem e Manejo das Águas Pluviais Urbanas.
+
+No portal \url{http://app4.cidades.gov.br/serieHistorica/\#}, buscamos as bases com as seguintes variáveis:
+
+\begin{itemize}
+\tightlist
+\item
+  Código do prestador
+\item
+  Nome do Prestador
+\item
+  Natureza jurídica do prestador
+\item
+  AG013 - quantidade de economias residenciais ativas de água
+\item
+  AG002 - quantidade de ligações ativas de água
+\item
+  AG004 - quantidade de ligações ativas de água micromedidas
+\item
+  AG008 - volume de água micromedido
+\item
+  AG010 - volume de água consumido
+\item
+  AG012 - volume de água macromedido
+\item
+  AG014 - quantidade de economias ativas micromedidas
+\item
+  ES008 - quantidade de economias residenciais ativas de esgoto
+\item
+  ES006 - volume de esgoto tratado
+\item
+  FN001 - receita operacional direta total
+\item
+  FN015 - despesas de exploração (DEX)
+\item
+  FN002 - receita operacional direta de água
+\item
+  AG011 - volume de água faturado
+\item
+  AG018 - volume de água tratada importado
+\item
+  AG019 - volume de água faturado exportado
+\end{itemize}
+
+\textbf{Nota}: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel.
+
+A partir da base do original extraída do portal \texttt{base\_snis\_original.xlsx}, criamos a base tratada \texttt{snis\_tidy}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snis <-}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read_excel}\NormalTok{(}
+  \StringTok{"data-raw/base_snis_original.xlsx"}\NormalTok{, }
+  \DataTypeTok{sheet =} \StringTok{"Sheet 1 - snis"}\NormalTok{, }
+  \DataTypeTok{skip =} \DecValTok{1}
+\NormalTok{)}
+
+\NormalTok{snis <-}\StringTok{ }\NormalTok{snis }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean_names}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(municipio }\OperatorTok{!=}\StringTok{ "---"}\NormalTok{, }\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(municipio))}
+
+\NormalTok{snis_tidy <-}\StringTok{ }\NormalTok{snis }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}
+    \DataTypeTok{munip_cod =}\NormalTok{ codigo_do_municipio,}
+    \DataTypeTok{ano =}\NormalTok{ ano_de_referencia,}
+    \DataTypeTok{prestador_cod =}\NormalTok{ codigo_do_prestador,}
+    \DataTypeTok{prestador_nome =}\NormalTok{ prestador,}
+    \DataTypeTok{prestador_sigla =}\NormalTok{ sigla_do_prestador,}
+    \DataTypeTok{prestador_nt_juridica =}\NormalTok{ natureza_juridica,}
+    \DataTypeTok{ind_ag013 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag013"}\NormalTok{),}
+    \DataTypeTok{ind_ag002 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag002"}\NormalTok{),}
+    \DataTypeTok{ind_ag004 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag004"}\NormalTok{),}
+    \DataTypeTok{ind_ag008 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag008"}\NormalTok{),}
+    \DataTypeTok{ind_ag010 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag010"}\NormalTok{),}
+    \DataTypeTok{ind_ag012 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag012"}\NormalTok{),}
+    \DataTypeTok{ind_ag014 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag014"}\NormalTok{),}
+    \DataTypeTok{ind_es008 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"es008"}\NormalTok{),}
+    \DataTypeTok{ind_es006 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"es006"}\NormalTok{),}
+    \DataTypeTok{ind_fn001 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"fn001"}\NormalTok{),}
+    \DataTypeTok{ind_fn015 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"fn015"}\NormalTok{),}
+    \DataTypeTok{ind_fn002 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"fn002"}\NormalTok{),}
+    \DataTypeTok{ind_ag011 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag011"}\NormalTok{),}
+    \DataTypeTok{ind_ag006 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag006"}\NormalTok{),}
+    \DataTypeTok{ind_ag018 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag018"}\NormalTok{),}
+    \DataTypeTok{ind_ag019 =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"ag019"}\NormalTok{)}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate_at}\NormalTok{(}
+    \KeywordTok{vars}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"ind"}\NormalTok{), ano), }
+    \KeywordTok{list}\NormalTok{(parse_number),}
+    \DataTypeTok{locale =} \KeywordTok{locale}\NormalTok{(}\DataTypeTok{decimal_mark =} \StringTok{","}\NormalTok{, }\DataTypeTok{grouping_mark =} \StringTok{"."}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{base-completa}{%
+\section{Base completa}\label{base-completa}}
+
+\hypertarget{indicadores}{%
+\chapter{Indicadores}\label{indicadores}}
+
+\hypertarget{dppof---nuxfamero-de-domicuxedlios-particulares-permanentes-ocupados-servidos-por-fossa}{%
+\section*{DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa}\label{dppof---nuxfamero-de-domicuxedlios-particulares-permanentes-ocupados-servidos-por-fossa}}
+\addcontentsline{toc}{section}{DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa}
+
+Quando a canalização do banheiro ou sanitário está conectada a um dispositivo tipo câmara, enterrado, destinado a receber o esgoto para separação e sedimentação do material orgânico e mineral, transformando-o em material inerte, seguido de unidade para a disposição da parte líquida no solo. Não são considerados nesse valor os domicílios cujos banheiros ou sanitários são ligados a uma fossa rústica (fossa negra, poço, buraco etc.), diretamente a uma vala a céu aberto, rio, lago ou mar.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+DPPOF = \frac{DPPO}{DPPO_{censo}} \times DPPOF_{censo}
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: domicílios
+\item
+  \textbf{Observação}: Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, os valores do número de domicílios particulares ocupados servidos por sistemas de fossas sépticas são estimados supondo variarem segundo as mesmas taxas adotadas nas projeções SEADE utilizadas para o cálculo dos valores dos número de domicílios particulares permanentes ocupados.
+\end{itemize}
+
+\hypertarget{dppopm---nuxfamero-de-domicuxedlios-particulares-permanentes-ocupados-abastecidos-por-pouxe7os-ou-minas}{%
+\section*{DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas}\label{dppopm---nuxfamero-de-domicuxedlios-particulares-permanentes-ocupados-abastecidos-por-pouxe7os-ou-minas}}
+\addcontentsline{toc}{section}{DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas}
+
+Domicílio era servido por água de poço ou nascente localizado no terreno ou na propriedade em que estava construído.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+DPPOPM = \frac{DPPO}{DPPO_{censo}} \times DPPOAM_{censo}
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: domicílios
+\item
+  \textbf{Observações}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Não devem ser considerados nesse item domicílios servidos por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia (em terras indígenas); transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.
+  \item
+    Para os anos situados entre dois censos demográficos, os valores do número de domicílios particulares ocupados servidos de água por poços ou minas são estimados supondo variarem segundo as mesmas taxas adotadas nas projeções SEADE utilizadas para o cálculo dos valores dos número de domicílios particulares permanentes ocupados.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{thd---taxa-muxe9dia-de-habitantes-por-domicuxedlio}{%
+\section*{THD - Taxa média de habitantes por domicílio}\label{thd---taxa-muxe9dia-de-habitantes-por-domicuxedlio}}
+\addcontentsline{toc}{section}{THD - Taxa média de habitantes por domicílio}
+
+Constitui o número médio de habitantes por domicílio particular permanente ocupado. É obtida através da divisão da população total residente no município (PT) pelo número de domicílios particulares permanentes ocupados no município (DPPO).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+THD = \frac{PT}{DPPO}
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: habitantes/domicílio
+\item
+  \textbf{Observação}: Essa taxa é apurada nos censos demográficos realizados no primeiro ano da década. Para os anos situados entre dois censos demográficos, a taxa é calculada através de estimativas da população e do número de domicílios particulares permanentes ocupados realizadas por metodologia desenvolvida pelo SEADE.
+\end{itemize}
+
+\hypertarget{par---populauxe7uxe3o-residente-servida-por-rede-puxfablica-de-abastecimento-de-uxe1gua}{%
+\section*{PAR - População residente servida por rede pública de abastecimento de água}\label{par---populauxe7uxe3o-residente-servida-por-rede-puxfablica-de-abastecimento-de-uxe1gua}}
+\addcontentsline{toc}{section}{PAR - População residente servida por rede pública de abastecimento de água}
+
+População do município atendida com rede pública de abastecimento de água pelo prestador de serviços, no último dia do ano de referência. Corresponde à população que é efetivamente atendida por rede pública de distribuição, tanto na área urbana como rural.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+PAR = AG013 \times THD
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: habitantes
+\item
+  \textbf{Observações}: Caso o prestador de serviços não disponha de procedimentos próprios para definir, de maneira precisa, essa população, o mesmo poderá estimá-la utilizando o produto da quantidade de economias residenciais ativas de água (AG013), multiplicada pela taxa média de habitantes por domicílio do respectivo município (THD), obtida no último censo ou contagem de população do IBGE, ou estimadas realizadas pelo SEADE. Quando isso ocorrer, o prestador de serviços deverá abater da quantidade de economias residenciais ativas de água, o quantitativo correspondente aos domicílios atendidos e que não contam com população residente. Como, por exemplo, em domicílios utilizados para veraneio, em domicílios utilizados somente em finais de semanas, imóveis desocupados, dentre outros. Assim, o quantitativo de economias residenciais ativas a ser considerado na estimativa populacional normalmente será inferior ao valor informado em AG013.
+\end{itemize}
+
+\hypertarget{papn---populauxe7uxe3o-residente-servida-por-pouxe7o-ou-nascente}{%
+\section*{PAPN - População residente servida por poço ou nascente}\label{papn---populauxe7uxe3o-residente-servida-por-pouxe7o-ou-nascente}}
+\addcontentsline{toc}{section}{PAPN - População residente servida por poço ou nascente}
+
+População do município atendida por sistemas de abastecimento de água de poço ou nascente localizado no terreno ou na propriedade em que estava construído.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+PAPN = DPPOPM \times THD
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: habitantes
+\item
+  \textbf{Observação}: Não devem ser considerados nesse item a população servida por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia, em terras indígenas; transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico, etc.; de rio, açude, lago, igarapé.
+\end{itemize}
+
+\hypertarget{pta---populauxe7uxe3o-residente-total-servida-por-sistemas-de-abastecimento-de-uxe1gua-sanitariamente-adequados}{%
+\section*{PTA - População residente total servida por sistemas de abastecimento de água sanitariamente adequados}\label{pta---populauxe7uxe3o-residente-total-servida-por-sistemas-de-abastecimento-de-uxe1gua-sanitariamente-adequados}}
+\addcontentsline{toc}{section}{PTA - População residente total servida por sistemas de abastecimento de água sanitariamente adequados}
+
+População total do município atendida por sistemas sanitariamente adequados de abastecimento de água (rede pública e poços ou minas localizadas dentro do terreno do domicílio).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+PTA = PAR + PAPN
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: habitantes
+\end{itemize}
+
+\hypertarget{ppta---porcentagem-da-populauxe7uxe3o-total-residente-servida-por-uxe1gua-de-abastecimento}{%
+\section*{pPTA - Porcentagem da população total residente servida por água de abastecimento}\label{ppta---porcentagem-da-populauxe7uxe3o-total-residente-servida-por-uxe1gua-de-abastecimento}}
+\addcontentsline{toc}{section}{pPTA - Porcentagem da população total residente servida por água de abastecimento}
+
+Percentual da população total do município abastecida por sistemas sanitariamente adequados de abastecimento de água.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pPTA =\frac{PTA}{PT} \times 100
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: \%
+\item
+  \textbf{Observação}: O cálculo da pPTA pode resultar em valores superiores a 100\% nos municípios que apresentem número elevado de domicílios utilizados para veraneio, imóveis desocupados, dentre outros, ou devido a deficiências de cadastro das economias residenciais. Nesses casos, deve-se adotar para esse indicador o valor de 100\%.
+\end{itemize}
+
+\hypertarget{ppapn---porcentagem-da-populauxe7uxe3o-total-residente-servida-por-pouxe7o-ou-nascentes}{%
+\section*{pPAPN - Porcentagem da população total residente servida por poço ou nascentes}\label{ppapn---porcentagem-da-populauxe7uxe3o-total-residente-servida-por-pouxe7o-ou-nascentes}}
+\addcontentsline{toc}{section}{pPAPN - Porcentagem da população total residente servida por poço ou nascentes}
+
+Percentual da população residente total do município abastecida por poço ou nascente.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pPAPN =\frac{PAPN}{PT} \times 100
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: \%
+\end{itemize}
+
+\hypertarget{ppar---porcentagem-da-populauxe7uxe3o-residente-servida-por-rede-puxfablica-de-abastecimento-de-uxe1gua}{%
+\section*{pPAR - Porcentagem da população residente servida por rede pública de abastecimento de água}\label{ppar---porcentagem-da-populauxe7uxe3o-residente-servida-por-rede-puxfablica-de-abastecimento-de-uxe1gua}}
+\addcontentsline{toc}{section}{pPAR - Porcentagem da população residente servida por rede pública de abastecimento de água}
+
+Percentual da População Abastecida por Sistema de Distribuição de Água.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pPAR = pPTA - pPAPN
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: \%
+\end{itemize}
+
+\hypertarget{pre---populauxe7uxe3o-residente-servida-por-rede-coletora-de-esgoto}{%
+\section*{PRE - População residente servida por rede coletora de esgoto}\label{pre---populauxe7uxe3o-residente-servida-por-rede-coletora-de-esgoto}}
+\addcontentsline{toc}{section}{PRE - População residente servida por rede coletora de esgoto}
+
+População do município atendida com rede pública coletora de esgoto pelo prestador de serviços, no último dia do ano de referência. Corresponde à população que é efetivamente atendida por rede pública coletora, tanto na área urbana como rural.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+PRE = ES008 \times THD
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: habitantes
+\item
+  \textbf{Observações}: Caso o prestador de serviços não disponha de procedimentos próprios para definir, de maneira precisa, essa população, o mesmo poderá estimá-la utilizando o produto da quantidade de economias residenciais ativas de esgotos (ES008), multiplicada pela taxa média de habitantes por domicílio do respectivo município, obtida no último censo ou contagem de população do IBGE. Quando isso ocorrer, o prestador de serviços deverá abater da quantidade de economias residenciais ativas de esgotos, o quantitativo correspondente aos domicílios atendidos e que não contam com população residente, como, por exemplo, domicílios utilizados para veraneio, domicílios utilizados somente em finais de semana, imóveis desocupados, dentre outros. Assim, o quantitativo de economias residenciais ativas a ser considerado na estimativa populacional normalmente será inferior ao valor informado em ES008.
+\end{itemize}
+
+\hypertarget{psf---populauxe7uxe3o-residente-servida-por-sistema-de-fossa-suxe9ptica}{%
+\section*{PSF - População residente servida por sistema de fossa séptica}\label{psf---populauxe7uxe3o-residente-servida-por-sistema-de-fossa-suxe9ptica}}
+\addcontentsline{toc}{section}{PSF - População residente servida por sistema de fossa séptica}
+
+População Residente Servida por Sistema de Fossa Séptica
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+PSF = DPPOF \times THD
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: habitantes
+\end{itemize}
+
+\hypertarget{ptce---populauxe7uxe3o-residente-total-servida-por-sistemas-de-coleta-de-esgoto}{%
+\section*{PTCE - População residente total servida por sistemas de coleta de esgoto}\label{ptce---populauxe7uxe3o-residente-total-servida-por-sistemas-de-coleta-de-esgoto}}
+\addcontentsline{toc}{section}{PTCE - População residente total servida por sistemas de coleta de esgoto}
+
+População total residente servida por sistemas sanitariamente adequados de coleta de esgoto (rede pública coletora ou fossas sépticas).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+PTCE = PRE + PFS
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: habitantes
+\end{itemize}
+
+\hypertarget{pptce---porcentagem-da-populauxe7uxe3o-residente-servida-com-sistema-de-coleta-de-esgoto}{%
+\section*{pPTCE - Porcentagem da população residente servida com sistema de coleta de esgoto}\label{pptce---porcentagem-da-populauxe7uxe3o-residente-servida-com-sistema-de-coleta-de-esgoto}}
+\addcontentsline{toc}{section}{pPTCE - Porcentagem da população residente servida com sistema de coleta de esgoto}
+
+Percentual da população total do município abastecida por Sistemas sanitariamente adequados de coleta de esgoto.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pPTCE =\frac{PTCE}{PT} \times 100
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: \%
+\item
+  \textbf{Observação}: O cálculo do pPTCE pode resultar em valores superiores a 100\% nos municípios que apresentem número elevado de domicílios utilizados para veraneio, imóveis desocupados, dentre outros, ou devido a deficiências de cadastro das economias residenciais. Nesses casos, deve-se adotar para esse indicador o valor de 100\%.
+\end{itemize}
+
+\hypertarget{ppfs---porcentagem-da-populauxe7uxe3o-residente-servida-por-fossa-suxe9ptica}{%
+\section*{pPFS - Porcentagem da população residente servida por fossa séptica}\label{ppfs---porcentagem-da-populauxe7uxe3o-residente-servida-por-fossa-suxe9ptica}}
+\addcontentsline{toc}{section}{pPFS - Porcentagem da população residente servida por fossa séptica}
+
+Percentual da população residente servida por Fossa séptica.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pPFSE =\frac{PFS}{PT} \times 100
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: \%
+\end{itemize}
+
+\hypertarget{ppre---porcentagem-da-populauxe7uxe3o-residente-servida-por-sistema-rede-coletora-de-esgoto}{%
+\section*{pPRE - Porcentagem da população residente servida por sistema rede coletora de esgoto}\label{ppre---porcentagem-da-populauxe7uxe3o-residente-servida-por-sistema-rede-coletora-de-esgoto}}
+\addcontentsline{toc}{section}{pPRE - Porcentagem da população residente servida por sistema rede coletora de esgoto}
+
+Percentual da população servida por sistema de rede coletora de esgoto.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pPRE = pPTCE - pPFS
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: \%
+\end{itemize}
+
+\hypertarget{vaed---volume-de-uxe1gua-efetivamente-disponibilizado-para-consumo-no-municuxedpio}{%
+\section*{VAED - Volume de água efetivamente disponibilizado para consumo no município}\label{vaed---volume-de-uxe1gua-efetivamente-disponibilizado-para-consumo-no-municuxedpio}}
+\addcontentsline{toc}{section}{VAED - Volume de água efetivamente disponibilizado para consumo no município}
+
+Volume de água de efetivamente disponibilizado para consumo potável na rede de distribuição do município. Corresponde à soma dos volumes de água produzido (AG006) e de água tratada importado (AG018), subtraindo o volume de agua tratada exportado (AG019).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+VAED = AG006 + AG018 – AG019
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: 1.000 m³/ano
+\end{itemize}
+
+\hypertarget{vatp---volume-total-de-uxe1gua-perdido-na-rede-de-distribuiuxe7uxe3o}{%
+\section*{VATP - Volume total de água perdido na rede de distribuição}\label{vatp---volume-total-de-uxe1gua-perdido-na-rede-de-distribuiuxe7uxe3o}}
+\addcontentsline{toc}{section}{VATP - Volume total de água perdido na rede de distribuição}
+
+Corresponde à soma volumes de perdas físicas ou reais e perdas aparentes ou não físicas.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+VATP = VAED – AG010 – AG019
+\]
+
+\begin{itemize}
+\item
+  \textbf{Unidade}: 1.000 m³/ano
+\item
+  \textbf{Observações}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Perdas físicas ou reais se referem a volumes de água que não são consumidos, por serem perdidos através de vazamentos em seu percurso, desde as estações de tratamento de água até os pontos de entrega nos imóveis dos clientes.
+  \item
+    Perdas aparentes ou não físicas correspondem aos volumes de água que são consumidos, mas não são contabilizados pela empresa, principalmente devido às irregularidades (com fraudes e ligações clandestinas, os chamados ``gatos'') e à submedição dos hidrômetros.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{vaec---volume-de-uxe1gua-efetivamente-consumido-no-municuxedpio}{%
+\section*{VAEC - Volume de água efetivamente consumido no município}\label{vaec---volume-de-uxe1gua-efetivamente-consumido-no-municuxedpio}}
+\addcontentsline{toc}{section}{VAEC - Volume de água efetivamente consumido no município}
+
+Volume efetivamente consumido em todas economias de água do município ligadas à rede de distribuição pública. Corresponde à soma dos volumes de água consumido (AG010) e de perda de água aparente (estimado em 30\% do volume de perda total de água ocorrido na rede de distribuição - VATP), subtraindo o volume de água tratada exportado (AG019).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+VAEC = AG010 + 0,3 \times VATP – AG019
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: 1.000 m³/ano
+\end{itemize}
+
+\hypertarget{cmpe---consumo-muxe9dio-per-capita-efetivo}{%
+\section*{CMPE - Consumo médio per capita efetivo}\label{cmpe---consumo-muxe9dio-per-capita-efetivo}}
+\addcontentsline{toc}{section}{CMPE - Consumo médio per capita efetivo}
+
+Consumo diário médio efetivo de água por habitante atendido. Corresponde à razão entre o volume efetivamente consumido no município e a população atendida por rede de abastecimento de água.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+CMPE = \frac{VAEC}{(pPRE/100)\times PT} \times \frac{1.000.000}{365}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: Litros/habitante/dia
+\end{itemize}
+
+\hypertarget{ippt---uxedndice-percentual-de-perdas-de-uxe1gua-na-rede-de-distribuiuxe7uxe3o}{%
+\section*{IPPT - Índice percentual de perdas de água na rede de distribuição}\label{ippt---uxedndice-percentual-de-perdas-de-uxe1gua-na-rede-de-distribuiuxe7uxe3o}}
+\addcontentsline{toc}{section}{IPPT - Índice percentual de perdas de água na rede de distribuição}
+
+Corresponde ao percentual de perdas totais (reais e aparentes) ocorridas no sistema de distribuição de água do município. Para efeito de cálculo desse índice, não são consideradas os volumes de água tratada exportado pela concessionaria dos serviços.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+IPPT = \frac{VATP}{VAED} \times 100
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: \%
+\end{itemize}
+
+\hypertarget{veep---volume-efetivo-de-esgoto-produzido-no-municuxedpio}{%
+\section*{VEEP - Volume efetivo de esgoto produzido no município}\label{veep---volume-efetivo-de-esgoto-produzido-no-municuxedpio}}
+\addcontentsline{toc}{section}{VEEP - Volume efetivo de esgoto produzido no município}
+
+Volume de esgoto efetivamente produzido pela totalidade das economias ativas de água do sistema público de abastecimento. Esse volume representa 80\% do consumo efetivo das economias ativas de água do município, sejam elas servidas ou não por redes coletoras de esgoto.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+VEEP = 0,8 * VAEC
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: 1.000 m³/ano
+\end{itemize}
+
+\hypertarget{pte---porcentagem-do-esgoto-tratado-em-relauxe7uxe3o-ao-produzido}{%
+\section*{pTE - Porcentagem do Esgoto Tratado em Relação ao Produzido}\label{pte---porcentagem-do-esgoto-tratado-em-relauxe7uxe3o-ao-produzido}}
+\addcontentsline{toc}{section}{pTE - Porcentagem do Esgoto Tratado em Relação ao Produzido}
+
+Corresponde ao percentual do volume de esgoto encaminhado pelo sistema coletor público de esgoto para tratamento em relação ao volume de esgoto produzido encaminhado pelo sistema público coletor para estações de tratamento em relação ao volume total de esgoto efetivamente produzido
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cálculo}:
+\end{itemize}
+
+\[
+pTE = \frac{E006}{VEEP} \times 100
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unidade}: \%
+\end{itemize}
+
+
+\end{document}
