@@ -2,50 +2,47 @@
 
 devtools::load_all()
 
+stringr::str_to_sentence("Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas")
+
 base_indicadores <- base_completa %>% 
   mutate(
+    # Domicílios abastecidos por fossa séptica/rudimentar
+    num_dom_fossa_septica = proj_domicilios_total * 
+      (sanea_fossa_septica_2010 / domicilios_total_2010),
     
+    num_dom_fossa_rudimentar = proj_domicilios_total * 
+      (sanea_fossa_rudimentar_2010 / domicilios_total_2010),
+    
+    # Domicílios abastecidos por poço na propriedade
+    num_dom_abast_poco_na_propriedade = proj_domicilios_total *
+      (abast_poco_ou_nascente_na_propriedade_2010 / domicilios_total_2010),
+    
+    # Taxa média de Habitantes por domicílio 
+    taxa_hab_domicilio = proj_pop_total / proj_domicilios_total,
+    
+    # População Residente Servida por Rede Pública de Abastecimento de Água 
+    pop_servida_abast_agua = taxa_hab_domicilio * ind_ag013,
+    
+    # População Residente Servida por Poço ou Nascente 
+    pop_servida_poco_nasc = taxa_hab_domicilio * 
+      num_dom_abast_poco_na_propriedade,
+    
+    # População Servida por Abastecimento de Água Sanitariamente Adequados
+    pop_abast_sist_adequados = pop_servida_poco_nasc + pop_servida_abast_agua,
+    
+    # Porcentagem da População Servida por Água de Abastecimento
+    prop_pop_abast_sist_adequados = pop_abast_sist_adequados / populacao * 100
   )
 
 
 base_indicadores <- base_completa %>%
-  mutate(
-    aux_prop_domicilios = num_domicilios/num_domicilios_censo
-  ) %>% 
-  # Domicílios abastecidos por fossa séptica/rudimentar
-  mutate(
-    num_dom_fossa_septica = aux_prop_domicilios*sanea_fossa_septica_censo,
-    num_dom_fossa_rudimentar = aux_prop_domicilios*sanea_fossa_rudimentar_censo
-  ) %>% 
-  # Domicílios abastecidos por poço na propriedade
-  mutate(
-    num_dom_abast_poco_na_propriedade = aux_prop_domicilios*abast_poco_na_propriedade_censo
-  ) %>% 
-  # Taxa média de Habitantes por domicílio 
-  mutate(
-    taxa_hab_domicilio = populacao/num_domicilios
-  ) %>% 
-  # População Residente Servida por Rede Pública de Abastecimento de Água 
-  mutate(
-    pop_servida_abast_agua = taxa_hab_domicilio*ind_ag0131
-  ) %>% 
-  # População Residente Servida por Poço ou Nascente 
-  mutate(
-    pop_servida_poco_nasc = taxa_hab_domicilio*num_dom_abast_poco_na_propriedade
-  ) %>% 
-  # População Servida por Abastecimento de Água Sanitariamente Adequados
-  mutate(
-    pop_abast_sist_adequados = pop_servida_poco_nasc + pop_servida_abast_agua
-  ) %>% 
   # Porcentagem da População Servida por Água de Abastecimento
-  mutate(
     prop_pop_abast_sist_adequados = (pop_abast_sist_adequados/populacao)*100
     # prop_pop_abast_sist_adequados = ifelse(
     #   prop_pop_abast_sist_adequados > 100,
     #   100,
     #   prop_pop_abast_sist_adequados
     # )
-  ) %>% 
   # Porcentagem da População Servida por Poço ou Nascentes
   mutate(
     prop_pop_servida_poco_nasc = (pop_servida_poco_nasc/populacao)*100

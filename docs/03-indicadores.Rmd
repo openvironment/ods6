@@ -4,9 +4,16 @@
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-## DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa {-}
+Nas seções a seguir, descrevemos o cálculo dos indicadores. O cálculo dos indicadores se referem aos anos de 2011 a 2018, utilizando dados de referência (censo 2010) e projeções do SEADE para o número de domicílios particulares ocupados no período. 
 
-Quando a canalização do banheiro ou sanitário está conectada a um dispositivo tipo câmara, enterrado, destinado a receber o esgoto para separação e sedimentação do material orgânico e mineral, transformando-o em material inerte, seguido de unidade para a disposição da parte líquida no solo. Não são considerados nesse valor os domicílios cujos banheiros ou sanitários são ligados a uma fossa rústica (fossa negra, poço, buraco etc.), diretamente a uma vala a céu aberto, rio, lago ou mar.
+Utilizaremos siglas para facilitar a notação, sendo
+
+- DPPO: a projeção do número de domicílios particulares ocupados dada pelo SEADE (2011 a 2018).
+- DPPO (censo): o número de domicílios particulares ocupados no censo de 2010.
+
+### DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa {-}
+
+Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, supõe-se que a proporção dos domicílios particulares ocupados servidos por sistemas de fossas sépticas se mantem constante durante o período e que o número total de domicílios particulares ocupados no município segue a projeção da SEADE.
 
 - **Cálculo**:
 
@@ -14,14 +21,16 @@ $$
 DPPOF = \frac{DPPO}{DPPO_{censo}} \times DPPOF_{censo}
 $$
 
--	**Unidade**: domicílios
+DPPOF (censo): número de domicílios particulares permanentes ocupados servidos por fossa no censo de 2010.
 
--	**Observação**: Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, os valores do número de domicílios particulares ocupados servidos por sistemas de fossas sépticas são estimados supondo variarem segundo as mesmas taxas adotadas nas projeções SEADE utilizadas para o cálculo dos valores dos número de domicílios particulares permanentes ocupados.
+- **Unidade**: domicílios
+
+- **Observação**: quando a canalização do banheiro ou sanitário está conectada a um dispositivo tipo câmara, enterrado, destinado a receber o esgoto para separação e sedimentação do material orgânico e mineral, transformando-o em material inerte, seguido de unidade para a disposição da parte líquida no solo. Não são considerados nesse valor os domicílios cujos banheiros ou sanitários são ligados a uma fossa rústica (fossa negra, poço, buraco etc.), diretamente a uma vala a céu aberto, rio, lago ou mar.
 
 
-## DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas {-}
+## DPPOPM - Número de domicílios particulares permanentes ocupados abastecidos por poços ou minas {-}
 
-Domicílio era servido por água de poço ou nascente localizado no terreno ou na propriedade em que estava construído.
+Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, supõe-se que a proporção dos domicílios particulares permanentes ocupados abastecidos por poços ou minas se mantem constante durante o período e que o número total de domicílios particulares ocupados no município segue a projeção da SEADE.
 
 - **Cálculo**:
 
@@ -32,13 +41,12 @@ $$
 - **Unidade**: domicílios
 
 -	**Observações**:
-    - Não devem ser considerados nesse item domicílios servidos por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia (em terras indígenas); transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.
-    - Para os anos situados entre dois censos demográficos, os valores do número de domicílios particulares ocupados servidos de água por poços ou minas são estimados supondo variarem segundo as mesmas taxas adotadas nas projeções SEADE utilizadas para o cálculo dos valores dos número de domicílios particulares permanentes ocupados.
+    - Domicílio era servido por água de poço ou nascente localizado no terreno ou na propriedade em que estava construído. Não devem ser considerados nesse item domicílios servidos por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia (em terras indígenas); transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.
 
     
 ## THD - Taxa média de habitantes por domicílio {-} 
 
-Constitui o número médio de habitantes por domicílio particular permanente ocupado. É obtida através da divisão da população total residente no município (PT) pelo número de domicílios particulares permanentes ocupados no município (DPPO).
+Constitui o número médio de habitantes por domicílio particular permanente ocupado. É obtida através da razão entre a população total residente no município (PT) pelo número de domicílios particulares permanentes ocupados no município (DPPO). Essa taxa é apurada nos censos demográficos realizados no primeiro ano da década. Para os anos situados entre dois censos demográficos, a taxa é calculada através de estimativas da população e do número de domicílios particulares permanentes ocupados realizadas por metodologia desenvolvida pelo SEADE.
 
 - **Cálculo**: 
 
@@ -48,11 +56,9 @@ $$
 
 - **Unidade**: habitantes/domicílio
 
--	**Observação**: Essa taxa é apurada nos censos demográficos realizados no primeiro ano da década. Para os anos situados entre dois censos demográficos, a taxa é calculada através de estimativas da população e do número de domicílios particulares permanentes ocupados realizadas por metodologia desenvolvida pelo SEADE.
-    
 ## PAR - População residente servida por rede pública de abastecimento de água {-}
 
-População do município atendida com rede pública de abastecimento de água pelo prestador de serviços, no último dia do ano de referência. Corresponde à população que é efetivamente atendida por rede pública de distribuição, tanto na área urbana como rural.
+População do município atendida com rede pública de abastecimento de água pelo prestador de serviços, no último dia do ano de referência. Corresponde à população que é efetivamente atendida por rede pública de distribuição, tanto na área urbana como rural. É calculada pelo produto da quantidade de economias residenciais ativas de água (AG013), multiplicada pela taxa média de habitantes por domicílio do respectivo município (THD), obtida no último censo ou contagem de população do IBGE, ou estimadas realizadas pelo SEADE.
 
 - **Cálculo**:
 
@@ -62,8 +68,6 @@ $$
 
 - **Unidade**: habitantes
 
--	**Observações**: Caso o prestador de serviços não disponha de procedimentos próprios para definir, de maneira precisa, essa população, o mesmo poderá estimá-la utilizando o produto da quantidade de economias residenciais ativas de água (AG013), multiplicada pela taxa média de habitantes por domicílio do respectivo município (THD), obtida no último censo ou contagem de população do IBGE, ou estimadas realizadas pelo SEADE. Quando isso ocorrer, o prestador de serviços deverá abater da quantidade de economias residenciais ativas de água, o quantitativo correspondente aos domicílios atendidos e que não contam com população residente. Como, por exemplo, em domicílios utilizados para veraneio, em domicílios utilizados somente em finais de semanas, imóveis desocupados, dentre outros. Assim, o quantitativo de economias residenciais ativas a ser considerado na estimativa populacional normalmente será inferior ao valor informado em AG013.
-    
 ## PAPN - População residente servida por poço ou nascente {-}
 
 População do município atendida por sistemas de abastecimento de água de poço ou nascente localizado no terreno ou na propriedade em que estava construído.
@@ -76,7 +80,7 @@ $$
 
 - **Unidade**: habitantes
 
--	**Observação**: Não devem ser considerados nesse item a população servida por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia, em terras indígenas; transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico, etc.; de rio, açude, lago, igarapé.
+-	**Observação**: Não devem ser considerados nesse item a população servida por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia, em terras indígenas; transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.
 
 ## PTA - População residente total servida por sistemas de abastecimento de água sanitariamente adequados {-} 
 

@@ -27,6 +27,10 @@ snis <- tab %>%
   filter(munip_cod != "TOTAL da AMOSTRA:") %>% 
   mutate(ano = as.numeric(ano)) %>% 
   filter(ano >= 2010) %>% 
-  arrange(munip_cod)
+  arrange(munip_cod) %>% 
+  mutate(across(
+    starts_with("ind_"),
+    ~parse_number(.x, locale = locale(decimal_mark = ",", grouping_mark = "."))
+  ))
 
 usethis::use_data(snis, overwrite = TRUE)
