@@ -1,11 +1,39 @@
 ## code to prepare `base_indicadores` dataset goes here
 
+# Dúvidas:
+# 1 - o número de domicílios de veraneio entra na conta da taxa de pessoas por domicílio?
+# 2 - é razoável assumir que a taxa de pessoas por domicílio é constante 
+# (entre regiões mais ricas e mais pobres)?
+
 devtools::load_all()
 
-stringr::str_to_sentence("Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas")
+# Dados censo de 2010 (SEADE só tem projeções a partir de 2011)
+tab_2010 <- ibge %>% 
+  dplyr::mutate(ano = 2010) %>% 
+  dplyr::select(
+    munip_cod,
+    ano,
+    proj_pop_urbana = pop_urbana_2010,
+    proj_pop_rural = pop_rural_2010,
+    proj_pop_total = pop_total_2010,
+    proj_domicilios_total = domicilios_total_2010
+  )
+
+# Juntando todas as bases
+base_completa <- seade %>% 
+  dplyr::bind_rows(tab_2010) %>% 
+  dplyr::arrange(munip_cod, ano) %>% 
+  dplyr::left_join(snis, by = c("munip_cod", "ano")) %>% 
+  dplyr::left_join(ibge, by = c("munip_cod")) %>% 
+  dplyr::left_join(idh, by = c("munip_cod")) %>% 
+  dplyr::filter(ano <= 2018) %>% 
+  dplyr::relocate(
+    dplyr::starts_with("munip"),
+    ano
+  )
 
 base_indicadores <- base_completa %>% 
-  mutate(
+  dplyr::mutate(
     # Domicílios abastecidos por fossa séptica/rudimentar
     num_dom_fossa_septica = proj_domicilios_total * 
       (sanea_fossa_septica_2010 / domicilios_total_2010),
@@ -31,90 +59,80 @@ base_indicadores <- base_completa %>%
     pop_abast_sist_adequados = pop_servida_poco_nasc + pop_servida_abast_agua,
     
     # Porcentagem da População Servida por Água de Abastecimento
-    prop_pop_abast_sist_adequados = pop_abast_sist_adequados / populacao * 100
-  )
-
-
-base_indicadores <- base_completa %>%
-  # Porcentagem da População Servida por Água de Abastecimento
-    prop_pop_abast_sist_adequados = (pop_abast_sist_adequados/populacao)*100
-    # prop_pop_abast_sist_adequados = ifelse(
-    #   prop_pop_abast_sist_adequados > 100,
-    #   100,
-    #   prop_pop_abast_sist_adequados
-    # )
-  # Porcentagem da População Servida por Poço ou Nascentes
-  mutate(
-    prop_pop_servida_poco_nasc = (pop_servida_poco_nasc/populacao)*100
-  ) %>% 
-  # Porcentagem da População Servida por Rede Pública de Abastecimento de Água
-  mutate(
+    prop_pop_abast_sist_adequados = 
+      pop_abast_sist_adequados / proj_pop_total * 100,
+    
+    # Porcentagem da População Servida por Poço ou Nascentes
+    prop_pop_servida_poco_nasc = pop_servida_poco_nasc / proj_pop_total * 100,
+    
+    # Porcentagem da População Servida por Rede Pública de Abastecimento de Água
     prop_pop_servida_rede_publica_agua = prop_pop_abast_sist_adequados -
-      prop_pop_servida_poco_nasc
+      prop_pop_servida_poco_nasc,
+    
+    # População Servida por Rede Coletora de Esgoto 
+    pop_servida_rede_esgoto = taxa_hab_domicilio * ind_es008,
+    
+    # População Residente Servida por Sistema de Fossa Séptica/Rudimentar 
+    pop_fossa_septica = num_dom_fossa_septica * taxa_hab_domicilio,
+    pop_fossa_rudimentar = num_dom_fossa_rudimentar * taxa_hab_domicilio,
+    
+    # População Residente Total Servida por Sistemas de Coleta de Esgoto
+    pop_servida_coleta_esgoto = pop_servida_rede_esgoto + pop_fossa_septica,
+    
+    # Porcentagem da População Residente Servida com Sistema de Coleta de Esgoto
+    prop_pop_servida_coleta_esgoto =
+      pop_servida_coleta_esgoto / proj_pop_total * 100,
+    
+    # Porcentagem da População Residente Servida por Fossa Séptica
+    prop_pop_fossa_septica = pop_fossa_septica / proj_pop_total * 100,
+    
+    # Porcentagem da População Servida por sistema Rede Coletora de Esgoto 
+    prop_pop_servida_rede_coleta = 
+      prop_pop_servida_coleta_esgoto - prop_pop_fossa_septica,
+    
+    # Volume de Água Efetivamente Disponibilizado para Consumo no Município 
+    volume_agua_efe_disp = ind_ag006 + ind_ag018 - ind_ag019,
+    
+    # Volume Total de Água Perdido na Rede de Distribuição 
+    volume_agua_perdido_rede = volume_agua_efe_disp - ind_ag010 - ind_ag019,
+    
+    # Volume de Água Efetivamente Consumido no Município
+    volume_agua_efe_consumido = 
+      ind_ag010 + 0.3 * volume_agua_perdido_rede - ind_ag019,
+    
+    # Consumo médio per capita efetivo 
+    consumo_medio_per_capita =
+      volume_agua_efe_consumido / 
+      (proj_pop_total * prop_pop_servida_rede_coleta / 100) *
+      (1e6 / 365),
+    
+    # Índice Percentual de Perdas de água na Rede de Distribuição
+    prop_perdas_rede_dist = 
+      volume_agua_perdido_rede / volume_agua_efe_disp * 100,
+    
+    # Volume efetivo de esgoto produzido no Município
+    volume_esgoto_produzido = 0.8 * volume_agua_efe_consumido,
+    
+    # Volume do esgoto tratado
+    volume_esgoto_tratado = ind_es006,
+    
+    # Porcentagem do Esgoto Tratado em Relação ao Produzido
+    prop_esgoto_tratado = (volume_esgoto_tratado / volume_esgoto_produzido) * 100
   ) %>% 
-  # População Servida por Rede Coletora de Esgoto 
-  mutate(
-    pop_servida_rede_esgoto = taxa_hab_domicilio*ind_es0081
-  ) %>% 
-  # População Residente Servida por Sistema de Fossa Séptica/Rudimentar 
-  mutate(
-    pop_fossa_septica = num_dom_fossa_septica*taxa_hab_domicilio,
-    pop_fossa_rudimentar = num_dom_fossa_rudimentar*taxa_hab_domicilio
-  ) %>% 
-  # População Residente Total Servida por Sistemas de Coleta de Esgoto
-  mutate(
-    pop_servida_coleta_esgoto = pop_servida_rede_esgoto + pop_fossa_septica
-  ) %>% 
-  # Porcentagem da População Residente Servida com Sistema de Coleta de Esgoto
-  mutate(
-    prop_pop_servida_coleta_esgoto = (pop_servida_coleta_esgoto/populacao)*100
-    # prop_pop_servida_coleta_esgoto = ifelse(
-    #   prop_pop_servida_coleta_esgoto > 100,
-    #   100,
-    #   prop_pop_servida_coleta_esgoto
-    # )
-  ) %>% 
-  # Porcentagem da População Residente Servida por Fossa Séptica
-  mutate(
-    prop_pop_fossa_septica = (pop_fossa_septica/populacao)*100
-  ) %>% 
-  # Porcentagem da População Servida por sistema Rede Coletora de Esgoto 
-  mutate(
-    prop_pop_servida_rede_coleta = prop_pop_servida_coleta_esgoto - prop_pop_fossa_septica
-  ) %>% 
-  # Volume de Água Efetivamente Disponibilizado para Consumo no Município 
-  mutate(
-    volume_agua_efe_disp = ind_ag006 + ind_ag018 - ind_ag019
-  ) %>% 
-  # Volume Total de Água Perdido na Rede de Distribuição 
-  mutate(
-    volume_agua_perdido_rede = volume_agua_efe_disp - ind_ag010 - ind_ag019
-  ) %>% 
-  # Volume de Água Efetivamente Consumido no Município
-  mutate(
-    volume_agua_efe_consumido = ind_ag010 + 0.3*volume_agua_perdido_rede - ind_ag019
-  ) %>% 
-  # Consumo médio per capita efetivo 
-  mutate(
-    consumo_medio_per_capita = (volume_agua_efe_consumido / ((populacao * prop_pop_servida_rede_coleta) / 100)) * (1e6 / 365)
-  ) %>% 
-  # Índice Percentual de Perdas de água na Rede de Distribuição
-  mutate(
-    perc_perdas_rede_dist = volume_agua_perdido_rede / volume_agua_efe_disp * 100
-  ) %>% 
-  # Volume efetivo de esgoto produzido no Município
-  mutate(
-    volume_esgoto_produzido = 0.8 * volume_agua_efe_consumido
-  ) %>% 
-  # Volume do esgoto tratado
-  mutate(
-    volume_esgoto_tratado = ind_es006
-  ) %>% 
-  # Porcentagem do Esgoto Tratado em Relação ao Produzido
-  mutate(
-    prop_esgoto_tratado = (ind_es006 / volume_esgoto_produzido) * 100
+  dplyr::select(
+    munip_cod,
+    munip_nome,
+    dplyr::starts_with("idh"),
+    dplyr::starts_with("proj_"),
+    dplyr::starts_with("pop_"),
+    dplyr::starts_with("perc_"),
+    dplyr::starts_with("num"),
+    dplyr::starts_with("taxa"),
+    dplyr::starts_with("volume"),
+    consumo_medio_per_capita
   )
 
-writexl::write_xlsx(base_ind, "data/base_indicadores.xlsx")
+readr::write_csv(base_indicadores, "data-raw/base_indicadores.csv")
+writexl::write_xlsx(base_indicadores, "data-raw/base_indicadores.xlsx")
 
 usethis::use_data(base_indicadores, overwrite = TRUE)

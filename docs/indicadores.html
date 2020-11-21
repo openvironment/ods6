@@ -69,7 +69,6 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Sobre</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#responsáveis"><i class="fa fa-check"></i>Responsáveis</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#atividades"><i class="fa fa-check"></i>Atividades</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#registro-de-atividades"><i class="fa fa-check"></i>Registro de atividades</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
@@ -82,11 +81,11 @@
 <li class="chapter" data-level="2.2" data-path="bases-de-dados.html"><a href="bases-de-dados.html#idh"><i class="fa fa-check"></i><b>2.2</b> IDH</a></li>
 <li class="chapter" data-level="2.3" data-path="bases-de-dados.html"><a href="bases-de-dados.html#seade"><i class="fa fa-check"></i><b>2.3</b> SEADE</a></li>
 <li class="chapter" data-level="2.4" data-path="bases-de-dados.html"><a href="bases-de-dados.html#snis"><i class="fa fa-check"></i><b>2.4</b> SNIS</a></li>
-<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-completa"><i class="fa fa-check"></i><b>2.5</b> Base completa</a></li>
+<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-de-indicadores"><i class="fa fa-check"></i><b>2.5</b> Base de indicadores</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="indicadores.html"><a href="indicadores.html"><i class="fa fa-check"></i><b>3</b> Indicadores</a><ul>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppof---número-de-domicílios-particulares-permanentes-ocupados-servidos-por-fossa"><i class="fa fa-check"></i>DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa</a></li>
-<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppopm---número-de-domicílios-particulares-permanentes-ocupados-abastecidos-por-poços-ou-minas"><i class="fa fa-check"></i>DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppopm---número-de-domicílios-particulares-permanentes-ocupados-abastecidos-por-poços-ou-minas"><i class="fa fa-check"></i>DPPOPM - Número de domicílios particulares permanentes ocupados abastecidos por poços ou minas</a></li>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#thd---taxa-média-de-habitantes-por-domicílio"><i class="fa fa-check"></i>THD - Taxa média de habitantes por domicílio</a></li>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#par---população-residente-servida-por-rede-pública-de-abastecimento-de-água"><i class="fa fa-check"></i>PAR - População residente servida por rede pública de abastecimento de água</a></li>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#papn---população-residente-servida-por-poço-ou-nascente"><i class="fa fa-check"></i>PAPN - População residente servida por poço ou nascente</a></li>
@@ -128,23 +127,30 @@
             <section class="normal" id="section-">
 <div id="indicadores" class="section level1">
 <h1><span class="header-section-number">3</span> Indicadores</h1>
-<div id="dppof---número-de-domicílios-particulares-permanentes-ocupados-servidos-por-fossa" class="section level2 unnumbered">
-<h2>DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa</h2>
-<p>Quando a canalização do banheiro ou sanitário está conectada a um dispositivo tipo câmara, enterrado, destinado a receber o esgoto para separação e sedimentação do material orgânico e mineral, transformando-o em material inerte, seguido de unidade para a disposição da parte líquida no solo. Não são considerados nesse valor os domicílios cujos banheiros ou sanitários são ligados a uma fossa rústica (fossa negra, poço, buraco etc.), diretamente a uma vala a céu aberto, rio, lago ou mar.</p>
+<p>Nas seções a seguir, descrevemos o cálculo dos indicadores. O cálculo dos indicadores se referem aos anos de 2011 a 2018, utilizando dados de referência (censo 2010) e projeções do SEADE para o número de domicílios particulares ocupados no período.</p>
+<p>Utilizaremos siglas para facilitar a notação, sendo</p>
+<ul>
+<li>DPPO: a projeção do número de domicílios particulares ocupados dada pelo SEADE (2011 a 2018).</li>
+<li>DPPO (censo): o número de domicílios particulares ocupados no censo de 2010.</li>
+</ul>
+<div id="dppof---número-de-domicílios-particulares-permanentes-ocupados-servidos-por-fossa" class="section level3 unnumbered">
+<h3>DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa</h3>
+<p>Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, supõe-se que a proporção dos domicílios particulares ocupados servidos por sistemas de fossas sépticas se mantem constante durante o período e que o número total de domicílios particulares ocupados no município segue a projeção da SEADE.</p>
 <ul>
 <li><strong>Cálculo</strong>:</li>
 </ul>
 <p><span class="math display">\[
 DPPOF = \frac{DPPO}{DPPO_{censo}} \times DPPOF_{censo}
 \]</span></p>
+<p>DPPOF (censo): número de domicílios particulares permanentes ocupados servidos por fossa no censo de 2010.</p>
 <ul>
 <li><p><strong>Unidade</strong>: domicílios</p></li>
-<li><p><strong>Observação</strong>: Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, os valores do número de domicílios particulares ocupados servidos por sistemas de fossas sépticas são estimados supondo variarem segundo as mesmas taxas adotadas nas projeções SEADE utilizadas para o cálculo dos valores dos número de domicílios particulares permanentes ocupados.</p></li>
+<li><p><strong>Observação</strong>: quando a canalização do banheiro ou sanitário está conectada a um dispositivo tipo câmara, enterrado, destinado a receber o esgoto para separação e sedimentação do material orgânico e mineral, transformando-o em material inerte, seguido de unidade para a disposição da parte líquida no solo. Não são considerados nesse valor os domicílios cujos banheiros ou sanitários são ligados a uma fossa rústica (fossa negra, poço, buraco etc.), diretamente a uma vala a céu aberto, rio, lago ou mar.</p></li>
 </ul>
 </div>
 <div id="dppopm---número-de-domicílios-particulares-permanentes-ocupados-abastecidos-por-poços-ou-minas" class="section level2 unnumbered">
-<h2>DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas</h2>
-<p>Domicílio era servido por água de poço ou nascente localizado no terreno ou na propriedade em que estava construído.</p>
+<h2>DPPOPM - Número de domicílios particulares permanentes ocupados abastecidos por poços ou minas</h2>
+<p>Esse dado é obtido nos censos demográficos realizados no primeiro ano de cada década. Para os anos situados entre dois censos, supõe-se que a proporção dos domicílios particulares permanentes ocupados abastecidos por poços ou minas se mantem constante durante o período e que o número total de domicílios particulares ocupados no município segue a projeção da SEADE.</p>
 <ul>
 <li><strong>Cálculo</strong>:</li>
 </ul>
@@ -155,14 +161,13 @@ DPPOPM = \frac{DPPO}{DPPO_{censo}} \times DPPOAM_{censo}
 <li><p><strong>Unidade</strong>: domicílios</p></li>
 <li><p><strong>Observações</strong>:</p>
 <ul>
-<li>Não devem ser considerados nesse item domicílios servidos por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia (em terras indígenas); transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.</li>
-<li>Para os anos situados entre dois censos demográficos, os valores do número de domicílios particulares ocupados servidos de água por poços ou minas são estimados supondo variarem segundo as mesmas taxas adotadas nas projeções SEADE utilizadas para o cálculo dos valores dos número de domicílios particulares permanentes ocupados.</li>
+<li>Domicílio era servido por água de poço ou nascente localizado no terreno ou na propriedade em que estava construído. Não devem ser considerados nesse item domicílios servidos por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia (em terras indígenas); transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.</li>
 </ul></li>
 </ul>
 </div>
 <div id="thd---taxa-média-de-habitantes-por-domicílio" class="section level2 unnumbered">
 <h2>THD - Taxa média de habitantes por domicílio</h2>
-<p>Constitui o número médio de habitantes por domicílio particular permanente ocupado. É obtida através da divisão da população total residente no município (PT) pelo número de domicílios particulares permanentes ocupados no município (DPPO).</p>
+<p>Constitui o número médio de habitantes por domicílio particular permanente ocupado. É obtida através da razão entre a população total residente no município (PT) pelo número de domicílios particulares permanentes ocupados no município (DPPO). Essa taxa é apurada nos censos demográficos realizados no primeiro ano da década. Para os anos situados entre dois censos demográficos, a taxa é calculada através de estimativas da população e do número de domicílios particulares permanentes ocupados realizadas por metodologia desenvolvida pelo SEADE.</p>
 <ul>
 <li><strong>Cálculo</strong>:</li>
 </ul>
@@ -170,13 +175,12 @@ DPPOPM = \frac{DPPO}{DPPO_{censo}} \times DPPOAM_{censo}
 THD = \frac{PT}{DPPO}
 \]</span></p>
 <ul>
-<li><p><strong>Unidade</strong>: habitantes/domicílio</p></li>
-<li><p><strong>Observação</strong>: Essa taxa é apurada nos censos demográficos realizados no primeiro ano da década. Para os anos situados entre dois censos demográficos, a taxa é calculada através de estimativas da população e do número de domicílios particulares permanentes ocupados realizadas por metodologia desenvolvida pelo SEADE.</p></li>
+<li><strong>Unidade</strong>: habitantes/domicílio</li>
 </ul>
 </div>
 <div id="par---população-residente-servida-por-rede-pública-de-abastecimento-de-água" class="section level2 unnumbered">
 <h2>PAR - População residente servida por rede pública de abastecimento de água</h2>
-<p>População do município atendida com rede pública de abastecimento de água pelo prestador de serviços, no último dia do ano de referência. Corresponde à população que é efetivamente atendida por rede pública de distribuição, tanto na área urbana como rural.</p>
+<p>População do município atendida com rede pública de abastecimento de água pelo prestador de serviços, no último dia do ano de referência. Corresponde à população que é efetivamente atendida por rede pública de distribuição, tanto na área urbana como rural. É calculada pelo produto da quantidade de economias residenciais ativas de água (AG013), multiplicada pela taxa média de habitantes por domicílio do respectivo município (THD), obtida no último censo ou contagem de população do IBGE, ou estimadas realizadas pelo SEADE.</p>
 <ul>
 <li><strong>Cálculo</strong>:</li>
 </ul>
@@ -184,8 +188,7 @@ THD = \frac{PT}{DPPO}
 PAR = AG013 \times THD
 \]</span></p>
 <ul>
-<li><p><strong>Unidade</strong>: habitantes</p></li>
-<li><p><strong>Observações</strong>: Caso o prestador de serviços não disponha de procedimentos próprios para definir, de maneira precisa, essa população, o mesmo poderá estimá-la utilizando o produto da quantidade de economias residenciais ativas de água (AG013), multiplicada pela taxa média de habitantes por domicílio do respectivo município (THD), obtida no último censo ou contagem de população do IBGE, ou estimadas realizadas pelo SEADE. Quando isso ocorrer, o prestador de serviços deverá abater da quantidade de economias residenciais ativas de água, o quantitativo correspondente aos domicílios atendidos e que não contam com população residente. Como, por exemplo, em domicílios utilizados para veraneio, em domicílios utilizados somente em finais de semanas, imóveis desocupados, dentre outros. Assim, o quantitativo de economias residenciais ativas a ser considerado na estimativa populacional normalmente será inferior ao valor informado em AG013.</p></li>
+<li><strong>Unidade</strong>: habitantes</li>
 </ul>
 </div>
 <div id="papn---população-residente-servida-por-poço-ou-nascente" class="section level2 unnumbered">
@@ -199,7 +202,7 @@ PAPN = DPPOPM \times THD
 \]</span></p>
 <ul>
 <li><p><strong>Unidade</strong>: habitantes</p></li>
-<li><p><strong>Observação</strong>: Não devem ser considerados nesse item a população servida por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia, em terras indígenas; transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico, etc.; de rio, açude, lago, igarapé.</p></li>
+<li><p><strong>Observação</strong>: Não devem ser considerados nesse item a população servida por água de rede pública de distribuição; de poço ou nascente localizado fora do terreno ou da propriedade em que estava construído; de poço ou nascente localizado na aldeia ou fora da aldeia, em terras indígenas; transportada por carro-pipa; de chuva, armazenada em cisterna, caixa de cimento, galões, tanques de material plástico etc.; de rio, açude, lago, igarapé.</p></li>
 </ul>
 </div>
 <div id="pta---população-residente-total-servida-por-sistemas-de-abastecimento-de-água-sanitariamente-adequados" class="section level2 unnumbered">

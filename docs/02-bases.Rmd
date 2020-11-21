@@ -121,14 +121,14 @@ Foi então baixado um arquivo CSV.
 O script utilizado para importação e limpeza da base por ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/snis.R).
 
 
-## Base completa
+## Base de indicadores
 
-A base completa foi construída por meio da junção das bases descritas nas seções anteriores.
+Por fim, criamos a base final utilizada na construção do dashboards. Essa base é constuída pela junção das informações das bases descritas nas seções anteriores, mas principalmente pelos indicadores descritos no próximo capítulo.
 
-O script em R utilizado para a junção das bases se encontra [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/base_completa.R).
+O script em R utilizado para a junção das bases se encontra [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/base_indicadores.R).
 
-Abaixo disponibilizamos links para o download direto da base completa:
+A seguir disponibilizamos links para o download direto da base de indicadores:
 
-- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/base_completa.csv)
-- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/base_completa.xlsx)
+- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/base_indicadores.csv)
+- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/base_indicadores.xlsx)
 

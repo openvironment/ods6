@@ -69,7 +69,6 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Sobre</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#responsáveis"><i class="fa fa-check"></i>Responsáveis</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#atividades"><i class="fa fa-check"></i>Atividades</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#registro-de-atividades"><i class="fa fa-check"></i>Registro de atividades</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
@@ -82,11 +81,11 @@
 <li class="chapter" data-level="2.2" data-path="bases-de-dados.html"><a href="bases-de-dados.html#idh"><i class="fa fa-check"></i><b>2.2</b> IDH</a></li>
 <li class="chapter" data-level="2.3" data-path="bases-de-dados.html"><a href="bases-de-dados.html#seade"><i class="fa fa-check"></i><b>2.3</b> SEADE</a></li>
 <li class="chapter" data-level="2.4" data-path="bases-de-dados.html"><a href="bases-de-dados.html#snis"><i class="fa fa-check"></i><b>2.4</b> SNIS</a></li>
-<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-completa"><i class="fa fa-check"></i><b>2.5</b> Base completa</a></li>
+<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-de-indicadores"><i class="fa fa-check"></i><b>2.5</b> Base de indicadores</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="indicadores.html"><a href="indicadores.html"><i class="fa fa-check"></i><b>3</b> Indicadores</a><ul>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppof---número-de-domicílios-particulares-permanentes-ocupados-servidos-por-fossa"><i class="fa fa-check"></i>DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa</a></li>
-<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppopm---número-de-domicílios-particulares-permanentes-ocupados-abastecidos-por-poços-ou-minas"><i class="fa fa-check"></i>DPPOPM - Número de Domicílios Particulares Permanentes Ocupados abastecidos por poços ou minas</a></li>
+<li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppopm---número-de-domicílios-particulares-permanentes-ocupados-abastecidos-por-poços-ou-minas"><i class="fa fa-check"></i>DPPOPM - Número de domicílios particulares permanentes ocupados abastecidos por poços ou minas</a></li>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#thd---taxa-média-de-habitantes-por-domicílio"><i class="fa fa-check"></i>THD - Taxa média de habitantes por domicílio</a></li>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#par---população-residente-servida-por-rede-pública-de-abastecimento-de-água"><i class="fa fa-check"></i>PAR - População residente servida por rede pública de abastecimento de água</a></li>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#papn---população-residente-servida-por-poço-ou-nascente"><i class="fa fa-check"></i>PAPN - População residente servida por poço ou nascente</a></li>
@@ -239,14 +238,14 @@
 <p><strong>Nota</strong>: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel. Possível causa: o arquivo CSV era um arquivo binário.</p>
 <p>O script utilizado para importação e limpeza da base por ser encontrado <a href="https://github.com/openvironment/ods6/blob/main/data-raw/snis.R">aqui</a>.</p>
 </div>
-<div id="base-completa" class="section level2">
-<h2><span class="header-section-number">2.5</span> Base completa</h2>
-<p>A base completa foi construída por meio da junção das bases descritas nas seções anteriores.</p>
-<p>O script em R utilizado para a junção das bases se encontra <a href="https://github.com/openvironment/ods6/blob/main/data-raw/base_completa.R">aqui</a>.</p>
-<p>Abaixo disponibilizamos links para o download direto da base completa:</p>
+<div id="base-de-indicadores" class="section level2">
+<h2><span class="header-section-number">2.5</span> Base de indicadores</h2>
+<p>Por fim, criamos a base final utilizada na construção do dashboards. Essa base é constuída pela junção das informações das bases descritas nas seções anteriores, mas principalmente pelos indicadores descritos no próximo capítulo.</p>
+<p>O script em R utilizado para a junção das bases se encontra <a href="https://github.com/openvironment/ods6/blob/main/data-raw/base_indicadores.R">aqui</a>.</p>
+<p>A seguir disponibilizamos links para o download direto da base de indicadores:</p>
 <ul>
-<li><a href="https://github.com/openvironment/ods6/raw/main/data-raw/base_completa.csv">versão CSV</a></li>
-<li><a href="https://github.com/openvironment/ods6/raw/main/data-raw/base_completa.xlsx">versão Excel</a></li>
+<li><a href="https://github.com/openvironment/ods6/raw/main/data-raw/base_indicadores.csv">versão CSV</a></li>
+<li><a href="https://github.com/openvironment/ods6/raw/main/data-raw/base_indicadores.xlsx">versão Excel</a></li>
 </ul>
 
 </div>
