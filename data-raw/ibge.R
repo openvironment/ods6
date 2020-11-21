@@ -66,7 +66,6 @@ abastecimento <- dados_sidra %>%
   janitor::clean_names() %>% 
   select(-abast_total)
 
-
 # Populacao ---------------------------------------------------------------
 
 dados_sidra <- sidrar::get_sidra(
