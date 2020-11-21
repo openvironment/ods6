@@ -2,47 +2,41 @@
 
 `%>%` <- magrittr::`%>%`
 
-load("data/ibge.rda")
-
-baixar_dados_seade <- function(cod_local, url, faixa_etaria, 
-                               localidade, sexo, anos) {
-  url <- paste(url, faixa_etaria, localidade, sexo, cod_local, anos, sep = "/")
-  
-  httr::GET(url) %>% 
-    httr::content() %>% 
-    purrr::pluck("dados") %>% 
-    purrr::map_dfr(tibble::as_tibble)
-}
-
-url <- "http://api-projpop.seade.gov.br/v1/dados"
-faixa_etaria <- "sf"
-localidade <- "mun"
-sexo <- "t"
-cod_localidade <- ibge$munip_cod
-anos <- "all"
-
-tab <- purrr::map_dfr(
-  cod_localidade,
-  baixar_dados_seade,
-  url = url,
-  faixa_etaria = faixa_etaria,
-  localidade = localidade,
-  sexo = sexo,
-  anos = anos
+download.file(
+  "http://produtos.seade.gov.br/produtos/projpop/download/Projpop.zip",
+  destfile = "data-raw/seade/seade_completo.zip"
 )
 
-seade <- tab %>%
-  dplyr::select(
-    ano, 
-    munip_cod = cod_municipio, 
-    pop_masc = total_polpulacao_homem, 
-    pop_fem = total_polpulacao_mulher,
-    pop_total = total_geral_polpulacao
+download.file(
+  "http://produtos.seade.gov.br/produtos/projpop/download/Dicionario.zip",
+  destfile = "data-raw/seade/seade_dir.zip"
+)
+
+unzip(
+  "data-raw/seade/seade_completo.zip", 
+  files = "tb_dados.txt", 
+  exdir = "data-raw/seade/"
+)
+
+unzip("data-raw/seade/seade_dir.zip", exdir = "data-raw/seade/")
+
+tab <- read.csv2("data-raw/seade/tb_dados.txt")
+
+seade <- tab %>% 
+  tibble::as_tibble() %>%
+  dplyr::filter(!is.na(mun_id), ano <= 2020) %>% 
+  dplyr::mutate(
+    mun_id = as.character(mun_id),
+    mun_id = stringr::str_sub(mun_id, 1, 6),
+    proj_pop_total = PURB + PRUR,
   ) %>% 
-  dplyr::mutate(dplyr::across(
-    -munip_cod,
-    as.numeric
-  )) %>% 
-  dplyr::filter(ano <= 2020)
+  dplyr::select(
+    munip_cod = mun_id,
+    ano,
+    proj_pop_urbana = PURB,
+    proj_pop_rural = PRUR,
+    proj_pop_total,
+    proj_domicilios_total = DOM
+  )
 
 usethis::use_data(seade, overwrite = TRUE)

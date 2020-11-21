@@ -20,12 +20,17 @@ idh <- tab %>%
   janitor::clean_names() %>%
   filter(uf == 35, ano == 2010) %>%
   select(
-    ano,
     munip_cod = codmun7,
-    munip_name = municipio,
     idh = idhm,
     starts_with("idhm_")
   ) %>% 
-  mutate(munip_name = str_to_title(munip_name))
+  mutate(
+    munip_cod = as.character(munip_cod),
+    munip_cod = stringr::str_sub(munip_cod, 1, 6)
+  ) %>% 
+  rename_with(
+    .cols = -munip_cod,
+    ~ paste0(.x, "_2010")
+  )
 
 usethis::use_data(idh, overwrite = TRUE)

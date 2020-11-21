@@ -108,7 +108,13 @@ ibge <- saneamento %>%
 
 ibge <- ibge %>% 
   mutate(
-    munip_nome = str_remove(munip_nome, " - SP")
-  )
+    munip_nome = str_remove(munip_nome, " - SP"),
+    munip_cod = stringr::str_sub(munip_cod, 1, 6)
+  ) %>% 
+  rename_with(
+    .cols = -c("munip_cod", "munip_nome", "ano"),
+    ~paste0(.x, "_2010")
+  ) %>% 
+  select(-ano)
 
 usethis::use_data(ibge, overwrite = TRUE)

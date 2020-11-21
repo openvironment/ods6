@@ -1,0 +1,7 @@
+rm_id;rm_desc;rm_desc_abrev;
+680;"Região Metropolitana da Baixada Santista";"Baixada Santista";
+681;"Região Metropolitana de São Paulo";"São Paulo";
+696;"Região Metropolitana de Campinas";"Campinas";
+697;"Região Metropolitana do Vale do Paraíba e Litoral Norte";"Vale do Paraíba e Litoral Norte";
+699;"Região Metropolitana de Sorocaba";"Sorocaba";
+951;"Região Metropolitana de Ribeirão Preto";"Ribeirão Preto";

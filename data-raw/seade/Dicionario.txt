@@ -1,0 +1,105 @@
+Projeções Populacionais Seade
+Projeções populacionais por sexo, faixas etárias qüinqüenais e idade 
+escolar, para o período de 2011 a 2050, com diversas possibilidades de agregação regional, 
+que vão desde os municípios até o total do Estado e distritos da Capital
+Gerado em: 20/06/2017 15:50:21
+Alterado em: 10/03/2020 10:44:15
+---------------------------------------------------------------------------
+Tabela:	tb_dados
+Descrição:	Dados de população por faixa etária e idade escolar, por 
+	localidades (distritos, municípios, regiões)
+Nome do campo	|	Descrição
+mun_id	|	Código IBGE do município (7 digitos)
+dist_id	|	Código do distrito da capital
+ra_id	|	Código da Região Administrativa a que pertence o 
+	município
+rg_id	|	Código da Região de Governo a que pertence o município
+rm_id	|	Código da Região Metropolitana a que pertence o 
+	município
+dir_id	|	Código do Departamento Regional de Saúde a que 
+	pertence o município
+ano	|	Ano da projeção da população
+FH1	|	Homens - 00 a 04 anos
+FH2	|	Homens - 05 a 09 anos
+FH3	|	Homens - 10 a 14 anos
+FH4	|	Homens - 15 a 19 anos
+FH5	|	Homens - 20 a 24 anos
+FH6	|	Homens - 25 a 29 anos
+FH7	|	Homens - 30 a 34 anos
+FH8	|	Homens - 35 a 39 anos
+FH9	|	Homens - 40 a 44 anos
+FH10	|	Homens - 45 a 49 anos
+FH11	|	Homens - 50 a 54 anos
+FH12	|	Homens - 55 a 59 anos
+FH13	|	Homens - 60 a 64 anos
+FH14	|	Homens - 65 a 69 anos
+FH15	|	Homens - 70 a 74 anos
+FH16	|	Homens - 75 anos e mais
+FM1	|	Mulheres - 00 a 04 anos
+FM2	|	Mulheres - 05 a 09 anos
+FM3	|	Mulheres - 10 a 14 anos
+FM4	|	Mulheres - 15 a 19 anos
+FM5	|	Mulheres - 20 a 24 anos
+FM6	|	Mulheres - 25 a 29 anos
+FM7	|	Mulheres - 30 a 34 anos
+FM8	|	Mulheres - 35 a 39 anos
+FM9	|	Mulheres - 40 a 44 anos
+FM10	|	Mulheres - 45 a 49 anos
+FM11	|	Mulheres - 50 a 54 anos
+FM12	|	Mulheres - 55 a 59 anos
+FM13	|	Mulheres - 60 a 64 anos
+FM14	|	Mulheres - 65 a 69 anos
+FM15	|	Mulheres - 70 a 74 anos
+FM16	|	Mulheres - 75 anos e mais
+FE17	|	População em idade escolar - 00 a 03 anos
+FE18	|	População em idade escolar - 04 a 05 anos
+FE19	|	População em idade escolar - 06 anos
+FE20	|	População em idade escolar - 07 a 10 anos
+FE21	|	População em idade escolar - 11 a 14 anos
+FE22	|	População em idade escolar - 15 a 17 anos
+FE23	|	População em idade escolar - 18 a 19 anos
+PURB	|	População Urbana 
+PRUR	|	População Rural
+DOM		|	Domicílios Ocupados
+---------------------------------------------------------------------------
+Tabela:	tb_municipios
+Descrição:	Relação de municípios
+Nome do campo	|	Descrição
+mun_id	|	Código IBGE do município (7 digitos)
+mun_desc	|	Nome do município
+---------------------------------------------------------------------------
+Tabela:	tb_ras
+Descrição:	Relação de Regiões Administrativas
+Nome do campo	|	Descrição
+ra_id	|	Código da Região Administrativa
+
+ra_desc	|	Nome da Região Administrativa por extenso
+ra_desc_abrev	|	Nome da Região Administrativa abreviado
+---------------------------------------------------------------------------
+Tabela:	tb_rgs
+Descrição:	Relação de Regiões de Governo
+Nome do campo	|	Descrição
+rg_id	|	Código da Região de Governo
+rg_desc	|	Nome da Região de Governo por extenso
+rg_desc_abrev	|	Nome da Região de Governo abreviado
+---------------------------------------------------------------------------
+Tabela:	tb_rms
+Descrição:	Relação de Regiões Metropolitanas
+Nome do campo	|	Descrição
+rm_id	|	Código da Região Metropolitana
+rm_desc	|	Nome da Região Metropolitana por extenso
+rm_desc_abrev	|	Nome da Região Metropolitana abreviado
+---------------------------------------------------------------------------
+Tabela:	tb_dirs
+Descrição:	Relação de Departamentos Regionais de Saúde
+Nome do campo	|	Descrição
+dir_id	|	Código do Departamento Regional de Saúde
+dir_desc	|	Nome do Departamento Regional de Saúde
+---------------------------------------------------------------------------
+Tabela:	tb_distritos
+Descrição:	Relação de Distritos da Capital
+Nome do campo	|	Descrição
+dist_id	|	Código do distrito
+dist_desc	|	Nome do distrito
+---------------------------------------------------------------------------
+Fundação Sistema Estadual de Análise de Dados - SEADE

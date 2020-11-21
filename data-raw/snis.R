@@ -15,15 +15,18 @@ snis <- tab %>%
     .cols = contains(" - ")
   ) %>% 
   janitor::clean_names() %>% 
+  janitor::remove_empty(which = "rows") %>% 
   select(
     munip_cod = codigo_do_municipio,
-    munip_nome = municipio,
     ano = ano_de_referencia,
     prestador,
     prestador_sigla = sigla_do_prestador,
     natureza_juridica,
     starts_with("ind")
   ) %>% 
-  filter(ano >= 2010) %>% arrange(munip_cod)
+  filter(munip_cod != "TOTAL da AMOSTRA:") %>% 
+  mutate(ano = as.numeric(ano)) %>% 
+  filter(ano >= 2010) %>% 
+  arrange(munip_cod)
 
 usethis::use_data(snis, overwrite = TRUE)
