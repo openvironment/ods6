@@ -1,9 +1,5 @@
 # Bases de dados
 
-```{r, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
-
 A seguir, documentamos o processo de extração de dados e contrução das bases.
 
 ## IBGE
@@ -66,31 +62,16 @@ O script em R utilizado para importação e limpeza dos dados pode ser encontrad
 
 O SEADE é o portal de estatísticas do Estado de São Paulo. É fundação vinculada à Secretaria de Governo, com o objetivo de produzir e disseminar análises e estatísticas socioeconômicas e demográficas.
 
-No portal [https://produtos.seade.gov.br/produtos/projpop/](https://produtos.seade.gov.br/produtos/projpop/), buscamos as bases com as seguintes variáveis:
+Os dados estão disponibilizados [neste portal](http://produtos.seade.gov.br/produtos/projpop/index.php). Foi possível fazer o download completo da base a partir deste link: [http://produtos.seade.gov.br/produtos/projpop/download/Projpop.zip](http://produtos.seade.gov.br/produtos/projpop/download/Projpop.zip). O dicionário de variáveis pode ser baixado diretamente a partir do link [http://produtos.seade.gov.br/produtos/projpop/download/Dicionario.zip](http://produtos.seade.gov.br/produtos/projpop/download/Dicionario.zip).
+
+Buscamos as seguintes variáveis:
 
 - Código do município
 - Ano
-- Projeção População Total (anos 2011 a 2017)
+- Projeção População Total 
 - Projeção do número de domicílios permanentes ocupados (anos 2011 a 2017)
 
-A partir do arquivo baixado (`base_pnud_original.xlsx`), construímos a tabela `pnud_tidy`.
-
-```{r, eval = FALSE}
-seade <- readr::read_delim(
-  "data-raw/base_seade_original.txt",
-  delim = ";", guess_max = 10000
-) %>% 
-  filter(!is.na(mun_id), ano %in% 2011:2017) 
-
-pop_total <- seade %>% 
-  select(starts_with("FM"), starts_with("FH")) %>% 
-  rowSums()
-
-seade_tidy <- seade %>% 
-  select(munip_cod = mun_id, ano = ano, proj_domicilios = DOM) %>% 
-  mutate(proj_populacao = pop_total)
-```
-
+O script em R utilizado para importação e limpeza dos dados pode ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/seade.R).
 
 ## SNIS
 
@@ -142,50 +123,12 @@ O script utilizado para importação e limpeza da base por ser encontrado [aqui]
 
 ## Base completa
 
-A base completa foi construída por meio da junção das bases *tidy* citadas acima. Essa base contempla as características de cada município para um determinado ano.
- 
-```{r, eval = FALSE}
-library(tidyverse)
+A base completa foi construída por meio da junção das bases descritas nas seções anteriores.
 
-ibge <- readxl::read_excel("data/base_ibge_2010.xlsx") %>% 
-  mutate(
-    munip_cod = str_sub(munip_cod, 1, 6), 
-    ano = 2010
-  )
-seade <- readxl::read_excel("data/base_seade_proj_2011_2017.xlsx") %>% 
-  mutate(munip_cod = str_sub(munip_cod, 1, 6))
-pnud <- readxl::read_excel("data/base_pnud_idh_2010.xlsx") %>% 
-  mutate(munip_cod = as.character(munip_cod))
-snis <- readxl::read_excel("data/base_snis_saneamento_2010_2017.xlsx")
+O script em R utilizado para a junção das bases se encontra [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/base_completa.R).
 
-base_censo <- left_join(ibge, pnud, by = c("munip_cod", "ano")) %>% 
-  rename(num_domicilios = domicilios_total, populacao = pop_total) %>% 
-  rename_at(vars(-munip_cod, -munip_nome, -ano), ~paste0(.x, "_censo"))
-base_censo <- map_dfr(2010:2017, ~mutate(base_censo, ano = .x))
+Abaixo disponibilizamos links para o download direto da base completa:
 
-base_completa <- tibble(
-  munip_cod = c(ibge$munip_cod, seade$munip_cod),
-  ano = c(ibge$ano, seade$ano),
-  num_domicilios = c(ibge$domicilios_total, seade$proj_domicilios),
-  populacao = c(ibge$pop_total, seade$proj_populacao)
-) %>%
-  left_join(base_censo, by = c("munip_cod", "ano")) %>% 
-  left_join(snis, by = c("munip_cod", "ano"))
-
-write_rds(base_completa, "data/base_completa.rds")
-
-```
-
-A tabela a seguir apresenta as dez primeiras linhas da base completa:
-
-```{r, echo = FALSE}
-library(tidyverse)
-library(reactable)
-
-readr::read_rds("../ods6/data/base_completa.rds") %>% 
-  slice(1:10) %>% 
-  reactable(
-    defaultColDef = colDef(maxWidth = 200)
-  )
-```
+- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/base_completa.csv)
+- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/base_completa.xlsx)
 
