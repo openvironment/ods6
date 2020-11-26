@@ -106,14 +106,19 @@ ibge <- saneamento %>%
   left_join(populacao, by = c("munip_cod", "ano"))
 
 ibge <- ibge %>% 
-  mutate(
+  dplyr::mutate(
     munip_nome = str_remove(munip_nome, " - SP"),
-    munip_cod = stringr::str_sub(munip_cod, 1, 6)
+    munip_cod = stringr::str_sub(munip_cod, 1, 6),
+    munip_turistico = ifelse(
+      limpar_nome_cidade(munip_nome) %in% pop_flutuante$munip_nome_sem,
+      "sim",
+      "não"
+    )
   ) %>% 
   rename_with(
     .cols = -c("munip_cod", "munip_nome", "ano"),
     ~paste0(.x, "_2010")
   ) %>% 
-  select(-ano)
+  select(-ano) 
 
 usethis::use_data(ibge, overwrite = TRUE)

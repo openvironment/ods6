@@ -4,6 +4,7 @@
 # 1 - o número de domicílios de veraneio entra na conta da taxa de pessoas por domicílio?
 # 2 - é razoável assumir que a taxa de pessoas por domicílio é constante 
 # (entre regiões mais ricas e mais pobres)?
+# 3- por que não usar o fator nos anos censitários?
 
 devtools::load_all()
 
@@ -32,7 +33,41 @@ base_completa <- seade %>%
     ano
   )
 
+tab_fator_correcao <- base_completa %>% 
+  dplyr::filter(ano == 2010) %>%
+  dplyr::group_by(munip_cod, munip_turistico) %>% 
+  dplyr::summarise(
+    dplyr::across(
+      c(pop_total_2010, domicilios_total_2010, abast_rede_geral_2010,
+        sanea_rede_geral_de_esgoto_ou_pluvial_2010),
+      dplyr::first
+    ),
+    dplyr::across(
+      c(ind_ag013, ind_es008),
+      ~dplyr::first(na.omit(.x))
+    )
+  ) %>% 
+  dplyr::mutate(
+    taxa_hab_domicilio = pop_total_2010 / domicilios_total_2010,
+    abast_rede_fator_correcao = abast_rede_geral_2010 / ind_ag013,
+    sanea_fator_correcao = 
+      sanea_rede_geral_de_esgoto_ou_pluvial_2010 / ind_es008
+  ) %>%
+  dplyr::mutate(dplyr::across(
+    dplyr::contains("fator_correcao"),
+    ~ifelse(munip_turistico == "sim", .x, 1)
+  )) %>% 
+  dplyr::select(
+    munip_cod,
+    munip_turistico,
+    dplyr::contains("fator_correcao")
+  )
+
 base_indicadores <- base_completa %>% 
+  dplyr::left_join(
+    tab_fator_correcao, 
+    by = c("munip_cod", "prestador_sigla")
+  ) %>% 
   dplyr::mutate(
     # Domicílios abastecidos por fossa séptica/rudimentar
     num_dom_fossa_septica = proj_domicilios_total * 
@@ -49,7 +84,9 @@ base_indicadores <- base_completa %>%
     taxa_hab_domicilio = proj_pop_total / proj_domicilios_total,
     
     # População Residente Servida por Rede Pública de Abastecimento de Água 
-    pop_servida_abast_agua = taxa_hab_domicilio * ind_ag013,
+    pop_servida_abast_agua = 
+      taxa_hab_domicilio * ind_ag013 * 
+      tidyr::replace_na(abast_rede_fator_correcao, 1),
     
     # População Residente Servida por Poço ou Nascente 
     pop_servida_poco_nasc = taxa_hab_domicilio * 
@@ -70,7 +107,9 @@ base_indicadores <- base_completa %>%
       prop_pop_servida_poco_nasc,
     
     # População Servida por Rede Coletora de Esgoto 
-    pop_servida_rede_esgoto = taxa_hab_domicilio * ind_es008,
+    pop_servida_rede_esgoto = 
+      taxa_hab_domicilio * ind_es008 * 
+      tidyr::replace_na(sanea_fator_correcao, 1),
     
     # População Residente Servida por Sistema de Fossa Séptica/Rudimentar 
     pop_fossa_septica = num_dom_fossa_septica * taxa_hab_domicilio,
@@ -120,8 +159,11 @@ base_indicadores <- base_completa %>%
     prop_esgoto_tratado = (volume_esgoto_tratado / volume_esgoto_produzido) * 100
   ) %>% 
   dplyr::select(
+    ano,
     munip_cod,
     munip_nome,
+    munip_turistico,
+    dplyr::contains("fator_correcao"),
     dplyr::starts_with("idh"),
     dplyr::starts_with("proj_"),
     dplyr::starts_with("pop_"),
