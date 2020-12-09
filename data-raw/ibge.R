@@ -2,7 +2,9 @@
 
 library(tidyverse)
 
-# Saneamento --------------------------------------------------------------
+devtools::load_all()
+
+# Esgotamento  ------------------------------------------------------------
 
 dados_sidra <- sidrar::get_sidra(
   x = 1394,
@@ -12,7 +14,7 @@ dados_sidra <- sidrar::get_sidra(
   format = 3
 )
 
-saneamento <- dados_sidra %>% 
+esgotamento <- dados_sidra %>% 
   janitor::clean_names() %>% 
   select(
     munip_cod = municipio_codigo,
@@ -23,7 +25,7 @@ saneamento <- dados_sidra %>%
   ) %>% 
   mutate(
     tipo_de_esgotamento_sanitario = paste0(
-      "sanea_", 
+      "esgot_", 
       tipo_de_esgotamento_sanitario
     )
   ) %>%  
@@ -32,7 +34,7 @@ saneamento <- dados_sidra %>%
     values_from = valor
   ) %>% 
   janitor::clean_names() %>% 
-  rename(domicilios_total = sanea_total)
+  rename(domicilios_total = esgot_total)
 
 # Abastecimento -----------------------------------------------------------
 
@@ -101,7 +103,7 @@ populacao <- dados_sidra %>%
 
 # Criando base ------------------------------------------------------------
 
-ibge <- saneamento %>% 
+ibge <- esgotamento %>% 
   left_join(abastecimento, by = c("munip_cod", "ano")) %>% 
   left_join(populacao, by = c("munip_cod", "ano"))
 
@@ -116,7 +118,7 @@ ibge <- ibge %>%
     )
   ) %>% 
   rename_with(
-    .cols = -c("munip_cod", "munip_nome", "ano"),
+    .cols = -c("munip_cod", "munip_nome", "ano", "munip_turistico"),
     ~paste0(.x, "_2010")
   ) %>% 
   select(-ano) 

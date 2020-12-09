@@ -74,14 +74,15 @@
 <li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a></li>
 <li class="chapter" data-level="2" data-path="bases-de-dados.html"><a href="bases-de-dados.html"><i class="fa fa-check"></i><b>2</b> Bases de dados</a><ul>
 <li class="chapter" data-level="2.1" data-path="bases-de-dados.html"><a href="bases-de-dados.html#ibge"><i class="fa fa-check"></i><b>2.1</b> IBGE</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="bases-de-dados.html"><a href="bases-de-dados.html#saneamento"><i class="fa fa-check"></i><b>2.1.1</b> Saneamento</a></li>
+<li class="chapter" data-level="2.1.1" data-path="bases-de-dados.html"><a href="bases-de-dados.html#esgotamento-sanitário"><i class="fa fa-check"></i><b>2.1.1</b> Esgotamento sanitário</a></li>
 <li class="chapter" data-level="2.1.2" data-path="bases-de-dados.html"><a href="bases-de-dados.html#abastecimento"><i class="fa fa-check"></i><b>2.1.2</b> Abastecimento</a></li>
 <li class="chapter" data-level="2.1.3" data-path="bases-de-dados.html"><a href="bases-de-dados.html#população-total"><i class="fa fa-check"></i><b>2.1.3</b> População total</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="bases-de-dados.html"><a href="bases-de-dados.html#idh"><i class="fa fa-check"></i><b>2.2</b> IDH</a></li>
 <li class="chapter" data-level="2.3" data-path="bases-de-dados.html"><a href="bases-de-dados.html#seade"><i class="fa fa-check"></i><b>2.3</b> SEADE</a></li>
 <li class="chapter" data-level="2.4" data-path="bases-de-dados.html"><a href="bases-de-dados.html#snis"><i class="fa fa-check"></i><b>2.4</b> SNIS</a></li>
-<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-de-indicadores"><i class="fa fa-check"></i><b>2.5</b> Base de indicadores</a></li>
+<li class="chapter" data-level="2.5" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-agregada"><i class="fa fa-check"></i><b>2.5</b> Base agregada</a></li>
+<li class="chapter" data-level="2.6" data-path="bases-de-dados.html"><a href="bases-de-dados.html#base-de-indicadores"><i class="fa fa-check"></i><b>2.6</b> Base de indicadores</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="indicadores.html"><a href="indicadores.html"><i class="fa fa-check"></i><b>3</b> Indicadores</a><ul>
 <li class="chapter" data-level="" data-path="indicadores.html"><a href="indicadores.html#dppof---número-de-domicílios-particulares-permanentes-ocupados-servidos-por-fossa"><i class="fa fa-check"></i>DPPOF - Número de domicílios particulares permanentes ocupados servidos por fossa</a></li>
@@ -134,8 +135,8 @@
 <p>Para facilitar e melhor documentar a importação dos dados, baixamos os dados a partir da API do portal Sidra com o auxílio do pacote <code>sidrar</code>.</p>
 <p>A página <a href="http://api.sidra.ibge.gov.br/">http://api.sidra.ibge.gov.br/</a> pode (e deve) ser utilizada para buscar os parâmetros disponíveis de cada uma das tabelas.</p>
 <p>O script em R utilizado para importação e limpeza dos dados pode ser encontrado <a href="https://github.com/openvironment/ods6/blob/main/data-raw/ibge.R">aqui</a>.</p>
-<div id="saneamento" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Saneamento</h3>
+<div id="esgotamento-sanitário" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Esgotamento sanitário</h3>
 <p>Página: <a href="https://sidra.ibge.gov.br/tabela/1394" class="uri">https://sidra.ibge.gov.br/tabela/1394</a></p>
 <p>Variáveis de interesse:</p>
 <ul>
@@ -151,7 +152,7 @@
 <ul>
 <li>Código do município</li>
 <li>Nome do município</li>
-<li>Número de Municípios permanentes ocupados abastecidos por poço e mina, localizados na propriedade</li>
+<li>Número de domicílios permanentes ocupados abastecidos por poço e mina, localizados na propriedade</li>
 </ul>
 </div>
 <div id="população-total" class="section level3">
@@ -238,9 +239,19 @@
 <p><strong>Nota</strong>: para ler a base, foi preciso abrir o arquivo .csv baixado do SNIS com o programa Numbers (iOS) e então exportar para Excel. Possível causa: o arquivo CSV era um arquivo binário.</p>
 <p>O script utilizado para importação e limpeza da base por ser encontrado <a href="https://github.com/openvironment/ods6/blob/main/data-raw/snis.R">aqui</a>.</p>
 </div>
+<div id="base-agregada" class="section level2">
+<h2><span class="header-section-number">2.5</span> Base agregada</h2>
+<p>Para facilitar a utilização dos dados, juntamos todas as bases em uma única, chamada de <code>base_agregada</code>.</p>
+<p>O script em R utilizado para a junção das bases se encontra <a href="https://github.com/openvironment/ods6/blob/main/data-raw/base_indicadores.R">aqui</a>.</p>
+<p>A seguir disponibilizamos links para o download direto da base agregada:</p>
+<ul>
+<li><a href="https://github.com/openvironment/ods6/raw/main/data-raw/base_agregada.csv">versão CSV</a></li>
+<li><a href="https://github.com/openvironment/ods6/raw/main/data-raw/base_agregada.xlsx">versão Excel</a></li>
+</ul>
+</div>
 <div id="base-de-indicadores" class="section level2">
-<h2><span class="header-section-number">2.5</span> Base de indicadores</h2>
-<p>Por fim, criamos a base final utilizada na construção do dashboards. Essa base é constuída pela junção das informações das bases descritas nas seções anteriores, mas principalmente pelos indicadores descritos no próximo capítulo.</p>
+<h2><span class="header-section-number">2.6</span> Base de indicadores</h2>
+<p>Por fim, criamos a base final utilizada na construção do dashboard. Essa base é constituída de indicadores construídas a partir da base agregada. A definição de cada indicador está apresentada no próximo capítulo.</p>
 <p>O script em R utilizado para a junção das bases se encontra <a href="https://github.com/openvironment/ods6/blob/main/data-raw/base_indicadores.R">aqui</a>.</p>
 <p>A seguir disponibilizamos links para o download direto da base de indicadores:</p>
 <ul>

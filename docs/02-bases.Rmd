@@ -12,7 +12,7 @@ A página [http://api.sidra.ibge.gov.br/](http://api.sidra.ibge.gov.br/) pode (e
 
 O script em R utilizado para importação e limpeza dos dados pode ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/ibge.R).
 
-### Saneamento
+### Esgotamento sanitário
 
 Página: https://sidra.ibge.gov.br/tabela/1394
 
@@ -31,7 +31,7 @@ Variáveis de interesse:
 
 - Código do município 
 - Nome do município
-- Número de Municípios permanentes ocupados abastecidos por poço e mina, localizados na propriedade
+- Número de domicílios permanentes ocupados abastecidos por poço e mina, localizados na propriedade
 
 ### População total
 
@@ -120,10 +120,21 @@ Foi então baixado um arquivo CSV.
 
 O script utilizado para importação e limpeza da base por ser encontrado [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/snis.R).
 
+## Base agregada
+
+Para facilitar a utilização dos dados, juntamos todas as bases em uma única, chamada de `base_agregada`.
+
+O script em R utilizado para a junção das bases se encontra [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/base_indicadores.R).
+
+A seguir disponibilizamos links para o download direto da base agregada:
+
+- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/base_agregada.csv)
+- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/base_agregada.xlsx)
+
 
 ## Base de indicadores
 
-Por fim, criamos a base final utilizada na construção do dashboards. Essa base é constuída pela junção das informações das bases descritas nas seções anteriores, mas principalmente pelos indicadores descritos no próximo capítulo.
+Por fim, criamos a base final utilizada na construção do dashboard. Essa base é constituída de indicadores construídas a partir da base agregada. A definição de cada indicador está apresentada no próximo capítulo.
 
 O script em R utilizado para a junção das bases se encontra [aqui](https://github.com/openvironment/ods6/blob/main/data-raw/base_indicadores.R).
 

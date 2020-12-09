@@ -21,6 +21,8 @@ Este texto tem como objetivo documentar as atividades realizadas no projeto "ODS
     - nardocci@usp.br 
 - Americo Sampaio
     - mecosamp@gmail.com
+- Maria Tereza Razzolini
+    - razzolini@usp.br
 - William Amorim
     - thewilliam89@gmail.com
 
@@ -35,3 +37,5 @@ Este texto tem como objetivo documentar as atividades realizadas no projeto "ODS
     - limpeza das bases
     - criação da base completa
     - construção dos indicadores
+- Dezembro
+    - validação dos dados

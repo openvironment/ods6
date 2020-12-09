@@ -1,9 +1,6 @@
 ## code to prepare `base_indicadores` dataset goes here
 
 # Dúvidas:
-# 1 - o número de domicílios de veraneio entra na conta da taxa de pessoas por domicílio?
-# 2 - é razoável assumir que a taxa de pessoas por domicílio é constante 
-# (entre regiões mais ricas e mais pobres)?
 # 3- por que não usar o fator nos anos censitários?
 
 devtools::load_all()
@@ -21,7 +18,7 @@ tab_2010 <- ibge %>%
   )
 
 # Juntando todas as bases
-base_completa <- seade %>% 
+base_agregada <- seade %>% 
   dplyr::bind_rows(tab_2010) %>% 
   dplyr::arrange(munip_cod, ano) %>% 
   dplyr::left_join(snis, by = c("munip_cod", "ano")) %>% 
@@ -33,13 +30,13 @@ base_completa <- seade %>%
     ano
   )
 
-tab_fator_correcao <- base_completa %>% 
+tab_fator_correcao <- base_agregada %>% 
   dplyr::filter(ano == 2010) %>%
   dplyr::group_by(munip_cod, munip_turistico) %>% 
   dplyr::summarise(
     dplyr::across(
       c(pop_total_2010, domicilios_total_2010, abast_rede_geral_2010,
-        sanea_rede_geral_de_esgoto_ou_pluvial_2010),
+        esgot_rede_geral_de_esgoto_ou_pluvial_2010),
       dplyr::first
     ),
     dplyr::across(
@@ -50,8 +47,8 @@ tab_fator_correcao <- base_completa %>%
   dplyr::mutate(
     taxa_hab_domicilio = pop_total_2010 / domicilios_total_2010,
     abast_rede_fator_correcao = abast_rede_geral_2010 / ind_ag013,
-    sanea_fator_correcao = 
-      sanea_rede_geral_de_esgoto_ou_pluvial_2010 / ind_es008
+    esgot_fator_correcao = 
+      esgot_rede_geral_de_esgoto_ou_pluvial_2010 / ind_es008
   ) %>%
   dplyr::mutate(dplyr::across(
     dplyr::contains("fator_correcao"),
@@ -59,22 +56,21 @@ tab_fator_correcao <- base_completa %>%
   )) %>% 
   dplyr::select(
     munip_cod,
-    munip_turistico,
     dplyr::contains("fator_correcao")
   )
 
-base_indicadores <- base_completa %>% 
+base_indicadores <- base_agregada %>% 
   dplyr::left_join(
     tab_fator_correcao, 
-    by = c("munip_cod", "prestador_sigla")
+    by = c("munip_cod")
   ) %>% 
   dplyr::mutate(
     # Domicílios abastecidos por fossa séptica/rudimentar
     num_dom_fossa_septica = proj_domicilios_total * 
-      (sanea_fossa_septica_2010 / domicilios_total_2010),
+      (esgot_fossa_septica_2010 / domicilios_total_2010),
     
     num_dom_fossa_rudimentar = proj_domicilios_total * 
-      (sanea_fossa_rudimentar_2010 / domicilios_total_2010),
+      (esgot_fossa_rudimentar_2010 / domicilios_total_2010),
     
     # Domicílios abastecidos por poço na propriedade
     num_dom_abast_poco_na_propriedade = proj_domicilios_total *
@@ -109,7 +105,7 @@ base_indicadores <- base_completa %>%
     # População Servida por Rede Coletora de Esgoto 
     pop_servida_rede_esgoto = 
       taxa_hab_domicilio * ind_es008 * 
-      tidyr::replace_na(sanea_fator_correcao, 1),
+      tidyr::replace_na(esgot_fator_correcao, 1),
     
     # População Residente Servida por Sistema de Fossa Séptica/Rudimentar 
     pop_fossa_septica = num_dom_fossa_septica * taxa_hab_domicilio,
@@ -167,12 +163,15 @@ base_indicadores <- base_completa %>%
     dplyr::starts_with("idh"),
     dplyr::starts_with("proj_"),
     dplyr::starts_with("pop_"),
-    dplyr::starts_with("perc_"),
+    dplyr::starts_with("prop_"),
     dplyr::starts_with("num"),
     dplyr::starts_with("taxa"),
     dplyr::starts_with("volume"),
     consumo_medio_per_capita
   )
+
+readr::write_csv(base_agregada, "data-raw/base_agregada.csv")
+writexl::write_xlsx(base_agregada, "data-raw/base_agregada.xlsx")
 
 readr::write_csv(base_indicadores, "data-raw/base_indicadores.csv")
 writexl::write_xlsx(base_indicadores, "data-raw/base_indicadores.xlsx")
