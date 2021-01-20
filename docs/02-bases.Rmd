@@ -20,7 +20,7 @@ Variáveis de interesse:
 
 - Código do município 
 - Nome do município
-- Número de municípios permanentes ocupados servidos por fossa
+- Número de domicílios permanentes ocupados servidos por fossa
 
 
 ### Abastecimento

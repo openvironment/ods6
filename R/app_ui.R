@@ -20,46 +20,50 @@ app_ui <- function(request) {
       controlbar_collapsed = TRUE,
       controlbar_overlay = TRUE,
       # loading_background = "#4682B4",
-      title = "TITULO",
-
-      #---
-      controlbar = dashboardControlbar(),
+      title = "ODS6",
 
       #---
       navbar = dashboardHeader(
-        title = "TITULO",
-        rightUi = auth0::logoutButton(icon = icon("sign-out-alt"))
+        title = "ODS6"
       ),
 
       #---
       sidebar = dashboardSidebar(
         skin = "light",
-        title = "TITULO",
+        title = "ODS6",
         bs4SidebarMenu(
           bs4SidebarMenuItem(
-            "Perfil",
-            tabName = "menu_sumario",
+            "Informações gerais",
+            tabName = "informacoes_gerais",
             icon = "bullseye"
           ),
           bs4SidebarMenuItem(
-            "Dados",
-            tabName = "menu_dados",
-            icon = "database"
+            "Visão por cidade",
+            tabName = "visao_cidade",
+            icon = "city"
+          ),
+          bs4SidebarMenuItem(
+            "Sobre",
+            tabName = "sobre",
+            icon = "info"
           )
         )
       ),
 
       #---
       body = dashboardBody(
-        fresh::use_theme(create_theme_css()), # <-- use the theme
         bs4TabItems(
           bs4TabItem(
-            tabName = "menu_sumario",
-            mod_sumario_ui("sumario")
+            tabName = "informacoes_gerais",
+            mod_informacoes_gerais_ui("informacoes_gerais_ui_1")
           ),
           bs4TabItem(
-            tabName = "menu_dados",
-            mod_dados_ui("dados")
+            tabName = "visao_cidade",
+            mod_visao_cidade_ui("visao_cidade_ui_1")
+          ),
+          bs4TabItem(
+            tabName = "sobre",
+            mod_sobre_ui("sobre_ui_1")
           )
         )
       ),
@@ -70,7 +74,7 @@ app_ui <- function(request) {
           href = "https://rseis.com.br",
           target = "_blank", "R6"
         ),
-        right_text = "2020 | desenvolvido pela R6"
+        right_text = "2021 | desenvolvido pela R6"
       )
     )
   )
@@ -95,7 +99,7 @@ golem_add_external_resources <- function(){
     favicon(ext = "png"),
     bundle_resources(
       path = app_sys('app/www'),
-      app_title = 'TITULO'
+      app_title = 'ODS6'
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert()
