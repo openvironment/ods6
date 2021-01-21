@@ -158,7 +158,7 @@ hc_serie <- function(dados, nome_formatado, unidade_de_medida) {
   )
   
   texto_tooltip <- paste0(
-    'Indicador: <b>{point.y}', perc, " ", unidade_de_medida, '</b><br/>'
+    'Indicador: <b>{point.y:.1f}', perc, " ", unidade_de_medida, '</b><br/>'
   )
   
   highcharter::highchart() %>% 

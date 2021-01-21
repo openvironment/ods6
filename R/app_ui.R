@@ -71,10 +71,11 @@ app_ui <- function(request) {
       #---
       footer = dashboardFooter(
         copyrights = a(
-          href = "https://rseis.com.br",
-          target = "_blank", "R6"
+          href = "https://www.curso-r.com/",
+          target = "_blank", 
+          HTML("Feito com ❤️ &nbsp; pela equipe da Curso-R")
         ),
-        right_text = "2021 | desenvolvido pela R6"
+        right_text = "2021 | FSP-USP"
       )
     )
   )

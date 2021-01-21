@@ -22,6 +22,8 @@ mod_visao_cidade_ui <- function(id) {
         solidHeader = TRUE,
         status = "info",
         height = "350px",
+        collapsible = FALSE,
+        closable = FALSE,
         reactable::reactableOutput(ns("tab_resumo"))
       ),
       col_4(
@@ -29,40 +31,39 @@ mod_visao_cidade_ui <- function(id) {
         bs4Dash::bs4ValueBoxOutput(ns("vb_num_domicilios"), width = 12),
         bs4Dash::bs4ValueBoxOutput(ns("vb_taxa_pop_domicilios"), width = 12)
       )
+    ),
+    fluidRow(
+      bs4Dash::bs4Card(
+        width = 12,
+        title = "Alertas",
+        solidHeader = TRUE,
+        status = "danger",
+        height = "300px",
+        collapsible = FALSE,
+        closable = FALSE,
+        reactable::reactableOutput(ns("tab_alertas"))
+      )
+    ),
+    br(),
+    fluidRow(
+      col_6(
+        uiOutput(ns("ui_select_indicador"))
+      ),
+      col_4(
+        offset = 2,
+        bs4Dash::bs4ValueBoxOutput(ns("vb_valor_ind_atual"), width = 12)
+      )
+    ),
+    fluidRow(
+      bs4Dash::bs4Card(
+        width = 12,
+        height = "420px",
+        status = "info",
+        title = "Série histórica",
+        solidHeader = TRUE,
+        highcharter::highchartOutput(ns("plot_serie"), height = "360px")
+      )
     )
-
-      # box(
-      #   width = 12,
-      #   title = "Alertas",
-      #   solidHeader = TRUE,
-      #   status = "danger",
-      #   height = "300px",
-      #   reactable::reactableOutput(ns("tab_alertas"))
-      # ),
-      # box(
-      #   width = 6,
-      #   status = "info",
-      #   uiOutput(ns("ui_select_indicador"))
-      # ),
-      # col_6(
-      #   valueBoxOutput(ns("vb_valor_ind_atual"), width = 8)
-      # ),
-      # box(
-      #   width = 6,
-      #   height = "420px",
-      #   status = "info",
-      #   title = "Série histórica",
-      #   solidHeader = TRUE,
-      #   highcharter::highchartOutput(ns("plot_serie"), height = "360px")
-      # ),
-      # box(
-      #   width = 6,
-      #   height = "420px",
-      #   status = "info",
-      #   title = "Mapa do Estado",
-      #   solidHeader = TRUE,
-      #   highcharter::highchartOutput(ns("plot_mapa"), height = "360px")
-      # )
   )
 }
 
@@ -108,7 +109,8 @@ mod_visao_cidade_server <- function(id) {
           value = "População",
           subtitle = valor,
           icon = "user-friends",
-          status = "info"
+          status = "info",
+          footer = "Número de habitantes"
         )
     })
 
@@ -141,146 +143,128 @@ mod_visao_cidade_server <- function(id) {
         footer = "Domicílios permanentes ocupados"
       )
     })
-    # 
-    # output$tab_resumo <- reactable::renderReactable({
-    #   base_filtrada() %>% 
-    #     filtrar_ano_mais_recente() %>% 
-    #     dplyr::select(
-    #       prop_pop_abast_sist_adequados,
-    #       prop_pop_servida_coleta_esgoto,
-    #       prop_esgoto_tratado,
-    #       perc_perdas_rede_dist,
-    #       consumo_medio_per_capita
-    #     ) %>% 
-    #     dplyr::mutate_at(
-    #       dplyr::vars(-consumo_medio_per_capita),
-    #       ~scales::percent(.x, accuracy = 0.1, scale = 1)
-    #     ) %>%
-    #     dplyr::mutate(
-    #       consumo_medio_per_capita = paste(
-    #         round(consumo_medio_per_capita),
-    #         "litros/habitante/dia"
-    #       )
-    #     ) %>% 
-    #     tidyr::gather(var, val) %>%
-    #     dplyr::left_join(
-    #       tab_depara,
-    #       by = c("var" = "cod")
-    #     ) %>% 
-    #     dplyr::select(nome_formatado, val) %>% 
-    #     reactable::reactable(
-    #       columns = list(
-    #         nome_formatado = reactable::colDef(
-    #           name = "Indicador",
-    #           align = "left"
-    #         ),
-    #         val = reactable::colDef(
-    #           name = "",
-    #           align = "right"
-    #         )
-    #       ),
-    #       striped = TRUE,
-    #       highlight = TRUE
-    #     )
-    # })
-    # 
-    # output$tab_alertas <- reactable::renderReactable({
-    #   base_filtrada() %>% 
-    #     filtrar_ano_mais_recente() %>% 
-    #     dplyr::select(dplyr::starts_with("prop"), perc_perdas_rede_dist) %>% 
-    #     tidyr::gather(var, val) %>%
-    #     dplyr::filter(val > 100) %>% 
-    #     dplyr::arrange(dplyr::desc(val)) %>% 
-    #     dplyr::mutate(
-    #       val = scales::percent(val, accuracy = 0.1, scale = 1)
-    #     ) %>%
-    #     dplyr::left_join(
-    #       tab_depara,
-    #       by = c("var" = "cod")
-    #     ) %>% 
-    #     dplyr::select(nome_formatado, val) %>% 
-    #     reactable::reactable(
-    #       columns = list(
-    #         nome_formatado = reactable::colDef(
-    #           name = "Indicador",
-    #           align = "left"
-    #         ),
-    #         val = reactable::colDef(
-    #           name = "",
-    #           align = "right"
-    #         )
-    #       ),
-    #       striped = TRUE,
-    #       highlight = TRUE
-    #     )
-    # })
-    # 
-    # output$ui_select_indicador <- renderUI({
-    #   
-    #   opcoes <- seleciona_indicadores(base_indicadores, tab_depara)
-    #   
-    #   selectInput(
-    #     inputId = ns("select_indicador"),
-    #     label = "Selecione um indicador",
-    #     choices = opcoes
-    #   )
-    # })
-    # 
-    # nome_formatado <- reactive({
-    #   pegar_nome_formatado(input$select_indicador, tab_depara)
-    # })
-    # 
-    # unidade_medida <- reactive({
-    #   pegar_unidade_de_medida(input$select_indicador, tab_depara)
-    # })
-    # 
-    # output$vb_valor_ind_atual <- renderValueBox({
-    #   
-    #   valor <- base_filtrada() %>% 
-    #     filtrar_ano_mais_recente() %>% 
-    #     dplyr::pull(input$select_indicador) %>% 
-    #     formatar_indicador(unidade_medida())
-    #   
-    #   valueBox(
-    #     valor,
-    #     subtitle = unidade_medida(),
-    #     icon = icon("water"),
-    #     color = "aqua"
-    #   )
-    #   
-    # })
-    # 
-    # output$plot_serie <- highcharter::renderHighchart({
-    #   base_filtrada() %>%
-    #     dplyr::select(ano, value = input$select_indicador) %>% 
-    #     dplyr::arrange(ano) %>%
-    #     as.matrix() %>% 
-    #     hc_serie(nome_formatado(), unidade_medida())
-    # })
-    # 
-    # output$plot_mapa <- highcharter::renderHighchart({
-    #   
-    #   req(input$select_cidade)
-    #   
-    #   tab <- base_indicadores %>%
-    #     filtrar_ano_mais_recente() %>% 
-    #     dplyr::rename(indicador = input$select_indicador) %>% 
-    #     dplyr::distinct(munip_cod, munip_nome, populacao, indicador) %>% 
-    #     dplyr::mutate(
-    #       value = ifelse(munip_nome == input$select_cidade, 1, 0),
-    #       populacao = formatar_numero(populacao, accuracy = 1),
-    #       indicador = paste(
-    #         formatar_indicador(indicador, unidade_medida()),
-    #         unidade_medida()
-    #       )
-    #     )
-    #   
-    #   hc_mapa(
-    #     tab,
-    #     geojson_munip
-    #   )
-    #   
-    # })
+    
+    output$tab_resumo <- reactable::renderReactable({
+      base_filtrada() %>%
+        filtrar_ano_mais_recente() %>%
+        dplyr::select(
+          prop_pop_abast_sist_adequados,
+          prop_pop_servida_coleta_esgoto,
+          prop_esgoto_tratado,
+          prop_perdas_rede_dist,
+          consumo_medio_per_capita
+        ) %>%
+        dplyr::mutate_at(
+          dplyr::vars(-consumo_medio_per_capita),
+          ~scales::percent(.x, accuracy = 0.1, scale = 1)
+        ) %>%
+        dplyr::mutate(
+          consumo_medio_per_capita = paste(
+            round(consumo_medio_per_capita),
+            "litros/habitante/dia"
+          )
+        ) %>%
+        tidyr::gather(var, val) %>%
+        dplyr::left_join(
+          tab_depara,
+          by = c("var" = "cod")
+        ) %>%
+        dplyr::select(nome_formatado, val) %>%
+        reactable::reactable(
+          columns = list(
+            nome_formatado = reactable::colDef(
+              name = "Indicador",
+              align = "left"
+            ),
+            val = reactable::colDef(
+              name = "",
+              align = "right"
+            )
+          ),
+          striped = TRUE,
+          highlight = TRUE
+        )
+    })
+
+    output$tab_alertas <- reactable::renderReactable({
+      base_filtrada() %>%
+        filtrar_ano_mais_recente() %>%
+        dplyr::select(dplyr::starts_with("prop"), prop_perdas_rede_dist) %>%
+        tidyr::gather(var, val) %>%
+        dplyr::filter(val > 100) %>%
+        dplyr::arrange(dplyr::desc(val)) %>%
+        dplyr::mutate(
+          val = scales::percent(val, accuracy = 0.1, scale = 1)
+        ) %>%
+        dplyr::left_join(
+          tab_depara,
+          by = c("var" = "cod")
+        ) %>%
+        dplyr::select(nome_formatado, val) %>%
+        reactable::reactable(
+          columns = list(
+            nome_formatado = reactable::colDef(
+              name = "Indicador",
+              align = "left"
+            ),
+            val = reactable::colDef(
+              name = "",
+              align = "right"
+            )
+          ),
+          striped = TRUE,
+          highlight = TRUE
+        )
+    })
+
+    output$ui_select_indicador <- renderUI({
+
+      opcoes <- seleciona_indicadores(base_indicadores, tab_depara)
+
+      selectInput(
+        inputId = ns("select_indicador"),
+        label = "Selecione um indicador",
+        choices = opcoes,
+        width = "100%"
+      )
+    })
+
+    unidade_medida <- reactive({
+      req(input$select_indicador)
+      pegar_unidade_de_medida(input$select_indicador)
+    })
+
+    output$vb_valor_ind_atual <- bs4Dash::renderbs4ValueBox({
+      
+      valor <- base_filtrada() %>%
+        filtrar_ano_mais_recente() %>%
+        dplyr::pull(isolate(input$select_indicador)) %>%
+        formatar_indicador(unidade_medida())
+      
+      bs4Dash::bs4ValueBox(
+        value = valor,
+        subtitle = unidade_medida(),
+        icon = "water",
+        status = "primary",
+        footer = "Valor atual"
+      )
+
+    })
+
+    output$plot_serie <- highcharter::renderHighchart({
+      
+      req(input$select_indicador)
+
+      nome_formatado <- pegar_nome_formatado(
+        isolate(input$select_indicador)
+      )
+      
+      base_filtrada() %>%
+        dplyr::select(ano, value = isolate(input$select_indicador)) %>%
+        dplyr::arrange(ano) %>%
+        as.matrix() %>%
+        hc_serie(nome_formatado, unidade_medida())
+    })
     
   })
   

@@ -35,7 +35,7 @@ formatar_indicador <- function(valor, unidade_medida, label = FALSE) {
 `%>%` <- dplyr::`%>%`
 
 #' Devolve o nome formatado de um indicador
-pegar_nome_formatado <- function(indicador, tab_depara) {
+pegar_nome_formatado <- function(indicador) {
   tab_depara %>% 
     dplyr::filter(cod == indicador) %>% 
     dplyr::pull(nome_formatado)
@@ -57,8 +57,7 @@ seleciona_indicadores <- function(tab_indicadores, tab_depara) {
   
   nomes_formatados <- purrr::map_chr(
     opcoes, 
-    pegar_nome_formatado, 
-    tab_depara = tab_depara
+    pegar_nome_formatado
   )
   
   opcoes <- purrr::set_names(opcoes, nomes_formatados)

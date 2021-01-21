@@ -14,3 +14,17 @@ h2 {
 .small-box-footer {
   font-size: 0.8em;
 }
+
+.main-footer a {
+  color: #262829;
+  font-size: 0.9em;
+}
+
+#visao_cidade_ui_1-vb_valor_ind_atual .inner {
+  font-size: 2em;
+}
+
+#visao_cidade_ui_1-vb_valor_ind_atual p {
+  font-size: 0.6em;
+  margin-left: 3%;
+}
