@@ -4,7 +4,7 @@
 \alias{pegar_nome_formatado}
 \title{Devolve o nome formatado de um indicador}
 \usage{
-pegar_nome_formatado(indicador, tab_depara)
+pegar_nome_formatado(indicador)
 }
 \description{
 Devolve o nome formatado de um indicador

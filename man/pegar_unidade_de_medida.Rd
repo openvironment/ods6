@@ -4,7 +4,7 @@
 \alias{pegar_unidade_de_medida}
 \title{Devolve a unidade de medida de um indicador}
 \usage{
-pegar_unidade_de_medida(indicador, tab_depara)
+pegar_unidade_de_medida(indicador)
 }
 \description{
 Devolve a unidade de medida de um indicador

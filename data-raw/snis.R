@@ -31,6 +31,11 @@ snis <- tab %>%
   mutate(across(
     starts_with("ind_"),
     ~parse_number(.x, locale = locale(decimal_mark = ",", grouping_mark = "."))
-  ))
+  )) %>% 
+  group_by(munip_cod, ano) %>% 
+  summarise(
+    across(c(prestador, prestador_sigla, natureza_juridica), ~ paste(.x, collapse = "|")),
+    across(-c(prestador, prestador_sigla, natureza_juridica), ~ first(na.omit(.x)))
+  )
 
 usethis::use_data(snis, overwrite = TRUE)

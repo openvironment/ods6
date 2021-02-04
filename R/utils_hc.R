@@ -2,8 +2,7 @@ hc_mapa <- function(tab, tab_geojson) {
   
   texto_tooltip <- paste0(
     '<span style="font-size:12px; font-weight: bold;">{point.munip_nome}</span><br/>',
-    'População: <b>{point.populacao} habitantes</b><br/>',
-    'Indicador: <b>{point.indicador}</b><br/>'
+    'População: <b>{point.proj_pop_total} habitantes</b><br/>'
   )
   
   highcharter::highchart(type = "map") %>% 
