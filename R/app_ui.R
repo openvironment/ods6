@@ -108,13 +108,11 @@ app_ui <- function(request) {
         # TIPs
         tippy::tippy_class(
           "tip-abastecimento", 
-          content = 
-          "Proporção de pessoas no município abastecidas por sistemas adequados."
+          content = "Proporção de pessoas no município abastecidas por sistemas adequados."
         ),
         tippy::tippy_class(
           "tip-esgotamento", 
-          content = 
-            "Proporção de pessoas no município servidas por rede de esgoto."
+          content = "Proporção de pessoas no município servidas por rede de esgoto."
         )
       ),
       

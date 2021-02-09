@@ -5,4 +5,4 @@
 pkgload::load_all(export_all = FALSE, helpers = FALSE, attach_testthat = FALSE)
 options( "golem.app.prod" = TRUE)
 options(shiny.port = 8080)
-ods6::run_app(auth0 = FALSE) # add parameters here (if any)
+ods6::run_app() # add parameters here (if any)

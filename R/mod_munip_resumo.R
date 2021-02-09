@@ -27,6 +27,9 @@ mod_munip_resumo_ui <- function(id) {
           label = "Esgotamento sanitário",
           icon = icon("question-circle", class = "tip-esgotamento"),
           textOutput(ns("prop_esgotamento"))
+        ),
+        tags$p(
+          "Valores maiores que 100% indicam inconsistências nos dados declarados pelo município."
         )
       )
     ),
@@ -53,7 +56,12 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
     
     output$plot_mapa <- renderPlot(bg = "transparent", {
       
-      shape_estado %>% 
+      tab_geo <- shape_estado
+        
+      sf::st_crs(tab_geo) <- 4674
+      sf::st_crs(tab_geo$geom) <- 4674
+      
+      tab_geo %>% 
         dplyr::mutate(
           value = ifelse(munip_nome == municipio_selecionado(), "1", "0")
         ) %>% 

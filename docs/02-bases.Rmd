@@ -128,8 +128,8 @@ O script em R utilizado para a junção das bases se encontra [aqui](https://git
 
 A seguir disponibilizamos links para o download direto da base agregada:
 
-- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/base_agregada.csv)
-- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/base_agregada.xlsx)
+- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/csv/base_agregada.csv)
+- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/xlsx/base_agregada.xlsx)
 
 
 ## Base de indicadores
@@ -140,6 +140,6 @@ O script em R utilizado para a junção das bases se encontra [aqui](https://git
 
 A seguir disponibilizamos links para o download direto da base de indicadores:
 
-- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/base_indicadores.csv)
-- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/base_indicadores.xlsx)
+- [versão CSV](https://github.com/openvironment/ods6/raw/main/data-raw/csv/base_indicadores.csv)
+- [versão Excel](https://github.com/openvironment/ods6/raw/main/data-raw/xlsx/base_indicadores.xlsx)
 

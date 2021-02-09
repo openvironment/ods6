@@ -4,11 +4,9 @@
 \alias{run_app}
 \title{Run the Shiny Application}
 \usage{
-run_app(auth0 = FALSE, ...)
+run_app(...)
 }
 \arguments{
-\item{auth0}{whether to use auth0 or not}
-
 \item{...}{A series of options to be used inside the app.}
 }
 \description{

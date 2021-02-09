@@ -9,6 +9,7 @@ municipios <- base_indicadores %>%
 
 usethis::use_data(municipios, overwrite = TRUE)
 
+# -------------------------------------------------------------------------
 
 shape_estado <- geobr::read_municipality() %>% 
   dplyr::filter(code_state == 35) %>% 

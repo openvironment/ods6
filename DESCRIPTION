@@ -7,7 +7,7 @@ Authors@R:
            email = "wamorim@curso-r.com")
 Version: 1.0.0
 Description: Dashboard do projeto ODS6.
-License: GPL-3
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -21,7 +21,6 @@ Imports:
     purrr,
     scales,
     pkgload,
-    auth0,
     reactable,
     forcats,
     ggplot2,
@@ -32,7 +31,9 @@ Imports:
     shinycssloaders,
     abjutils,
     highcharter,
-    tidyr
+    tidyr,
+    tippy,
+    sf
 Remotes: 
     Thinkr-open/golem
 RoxygenNote: 7.1.1
