@@ -148,7 +148,8 @@ hc_custom_exporting <- function(hc, align = "right") {
   )
 }
 
-hc_serie <- function(dados, nome_formatado, unidade_de_medida) {
+hc_serie <- function(dados, nome_formatado, unidade_de_medida, 
+                     text_color = "#666666") {
   
   perc <- ifelse(
     stringr::str_detect(formatar_indicador(1, unidade_de_medida), "%"),
@@ -157,7 +158,7 @@ hc_serie <- function(dados, nome_formatado, unidade_de_medida) {
   )
   
   texto_tooltip <- paste0(
-    'Indicador: <b>{point.y:.1f}', perc, " ", unidade_de_medida, '</b><br/>'
+    '<b>{point.y:.1f}', perc, " ", unidade_de_medida, '</b><br/>'
   )
   
   highcharter::highchart() %>% 
@@ -172,15 +173,19 @@ hc_serie <- function(dados, nome_formatado, unidade_de_medida) {
       )
     ) %>% 
     highcharter::hc_xAxis(
-      type = "date"
+      type = "date",
+      labels = list(style = list(color = text_color)),
+      title = list(style = list(color = text_color))
     ) %>%
-    highcharter::hc_yAxis(title = list(text = "Indicador")) %>% 
+    highcharter::hc_yAxis(
+      labels = list(style = list(color = text_color)),
+      title = list(style = list(color = text_color))
+    ) %>%
     highcharter::hc_tooltip(
       pointFormat = texto_tooltip,
       headerFormat = NULL
     ) %>% 
-    highcharter::hc_legend(enabled = FALSE) %>% 
-    highcharter::hc_colors(colors = "#005180")
+    highcharter::hc_legend(enabled = FALSE)
   
 }
 

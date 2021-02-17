@@ -9,7 +9,7 @@ selectInput_munip <- function(id, width = NULL) {
   selectInput(
     inputId = id,
     label = "Você está vendo dados de",
-    selected = "São Paulo",
+    selected = "Amparo",
     choices = municipios,
     width = width
   )

@@ -74,14 +74,7 @@ app_ui <- function(request) {
 
       #---
       body = dashboardBody(
-        fluidRow(
-          id = "div_select_munip",
-          class = "seletor-munip", 
-          column(
-            width = 12,
-            selectInput_munip(id = "select_munip", width = "100%")
-          )
-        ),
+        mod_select_munip_ui("select_munip_ui_1"),
         bs4TabItems(
           # bs4TabItem(
           #   tabName = "informacoes_gerais",
@@ -93,6 +86,7 @@ app_ui <- function(request) {
           ),
           bs4TabItem(
             tabName = "munip_abast",
+            mod_munip_abast_ui("munip_abast_ui_1")
           ),
           bs4TabItem(
             tabName = "munip_esgot",
@@ -121,7 +115,7 @@ app_ui <- function(request) {
         copyrights = a(
           href = "https://www.curso-r.com/",
           target = "_blank", 
-          HTML("Feito com ❤️&nbsp;pela equipe da Curso-R")
+          HTML("Feito com ❤️ &nbsp;pela equipe da Curso-R")
         ),
         right_text = "2021 | FSP-USP"
       )

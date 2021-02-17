@@ -13,7 +13,13 @@ formatar_numero <- function(x, accuracy = 0.1) {
 }
 
 formatar_porcentagem <- function(x) {
-  scales::percent(x, accuracy = 0.1, scale = 1)
+  scales::percent(
+    x, 
+    accuracy = 0.1,
+    scale = 1, 
+    big.mark = ".", 
+    decimal.mark = ","
+  )
 }
 
 formatar_indicador <- function(valor, unidade_medida, label = FALSE) {

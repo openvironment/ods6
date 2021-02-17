@@ -4,7 +4,11 @@
 #'     DO NOT REMOVE.
 #'
 #' @noRd
-app_server <- function( input, output, session ) {
+app_server <- function(input, output, session) {
+  
+  municipio_selecionado <- mod_select_munip_server(
+    id = "select_munip_ui_1"
+  )
   
   observe({
     shinyjs::toggle(
@@ -14,17 +18,9 @@ app_server <- function( input, output, session ) {
     )
   })
   
-  municipio_selecionado <- reactive({
-    input$select_munip
-  })
+  mod_munip_resumo_server("munip_resumo_ui_1", municipio_selecionado)
+  mod_munip_abast_server("munip_abast_ui_1", municipio_selecionado)
   
-  mod_munip_resumo_server(
-    "munip_resumo_ui_1", 
-    municipio_selecionado
-  )
-  
-  # mod_informacoes_gerais_server("informacoes_gerais_ui_1")
-  # mod_visao_cidade_server("visao_cidade_ui_1")
   # mod_sobre_server("sobre_ui_1")
   
 }

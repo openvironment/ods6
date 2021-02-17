@@ -17,7 +17,7 @@
 **********************************/
 
 :root {
-  --azul: #2aaee2;
+  --azulODS6: #2aaee2;
 }
 
 
@@ -79,6 +79,7 @@
 
 .seletor-munip {
   padding-top: 30px;
+  margin-bottom: 20px;
 }
 
 .seletor-munip  label {
@@ -91,7 +92,7 @@
   background-color: transparent;
   border: 0;
   font-size: 3em;
-  color: var(--azul);
+  color: var(--azulODS6);
   text-align: center;
   padding: 10px 12px;
 }
@@ -100,7 +101,7 @@
   background-color: transparent;
   border: 0;
   font-size: 2.5em;
-  color: var(--azul);
+  color: var(--azulODS6);
   text-align: center;
   padding: 10px 12px;
 }
@@ -113,6 +114,22 @@
   position: static !important;
 }
 
+.tag-turistico {
+  padding: 5px;
+  border-radius: 10px;
+  width: 160px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  background-color: orange;
+  margin-top: -40px;
+}
+
+.seletor-munip hr {
+  width: 80%;
+  border-top: 2px solid rgba(0,0,0,.1);
+}
+
 @media (max-width: 575px) {
   .seletor-munip .selectize-input {
     font-size: 1.5em;
@@ -121,4 +138,82 @@
   .seletor-munip .item {
     height: 40px;
   }
+  
+  .tag-turistico {
+    padding: 3px;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 0.8em;
+  }
 }
+
+/**********************************
+  Seletor de município
+**********************************/
+
+.munip-abast-ods6 {
+  background-color: var(--azulODS6);
+  padding: 30px;
+  color: white;
+  border-radius: 10px;
+}
+
+.munip-abast-ods6 h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 2.5em;
+  text-shadow: 1px 1px black;
+}
+
+.munip-abast-ods6 h4 {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.munip-abast-ods6 .meta-origem {
+  display: block;
+  font-weight: bold;
+}
+
+.munip-abast-ods6 .meta-ind {
+  border: 1px solid white;
+  box-shadow: 0px 0px 4px 2px white;
+  padding: 10px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.munip-abast-ods6 .shiny-text-output {
+  text-align: center;
+  font-size: 3em;
+}
+
+.munip-abast-ods6 hr {
+  width: 90%;
+  border-top: 2px dashed white;
+}
+
+.munip-abast-ods6 .meta-ind-serie {
+  margin-top: 30px;
+}
+
+.vb-clickable {
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

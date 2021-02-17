@@ -29,7 +29,7 @@ mod_munip_resumo_ui <- function(id) {
           textOutput(ns("prop_esgotamento"))
         ),
         tags$p(
-          "Valores maiores que 100% indicam inconsistências nos dados declarados pelo município."
+          "Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
         )
       )
     ),
