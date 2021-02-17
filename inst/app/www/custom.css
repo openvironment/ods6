@@ -13,6 +13,17 @@
 */
 
 /**********************************
+  Geral
+**********************************/
+
+.tab-content hr {
+  width: 80%;
+  border-top: 2px solid rgba(0, 0, 0, .1);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+/**********************************
   Cores
 **********************************/
 
@@ -148,7 +159,7 @@
 }
 
 /**********************************
-  Seletor de município
+  Abastecimento
 **********************************/
 
 .munip-abast-ods6 {
@@ -203,10 +214,19 @@
   cursor: pointer;
 }
 
+.munip-abast-outros-ind {
+  padding-bottom: 30px;
+}
+
+.munip-abast-outros-ind h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
 
-
-
+.munip-abast-outros-ind .hc-outros-ind {
+  margin-top: 20px;
+}
 
 
 

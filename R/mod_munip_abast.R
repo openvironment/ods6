@@ -78,6 +78,7 @@ mod_munip_abast_ui <- function(id){
         )
       )
     ),
+    hr(),
     tags$div(
       class = "munip-abast-outros-ind",
       fluidRow(
@@ -108,13 +109,17 @@ mod_munip_abast_ui <- function(id){
           )
         )
       ),
-      fluidRow(
-        column(
-          width = 12,
-          highcharter::highchartOutput(
-            ns("hc_serie_outro_ind"),
-            width = "80%",
-            height = "300px"
+      div(
+        class = "hc-outros-ind",
+        fluidRow(
+          column(
+            width = 12,
+            class = "d-flex justify-content-center",
+            highcharter::highchartOutput(
+              ns("hc_serie_outro_ind"),
+              width = "80%",
+              height = "300px"
+            )
           )
         )
       )
