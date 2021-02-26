@@ -23,6 +23,14 @@
   margin-bottom: 3rem;
 }
 
+.content-wrapper {
+  background-color: white;
+}
+
+.navbar-light {
+  background-color: white;
+}
+
 /**********************************
   Cores
 **********************************/
@@ -88,11 +96,6 @@
   Seletor de município
 **********************************/
 
-.seletor-munip {
-  padding-top: 30px;
-  margin-bottom: 20px;
-}
-
 .seletor-munip  label {
   margin-bottom: 0;
   display: block;
@@ -117,10 +120,6 @@
   padding: 10px 12px;
 }
 
-.seletor-munip .item {
-  height: 70px;
-}
-
 .seletor-munip input {
   position: static !important;
 }
@@ -133,7 +132,6 @@
   margin: auto;
   text-align: center;
   background-color: orange;
-  margin-top: -40px;
 }
 
 .seletor-munip hr {
@@ -162,18 +160,50 @@
   Abastecimento
 **********************************/
 
-.munip-abast-ods6 {
+.munip-abast .card {
   background-color: var(--azulODS6);
-  padding: 30px;
-  color: white;
-  border-radius: 10px;
 }
 
-.munip-abast-ods6 h3 {
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 2.5em;
+.card-indicadores .nav-pills .nav-link.active {
+  color: #fff;
+  background-color: var(--azulODS6);
+  border: 0;
+  border-radius: 0;
+  font-size: 2em;
   text-shadow: 1px 1px black;
+}
+
+.card-indicadores .card-default .nav-item:first-child .nav-link.active {
+  border: 0;
+}
+
+.card-indicadores .nav-pills {
+  background-color: var(--azulODS6);
+}
+
+.card-indicadores .nav-pills .nav-link {
+  color: #fff;
+}
+
+.card-indicadores .nav-pills .nav-link:not(.active) {
+  padding-top: 22px;
+}
+
+.card-indicadores .nav-pills .nav-link:not(.active):hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.card-indicadores .card-header {
+  border-bottom: 1px solid white;
+}
+
+.card-indicadores .p-2 {
+  padding: 0 !important;
+}
+
+.munip-abast-ods6 {
+  color: white;
 }
 
 .munip-abast-ods6 h4 {

@@ -137,9 +137,3 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
  
   })
 }
-    
-## To be copied in the UI
-# mod_munip_resumo_ui("munip_resumo_ui_1")
-    
-## To be copied in the server
-# mod_munip_resumo_server("munip_resumo_ui_1")

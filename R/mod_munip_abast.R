@@ -10,115 +10,126 @@
 mod_munip_abast_ui <- function(id){
   ns <- NS(id)
   id_js <- ns("select_ind")
+  
   tags$div(
-    class = "munip-abast",
-    tags$div(
-      class = "munip-abast-ods6",
-      fluidRow(
-        column(
-          width = 5,
-          div(
-            class = "meta-desc",
-            tags$h3("ODS 6.1"),
-            tags$p(
-              span(
-                class = "meta-origem",
-                "Nações Unidas"
-              ),
-              "Até 2030, alcançar o acesso universal e equitativo à água 
+    class = "card-indicadores munip-abast",
+    fluidRow(
+      bs4Dash::bs4TabCard(
+        id = "tabcard-abast",
+        width = 12,
+        closable = FALSE,
+        collapsible = FALSE,
+        headerBorder = FALSE,
+        title = "",
+        bs4Dash::bs4TabPanel(
+          tabName = "ODS 6.1", 
+          active = TRUE,
+          tags$div(
+            class = "munip-abast-ods6",
+            fluidRow(
+              column(
+                width = 5,
+                div(
+                  class = "meta-desc",
+                  tags$p(
+                    span(
+                      class = "meta-origem",
+                      "Nações Unidas"
+                    ),
+                    "Até 2030, alcançar o acesso universal e equitativo à água 
             potável e segura para todos."
-            ),
-            tags$p(
-              span(
-                class = "meta-origem",
-                "Brasil"
-              ),
-              "Até 2030, alcançar o acesso universal e equitativo à água p
+                  ),
+                  tags$p(
+                    span(
+                      class = "meta-origem",
+                      "Brasil"
+                    ),
+                    "Até 2030, alcançar o acesso universal e equitativo à água p
             ara consumo humano, segura e acessível para todas e todos."
-            ),
-          )
-        ),
-        column(
-          width = 7,
-          class = "d-flex  align-items-center",
-          div(
-            class = "meta-ind",
-            tags$h4("Proporção da população que utiliza serviços de água potável 
+                  ),
+                )
+              ),
+              column(
+                width = 7,
+                class = "d-flex  align-items-center",
+                div(
+                  class = "meta-ind",
+                  tags$h4("Proporção da população que utiliza serviços de água potável 
                   gerenciados de forma segura"),
-            textOutput(ns("ind_ods_valor"))
-          )
-        )
-      ),
-      hr(),
-      div(
-        class = "meta-ind-serie",
-        fluidRow(
-          column(
-            width = 8,
-            class = "d-flex justify-content-center",
-            highcharter::highchartOutput(
-              ns("hc_serie_ind_ods"),
-              width = "90%",
-              height = "250px"
-            )
-          ),
-          column(
-            width = 4,
-            highcharter::highchartOutput(
-              ns("hc_prop_rede"),
-              width = "100%",
-              height = "200px"
+                  textOutput(ns("ind_ods_valor"))
+                )
+              )
             ),
-            tags$p(
-              class = "explicacao-abast",
-              "*Referente à população abastecidada por sistemas de água 
+            hr(),
+            div(
+              class = "meta-ind-serie",
+              fluidRow(
+                column(
+                  width = 8,
+                  class = "d-flex justify-content-center",
+                  highcharter::highchartOutput(
+                    ns("hc_serie_ind_ods"),
+                    width = "90%",
+                    height = "250px"
+                  )
+                ),
+                column(
+                  width = 4,
+                  highcharter::highchartOutput(
+                    ns("hc_prop_rede"),
+                    width = "100%",
+                    height = "200px"
+                  ),
+                  tags$p(
+                    class = "explicacao-abast",
+                    "*Referente à população abastecidada por sistemas de água 
               sanitariamente adequados."
+                  )
+                )
+              )
             )
-          )
-        )
-      )
-    ),
-    hr(),
-    tags$div(
-      class = "munip-abast-outros-ind",
-      fluidRow(
-        column(
-          width = 12,
-          tags$h2("Outros indicadores"),
-        )
-      ),
-      fluidRow(
-        column(
-          width = 4,
-          tags$div(
-            class = "vb-clickable",
-            fluidRow(
-              bs4Dash::bs4ValueBoxOutput(ns("consumo"), width = 12),
-            ),
-            onclick = glue::glue("clickFunction('{id_js}','consumo')")
           )
         ),
-        column(
-          width = 4,
+        bs4Dash::bs4TabPanel(
+          tabName = "Outros indicadores", 
+          active = FALSE,
           tags$div(
-            class = "vb-clickable",
+            class = "munip-abast-outros-ind",
             fluidRow(
-              bs4Dash::bs4ValueBoxOutput(ns("perdas"), width = 12)
+              column(
+                width = 4,
+                tags$div(
+                  class = "vb-clickable",
+                  fluidRow(
+                    bs4Dash::bs4ValueBoxOutput(ns("consumo"), width = 12),
+                  ),
+                  onclick = glue::glue("clickFunction('{id_js}','consumo')")
+                )
+              ),
+              column(
+                width = 4,
+                tags$div(
+                  class = "vb-clickable",
+                  fluidRow(
+                    bs4Dash::bs4ValueBoxOutput(ns("perdas"), width = 12)
+                  ),
+                  onclick = glue::glue("clickFunction('{id_js}','perdas')")
+                )
+              )
             ),
-            onclick = glue::glue("clickFunction('{id_js}','perdas')")
-          )
-        )
-      ),
-      div(
-        class = "hc-outros-ind",
-        fluidRow(
-          column(
-            width = 12,
-            class = "d-flex justify-content-center",
-            highcharter::highchartOutput(
-              ns("hc_serie_outro_ind"),
-              width = "80%",
-              height = "300px"
+            div(
+              class = "hc-outros-ind",
+              fluidRow(
+                column(
+                  width = 12,
+                  class = "d-flex justify-content-center",
+                  highcharter::highchartOutput(
+                    ns("hc_serie_outro_ind"),
+                    width = "80%",
+                    height = "300px"
+                  )
+                )
+              )
             )
           )
         )
@@ -126,7 +137,7 @@ mod_munip_abast_ui <- function(id){
     )
   )
 }
-    
+
 #' munip_abast Server Functions
 #'
 #' @noRd 
@@ -231,7 +242,7 @@ mod_munip_abast_server <- function(id, municipio_selecionado){
       bs4Dash::bs4ValueBox(
         value = "Consumo médio per capita",
         subtitle = formatar_numero(consumo, 1),
-        icon = "users",
+        icon = "faucet",
         status = "primary",
         footer = "Litros por habitante por dia"
       )
@@ -244,7 +255,7 @@ mod_munip_abast_server <- function(id, municipio_selecionado){
       bs4Dash::bs4ValueBox(
         value = "Perda na distribuição",
         subtitle = formatar_porcentagem(prop),
-        icon = "users",
+        icon = "tint-slash",
         status = "primary",
         footer = "Proporção da água perdida na distribuição"
       )
@@ -275,7 +286,7 @@ mod_munip_abast_server <- function(id, municipio_selecionado){
         ) %>% 
         highcharter::hc_colors(colors = "orange")
     })
- 
+    
   })
 }
-    
+
