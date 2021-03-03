@@ -3,8 +3,7 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #'
-#' @importFrom bs4Dash tabPanel tabsetPanel updateTabsetPanel dashboardPage dashboardControlbar dashboardHeader dashboardSidebar bs4SidebarMenu bs4SidebarMenuItem dashboardBody bs4TabItems bs4TabItem dashboardFooter bs4SidebarMenuSubItem
-#' @importFrom shiny a tagList icon
+#' @import shiny
 #'
 #' @noRd
 app_ui <- function(request) {
@@ -13,58 +12,50 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     shinyjs::useShinyjs(),
     # List the first level UI elements here
-    dashboardPage(
-      enable_preloader = FALSE,
-      old_school = FALSE,
+    bs4Dash::bs4DashPage(
       sidebar_mini = TRUE,
-      sidebar_collapsed = FALSE,
-      controlbar_collapsed = TRUE,
-      controlbar_overlay = TRUE,
-      # loading_background = "#4682B4",
       title = "ODS6",
 
       #---
-      navbar = dashboardHeader(
-        title = "ODS6"
-      ),
+      navbar = bs4Dash::bs4DashNavbar(),
 
       #---
-      sidebar = dashboardSidebar(
+      sidebar = bs4Dash::bs4DashSidebar(
         skin = "light",
         title = "ODS6",
-        bs4SidebarMenu(
+        bs4Dash::bs4SidebarMenu(
           # bs4SidebarMenuItem(
           #   "Informações gerais",
           #   tabName = "informacoes_gerais",
           #   icon = "bullseye"
           # ),
           id = "tabs",
-          bs4SidebarMenuItem(
+          bs4Dash::bs4SidebarMenuItem(
             "Análise por município",
             icon = "city",
             startExpanded = TRUE,
-            bs4SidebarMenuSubItem(
+            bs4Dash::bs4SidebarMenuSubItem(
               "Resumo",
-              icon = "",
+              icon = "file-contract",
               tabName = "munip_resumo"
             ),
-            bs4SidebarMenuSubItem(
-              "Abastecimento",
-              icon = "",
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Acesso a água",
+              icon = "water",
               tabName = "munip_abast"
             ),
-            bs4SidebarMenuSubItem(
-              "Esgotamento sanitário",
-              icon = "",
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Acesso a esgoto",
+              icon = "toilet",
               tabName = "munip_esgot"
             ),
-            bs4SidebarMenuSubItem(
+            bs4Dash::bs4SidebarMenuSubItem(
               "Inconsistências",
-              icon = "",
+              icon = "exclamation-circle",
               tabName = "munip_incons"
             )
           ),
-          bs4SidebarMenuItem(
+          bs4Dash::bs4SidebarMenuItem(
             "Sobre",
             tabName = "sobre",
             icon = "info"
@@ -73,28 +64,29 @@ app_ui <- function(request) {
       ),
 
       #---
-      body = dashboardBody(
+      body = bs4Dash::bs4DashBody(
         mod_select_munip_ui("select_munip_ui_1"),
-        bs4TabItems(
+        bs4Dash::bs4TabItems(
           # bs4TabItem(
           #   tabName = "informacoes_gerais",
           #   mod_informacoes_gerais_ui("informacoes_gerais_ui_1")
           # ),
-          bs4TabItem(
+          bs4Dash::bs4TabItem(
             tabName = "munip_resumo",
             mod_munip_resumo_ui("munip_resumo_ui_1")
           ),
-          bs4TabItem(
+          bs4Dash::bs4TabItem(
             tabName = "munip_abast",
             mod_munip_abast_ui("munip_abast_ui_1")
           ),
-          bs4TabItem(
+          bs4Dash::bs4TabItem(
             tabName = "munip_esgot",
+            mod_munip_esgot_ui("munip_esgot_ui_1")
           ),
-          bs4TabItem(
+          bs4Dash::bs4TabItem(
             tabName = "munip_incons",
           ),
-          bs4TabItem(
+          bs4Dash::bs4TabItem(
             tabName = "sobre",
             mod_sobre_ui("sobre_ui_1")
           )
@@ -111,11 +103,11 @@ app_ui <- function(request) {
       ),
       
       #---
-      footer = dashboardFooter(
+      footer = bs4Dash::bs4DashFooter(
         copyrights = a(
           href = "https://www.curso-r.com/",
           target = "_blank", 
-          HTML("Feito com ❤️ &nbsp;pela equipe da Curso-R")
+          HTML("Desenvolvido pela equipe da Curso-R")
         ),
         right_text = "2021 | FSP-USP"
       )

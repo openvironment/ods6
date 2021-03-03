@@ -27,7 +27,7 @@ mod_informacoes_gerais_ui <- function(id) {
         bs4Dash::bs4TabCard(
           width = 12,
           id = "tabbox",
-          bs4Dash::bs4TabPanel(
+          tabPanel(
             tabName = "Abstecimento",
             tags$p(paste0(
               "Proporção da população servida por redes de",
@@ -37,7 +37,7 @@ mod_informacoes_gerais_ui <- function(id) {
             highcharter::highchartOutput(ns("hc_abastecimento")) %>%
               shinycssloaders::withSpinner()
           ),
-          bs4Dash::bs4TabPanel(
+          tabPanel(
             tabName = "Esgotamento sanitário",
             tags$p(paste0(
               "Proporção da população servida com sistema",
@@ -47,7 +47,7 @@ mod_informacoes_gerais_ui <- function(id) {
             highcharter::highchartOutput(ns("hc_esgoto")) %>%
               shinycssloaders::withSpinner()
           ),
-          bs4Dash::bs4TabPanel(
+          tabPanel(
             tabName = "Esgoto tratado",
             tags$p(paste0(
               "Proporção do esgoto tratado em relação ao produzido. ",
@@ -56,7 +56,7 @@ mod_informacoes_gerais_ui <- function(id) {
             highcharter::highchartOutput(ns("hc_esgoto_tratado")) %>%
               shinycssloaders::withSpinner()
           ),
-          bs4Dash::bs4TabPanel(
+          tabPanel(
             tabName = "Consumo de água",
             tags$p(paste0(
               "Consumo médio per capita efetivo. ",

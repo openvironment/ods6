@@ -24,3 +24,26 @@ valueDiv <- function(label, icon, ...) {
     ...
   )
 }
+
+card_indicadores <- function(id, ...) {
+  bs4Dash::bs4TabCard(
+    id = id,
+    width = 12,
+    closable = FALSE,
+    collapsible = FALSE,
+    headerBorder = FALSE,
+    title = "",
+    ...
+  )
+}
+
+simple_value_box <- function(titulo, valor, unidade = "") {
+  div(
+    class = "meta-ind",
+    tags$h4(titulo),
+    span(class = "meta-ind-valor", valor), 
+    span(class = "meta-ind-unidade", unidade)
+  )
+}
+
+

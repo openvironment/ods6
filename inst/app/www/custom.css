@@ -160,7 +160,8 @@
   Abastecimento
 **********************************/
 
-.munip-abast .card {
+.card-indicadores .card {
+  color: white;
   background-color: var(--azulODS6);
 }
 
@@ -202,22 +203,12 @@
   padding: 0 !important;
 }
 
-.munip-abast-ods6 {
-  color: white;
-}
-
-.munip-abast-ods6 h4 {
-  font-weight: bold;
-  font-size: 1.1em;
-  text-align: center;
-}
-
-.munip-abast-ods6 .meta-origem {
+.munip-ind-ods6 .meta-origem {
   display: block;
   font-weight: bold;
 }
 
-.munip-abast-ods6 .meta-ind {
+.meta-ind {
   border: 1px solid white;
   box-shadow: 0px 0px 4px 2px white;
   padding: 10px;
@@ -226,31 +217,36 @@
   margin-right: auto;
 }
 
-.munip-abast-ods6 .shiny-text-output {
+.meta-ind h4 {
+  font-weight: bold;
+  font-size: 1.1em;
   text-align: center;
-  font-size: 3em;
 }
 
-.munip-abast-ods6 hr {
+.meta-ind {
+  text-align: center;
+}
+
+.meta-ind-valor {
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+.meta-ind-unidade {
+  font-size: 1.2em;
+}
+
+.munip-ind-ods6 hr {
   width: 90%;
   border-top: 2px dashed white;
 }
 
-.munip-abast-ods6 .meta-ind-serie {
+.munip-ind-ods6 .meta-ind-serie {
   margin-top: 30px;
 }
 
-.vb-clickable {
-  cursor: pointer;
-}
-
-.munip-abast-outros-ind {
-  padding-bottom: 30px;
-}
-
-.munip-abast-outros-ind h2 {
-  text-align: center;
-  margin-bottom: 30px;
+.munip-outros-ind .desc {
+  margin-top: 20px;
 }
 
 

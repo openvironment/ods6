@@ -37,8 +37,14 @@ formatar_indicador <- function(valor, unidade_medida, label = FALSE) {
   }
 }
 
-#' Pipe
-`%>%` <- dplyr::`%>%`
+formatar_nome_tipo_servico <- function(x) {
+  dplyr::case_when(
+    x == "pop_servida_abast_agua" ~ "Rede pública",
+    x == "pop_servida_poco_nasc" ~ "Poço ou mina",
+    x == "prop_pop_fossa_septica" ~ "Fossa séptica",
+    x == "prop_pop_servida_rede_coleta" ~ "Rede de coleta"
+  )  
+}
 
 #' Devolve o nome formatado de um indicador
 pegar_nome_formatado <- function(indicador) {
