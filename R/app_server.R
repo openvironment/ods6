@@ -29,8 +29,21 @@ app_server <- function(input, output, session) {
   })
   
   mod_munip_resumo_server("munip_resumo_ui_1", municipio_selecionado)
-  mod_munip_abast_server("munip_abast_ui_1", base_filtrada, base_filtrada_contemp)
-  mod_munip_esgot_server("munip_esgot_ui_1", base_filtrada, base_filtrada_contemp)
+  
+  mod_munip_abast_server(
+    "munip_abast_ui_1",
+    base_filtrada, 
+    base_filtrada_contemp
+  )
+  
+  mod_munip_esgot_server(
+    "munip_esgot_ui_1",
+    base_filtrada,
+    base_filtrada_contemp
+  )
+  
+  mod_munip_incons_server("munip_incons_ui_1")
+  
   # mod_sobre_server("sobre_ui_1")
   
 }

@@ -24,8 +24,7 @@ mod_munip_esgot_ui <- function(id){
               com a defecação a céu aberto, com especial atenção 
               para as necessidades das mulheres e meninas e daqueles 
               em situação de vulnerabilidade.",
-            desc_br = "Proporção da população que utiliza serviços de 
-              saneamento gerenciados de forma segura",
+            desc_br = "Meta mantida sem alteração.",
             text_pie_chart = "*Referente à população servida por 
               serviços de saneamento gerenciados de forma segura."
           )

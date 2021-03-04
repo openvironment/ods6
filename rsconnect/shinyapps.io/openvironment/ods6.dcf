@@ -5,9 +5,9 @@ account: openvironment
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3500727
-bundleId: 4246113
+bundleId: 4297497
 url: https://openvironment.shinyapps.io/ods6/
-when: 1613758984.22041
+when: 1614813155.51326
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: data-raw
+ignoredFiles: .Rprofile|data-raw|docs

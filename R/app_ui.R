@@ -85,6 +85,7 @@ app_ui <- function(request) {
           ),
           bs4Dash::bs4TabItem(
             tabName = "munip_incons",
+            mod_munip_incons_ui("munip_incons_ui_1")
           ),
           bs4Dash::bs4TabItem(
             tabName = "sobre",
