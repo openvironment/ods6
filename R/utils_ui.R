@@ -46,4 +46,26 @@ simple_value_box <- function(titulo, valor, unidade = "") {
   )
 }
 
-
+card_inconsistencia <- function(titulo, desc_ind, desc_validacao, valor,
+                                status) {
+  bs4Dash::bs4Card(
+    title = titulo,
+    width = 12,
+    status = status,
+    closable = FALSE,
+    fluidRow(
+      column(
+        width = 8,
+        span("Indicador", style = "font-weight: bold;"),
+        span(": ", desc_ind), class = "incons-desc-indicador",
+        br(),
+        br(),
+        span(desc_validacao, class = "incons-desc-validacao")
+      ),
+      column(
+        width = 4,
+        valor
+      )
+    )
+  )
+}

@@ -37,6 +37,13 @@ formatar_indicador <- function(valor, unidade_medida, label = FALSE) {
   }
 }
 
+colocar_unidade_medida <- function(valor, indicador) {
+  unidade <- pegar_unidade_de_medida(indicador)
+  valor %>% 
+    formatar_indicador(unidade) %>% 
+    paste(unidade)
+}
+
 formatar_nome_tipo_servico <- function(x) {
   dplyr::case_when(
     x == "pop_servida_abast_agua" ~ "Rede pública",

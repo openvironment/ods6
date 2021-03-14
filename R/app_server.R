@@ -42,7 +42,11 @@ app_server <- function(input, output, session) {
     base_filtrada_contemp
   )
   
-  mod_munip_incons_server("munip_incons_ui_1")
+  mod_munip_incons_server(
+    "munip_incons_ui_1",
+    base_filtrada,
+    base_filtrada_contemp
+  )
   
   # mod_sobre_server("sobre_ui_1")
   
