@@ -12,32 +12,67 @@ mod_munip_resumo_ui <- function(id) {
   tagList(
     fluidRow(
       column(
+        width = 12,
+        h2("Dados demográficos")
+      )
+    ),
+    fluidRow(
+      column(
         width = 7,
         plotOutput(ns("plot_mapa"), height = "360px")
       ),
       column(
-        width = 4,
         offset = 1,
-        valueDiv(
-          label = "Abastecimento",
-          icon = icon("question-circle", class = "tip-abastecimento"),
-          textOutput(ns("prop_abastecimento"))
+        width = 4,
+        fluidRow(
+          bs4Dash::bs4ValueBoxOutput(ns("pop_total"), width = 12)
         ),
-        valueDiv(
-          label = "Esgotamento sanitário",
-          icon = icon("question-circle", class = "tip-esgotamento"),
-          textOutput(ns("prop_esgotamento"))
-        ),
-        tags$p(
-          "Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
+        fluidRow(
+          column(
+            width = 12,
+            highcharter::highchartOutput(ns("prop_populacao"), height = "200px")
+          )
         )
       )
     ),
     br(),
     fluidRow(
-      bs4Dash::bs4ValueBoxOutput(ns("pop_rural"), width = 4),
-      bs4Dash::bs4ValueBoxOutput(ns("pop_urbana"), width = 4),
-      bs4Dash::bs4ValueBoxOutput(ns("pop_total"), width = 4)
+      column(
+        width = 12,
+        h2("Indicadores de acesso a água e esgoto")
+      )
+    ),
+    br(),
+    fluidRow(
+      column(
+        width = 4,
+        valueDiv(
+          label = "Abastecimento",
+          icon = icon("question-circle", class = "tip-abastecimento"),
+          textOutput(ns("prop_abastecimento"))
+        )
+      ),
+      column(
+        width = 4,
+        valueDiv(
+          label = "Esgotamento sanitário",
+          icon = icon("question-circle", class = "tip-esgotamento"),
+          textOutput(ns("prop_esgotamento"))
+        )
+      ),
+      column(
+        width = 4,
+        tags$p(
+          "*Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
+        )
+      )
+    ),
+    fluidRow(
+      column(
+        width = 12,
+        h2("Inconsistências nos dados"),
+        reactable::reactableOutput(ns("tab_incons"))
+      )
     )
   )
 }

@@ -68,6 +68,13 @@ aside {
   font-weight: 400!important;
 }
 
+.logo-agua {
+  width: 30%;
+  position: absolute;
+  bottom: 10px;
+  left: 85px;
+}
+
 .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
   background-color: white; 
 }
@@ -146,17 +153,20 @@ aside {
 }
 
 .valueDiv .shiny-text-output {
-  font-size: 40px;
+  font-size: 3em;
   margin-left: 10px;
 }
 
 .valueDiv {
   margin-bottom: 20px;
+  color: var(--azulODS6);
 }
 
 .valueDiv hr {
   margin-top: 2px;
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  width: 60%;
+  border-top: 1px solid var(--azulODS6);
 }
 
 .valueDiv i {
@@ -168,14 +178,19 @@ aside {
   Seletor de município
 **********************************/
 
+.seletor-munip {
+  border-bottom: 2px solid var(--azulODS6);
+}
+
 .seletor-munip  label {
+  padding-left: 5px;
   margin-bottom: 0;
   display: block;
 }
 
 .seletor-munip select {
   background-color: transparent;
-  border: 0;
+  border: 2px solid var(--azulODS6);
   font-size: 3em;
   color: var(--azulODS6);
   padding: 10px 12px;
@@ -183,7 +198,7 @@ aside {
 
 .seletor-munip .selectize-input {
   background-color: transparent;
-  border: 0;
+  border: 2px solid var(--azulODS6);
   font-size: 2.5em;
   color: var(--azulODS6);
   padding: 10px 12px;
@@ -199,6 +214,7 @@ aside {
   width: 160px;
   display: block;
   margin: auto;
+  margin-top: 40px;
   text-align: center;
   background-color: var(--verdeODS6);
 }

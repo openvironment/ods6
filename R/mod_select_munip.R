@@ -19,7 +19,6 @@ mod_select_munip_ui <- function(id){
       ),
       column(
         width = 3,
-        offset = 3,
         uiOutput(ns("tag_turistico"))
       )
     )

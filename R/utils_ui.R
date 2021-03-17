@@ -20,7 +20,7 @@ valueDiv <- function(label, icon, ...) {
     class = "valueDiv",
     htmltools::span(label),
     icon,
-    htmltools::hr(),
+    htmltools::hr(align = "left"),
     ...
   )
 }

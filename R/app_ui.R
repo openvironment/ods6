@@ -17,12 +17,13 @@ app_ui <- function(request) {
       title = "ODS6",
 
       #---
-      navbar = bs4Dash::bs4DashNavbar(),
+      navbar = bs4Dash::bs4DashNavbar(
+        h1("Painel ODS6 do Estado de São Paulo")
+      ),
 
       #---
       sidebar = bs4Dash::bs4DashSidebar(
         skin = "light",
-        title = "Painel ODS6 São Paulo",
         bs4Dash::bs4SidebarMenu(
           # bs4SidebarMenuItem(
           #   "Informações gerais",
@@ -60,7 +61,8 @@ app_ui <- function(request) {
             tabName = "sobre",
             icon = "info"
           )
-        )
+        ),
+        img(src = "www/img_agua.jpeg", class = "logo-agua")
       ),
 
       #---
