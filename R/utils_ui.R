@@ -37,13 +37,28 @@ card_indicadores <- function(id, ...) {
   )
 }
 
-simple_value_box <- function(titulo, valor, unidade = "") {
-  div(
-    class = "meta-ind",
-    tags$h4(titulo),
-    span(class = "meta-ind-valor", valor), 
-    span(class = "meta-ind-unidade", unidade)
+simple_value_box <- function(titulo, valor, unidade = "", alerta = FALSE) {
+  if (alerta) {
+    alerta_texto <- span(
+      class = "alerta100",
+      "*Indicador maior que 100% indica inconsistências nos dados declarados 
+          pelo município."
+    )
+  } else {
+    alerta_texto <- NULL
+  }
+  tagList(
+    div(
+      class = "meta-ind",
+      tags$h4(titulo),
+      span(class = "meta-ind-valor", valor), 
+      span(class = "meta-ind-unidade", unidade)
+    ),
+    div(
+      alerta_texto
+    )
   )
+  
 }
 
 card_inconsistencia <- function(titulo, desc_ind, desc_validacao, valor,
@@ -63,8 +78,12 @@ card_inconsistencia <- function(titulo, desc_ind, desc_validacao, valor,
         span(desc_validacao, class = "incons-desc-validacao")
       ),
       column(
+        class = "d-flex align-items-center",
         width = 4,
-        valor
+        div(
+          class = "text-center w-100 fs-1_5em",
+          valor
+        )
       )
     )
   )

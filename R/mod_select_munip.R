@@ -14,11 +14,12 @@ mod_select_munip_ui <- function(id){
     class = "seletor-munip",
     fluidRow(
       column(
-        width = 9,
+        width = 6,
         selectInput_munip(id = ns("select_munip"), width = "100%")
       ),
       column(
         width = 3,
+        offset = 3,
         uiOutput(ns("tag_turistico"))
       )
     )

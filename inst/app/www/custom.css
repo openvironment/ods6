@@ -13,6 +13,18 @@
 */
 
 /**********************************
+  Cores
+**********************************/
+
+:root {
+  --azulODS6: #2aaee2;
+  --primary: #2aaee2;
+  --blue: #2aaee2;
+  --cinzaODS6: #969586;
+  --verdeODS6: #4ca1469c;
+}
+
+/**********************************
   Geral
 **********************************/
 
@@ -31,14 +43,70 @@
   background-color: white;
 }
 
-/**********************************
-  Cores
-**********************************/
-
-:root {
-  --azulODS6: #2aaee2;
+.fs-1_5em {
+  font-size: 1.5em;
 }
 
+.fs-2em {
+  font-size: 2em;
+}
+
+/**********************************
+  Sidebar
+**********************************/
+
+aside {
+  background: linear-gradient(180deg, var(--azulODS6) 68%, rgba(76, 161, 70, 0.608281) 100%)
+}
+
+.brand-link {
+  text-align: center;
+}
+
+.brand-text{
+  color: white;
+  font-weight: 400!important;
+}
+
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: white; 
+}
+
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  color: var(--azulODS6);
+}
+
+.sidebar-light-primary .nav-treeview>.nav-item>.nav-link.active {
+  color: var(--azulODS6);
+}
+
+.sidebar-light-primary .nav-sidebar>.nav-item.menu-open>.nav-link {
+  color: var(--azulODS6);
+}
+
+.sidebar-light-primary .nav-treeview>.nav-item>.nav-link {
+  color: white;
+}
+
+.sidebar-light-primary .sidebar a {
+  color: white;
+}
+
+.sidebar-light-primary .nav-treeview>.nav-item>.nav-link.active:hover {
+  color: var(--azulODS6);
+}
+
+.nav-pills .nav-link:not(.active):hover {
+  color: var(--azulODS6);
+}
+
+.sidebar-light-primary .nav-sidebar>.nav-item:hover>.nav-link {
+  color: var(--azulODS6);
+}
+
+.nav-item:hover {
+  color: var(--azulODS6);
+}
 
 /**********************************
   Value boxes
@@ -54,6 +122,10 @@
 
 .small-box-footer {
   font-size: 0.8em;
+}
+
+.bg-primary {
+  background-color: var(--azulODS6)!important;
 }
 
 /**********************************
@@ -99,7 +171,6 @@
 .seletor-munip  label {
   margin-bottom: 0;
   display: block;
-  text-align: center;
 }
 
 .seletor-munip select {
@@ -107,7 +178,6 @@
   border: 0;
   font-size: 3em;
   color: var(--azulODS6);
-  text-align: center;
   padding: 10px 12px;
 }
 
@@ -116,7 +186,6 @@
   border: 0;
   font-size: 2.5em;
   color: var(--azulODS6);
-  text-align: center;
   padding: 10px 12px;
 }
 
@@ -131,7 +200,7 @@
   display: block;
   margin: auto;
   text-align: center;
-  background-color: orange;
+  background-color: var(--verdeODS6);
 }
 
 .seletor-munip hr {

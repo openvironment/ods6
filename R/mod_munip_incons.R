@@ -20,12 +20,14 @@ mod_munip_incons_ui <- function(id){
       ea commodo consequat.")
       )
     ),
+    br(),
     fluidRow(
       uiOutput(ns("ind_acesso_agua")),
       uiOutput(ns("ind_acesso_esgoto")),
       uiOutput(ns("ind_perdas_totais")),
       uiOutput(ns("ind_consumo"))
     ),
+    br(),
     fluidRow(
       column(
         width = 12,
@@ -36,6 +38,7 @@ mod_munip_incons_ui <- function(id){
       ea commodo consequat.")
       )
     ),
+    br(),
     fluidRow(
       uiOutput(ns("ind_var_acesso_agua")),
       uiOutput(ns("ind_var_acesso_esgoto")),

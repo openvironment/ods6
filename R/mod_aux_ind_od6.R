@@ -75,14 +75,27 @@ mod_aux_ind_od6_server <- function(id, base_filtrada, base_filtrada_contemp,
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
+    valor_ind <- reactive({
+      base_filtrada_contemp() %>% 
+        dplyr::pull(indicador)
+    })
+    
     output$ind_valor <- renderUI({
-      prop <- base_filtrada_contemp() %>% 
-        dplyr::pull(indicador) %>% 
-        formatar_porcentagem()
+      
+      valor <- valor_ind()
+      prop <- formatar_porcentagem(valor)
+      
+      if (valor > 100) {
+        prop <- paste0(prop, "*")
+        alerta <- TRUE
+      } else {
+        alerta <- FALSE
+      }
       
       simple_value_box(
         titulo = nome_indicador_ods,
-        valor = prop
+        valor = prop,
+        alerta = alerta
       )
     })
     

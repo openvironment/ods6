@@ -10,7 +10,7 @@ run_app <- function(...) {
     app = do.call(shinyApp, list(
       ui = app_ui,
       server = app_server,
-      options = list(launch.browser = FALSE)
+      options = list(launch.browser = FALSE, port = 4242)
     )),
     golem_opts = list(...)
   )

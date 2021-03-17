@@ -22,7 +22,7 @@ app_ui <- function(request) {
       #---
       sidebar = bs4Dash::bs4DashSidebar(
         skin = "light",
-        title = "ODS6",
+        title = "Painel ODS6 São Paulo",
         bs4Dash::bs4SidebarMenu(
           # bs4SidebarMenuItem(
           #   "Informações gerais",
