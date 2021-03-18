@@ -12,6 +12,18 @@ mod_munip_abast_ui <- function(id){
   div(
     class = "card-indicadores munip-abast",
     fluidRow(
+      column(
+        width = 12,
+        h2("Indicadores de acesso a água"),
+        br(),
+        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+          ea commodo consequat.")
+      )
+    ),
+    br(),
+    fluidRow(
       card_indicadores(
         id = "tabcard-abast",
         bs4Dash::bs4TabPanel(

@@ -28,6 +28,15 @@
   Geral
 **********************************/
 
+h1 {
+  font-size: 1.8rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+}
+
+
 .tab-content hr {
   width: 80%;
   border-top: 2px solid rgba(0, 0, 0, .1);
@@ -37,6 +46,7 @@
 
 .content-wrapper {
   background-color: white;
+  padding-top: 30px;
 }
 
 .navbar-light {
@@ -55,17 +65,30 @@
   Sidebar
 **********************************/
 
+.navbar-light {
+    background-color: #2aaee20f;
+}
+
+.app-title {
+  text-align: center; 
+  width: 100%;
+  color: var(--azulODS6);
+}
+
+.title-sec-color {
+  color: black;
+}
+
+/**********************************
+  Sidebar
+**********************************/
+
 aside {
   background: linear-gradient(180deg, var(--azulODS6) 68%, rgba(76, 161, 70, 0.608281) 100%)
 }
 
-.brand-link {
-  text-align: center;
-}
-
-.brand-text{
-  color: white;
-  font-weight: 400!important;
+.sidebar {
+  padding-top: 20px;
 }
 
 .logo-agua {
@@ -165,7 +188,7 @@ aside {
 .valueDiv hr {
   margin-top: 2px;
   margin-bottom: 0;
-  width: 60%;
+  width: 90%;
   border-top: 1px solid var(--azulODS6);
 }
 

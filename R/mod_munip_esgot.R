@@ -12,6 +12,18 @@ mod_munip_esgot_ui <- function(id){
   div(
     class = "card-indicadores munip-esgot",
     fluidRow(
+      column(
+        width = 12,
+        h2("Indicadores de acesso a esgoto"),
+        br(),
+        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+          ea commodo consequat.")
+      )
+    ),
+    br(),
+    fluidRow(
       card_indicadores(
         id = "tabcard-esgot",
         bs4Dash::bs4TabPanel(

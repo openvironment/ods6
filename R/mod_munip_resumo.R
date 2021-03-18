@@ -16,6 +16,7 @@ mod_munip_resumo_ui <- function(id) {
         h2("Dados demográficos")
       )
     ),
+    br(),
     fluidRow(
       column(
         width = 7,
@@ -45,7 +46,7 @@ mod_munip_resumo_ui <- function(id) {
     br(),
     fluidRow(
       column(
-        width = 4,
+        width = 3,
         valueDiv(
           label = "Abastecimento",
           icon = icon("question-circle", class = "tip-abastecimento"),
@@ -53,7 +54,7 @@ mod_munip_resumo_ui <- function(id) {
         )
       ),
       column(
-        width = 4,
+        width = 3,
         valueDiv(
           label = "Esgotamento sanitário",
           icon = icon("question-circle", class = "tip-esgotamento"),
@@ -61,9 +62,19 @@ mod_munip_resumo_ui <- function(id) {
         )
       ),
       column(
-        width = 4,
-        tags$p(
-          "*Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
+        width = 3,
+        valueDiv(
+          label = "Perda na distribuição",
+          icon = icon("question-circle", class = "tip-perda"),
+          textOutput(ns("prop_perda"))
+        )
+      ),
+      column(
+        width = 3,
+        valueDiv(
+          label = "Esgoto tratado",
+          icon = icon("question-circle", class = "tip-esgoto-tratado"),
+          textOutput(ns("prop_esgoto_tratado"))
         )
       )
     ),
@@ -71,9 +82,15 @@ mod_munip_resumo_ui <- function(id) {
       column(
         width = 12,
         h2("Inconsistências nos dados"),
+      )
+    ),
+    br(),
+    fluidRow(
+      column(
+        width = 12,
         reactable::reactableOutput(ns("tab_incons"))
       )
-    )
+    ),
   )
 }
     
@@ -166,6 +183,18 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
     
     output$prop_esgotamento <- renderText({
       prop <- base_filtrada()$prop_pop_servida_coleta_esgoto
+      
+      formatar_porcentagem(prop)
+    })
+    
+    output$prop_perda <- renderText({
+      prop <- base_filtrada()$prop_perdas_rede_dist
+      
+      formatar_porcentagem(prop)
+    })
+    
+    output$prop_esgoto_tratado <- renderText({
+      prop <- base_filtrada()$prop_esgoto_tratado
       
       formatar_porcentagem(prop)
     })

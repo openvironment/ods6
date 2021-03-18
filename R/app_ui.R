@@ -18,7 +18,13 @@ app_ui <- function(request) {
 
       #---
       navbar = bs4Dash::bs4DashNavbar(
-        h1("Painel ODS6 do Estado de São Paulo")
+        div(
+          class = "app-title",
+          h1(
+            "Painel ODS6",
+            span("do Estado de São Paulo", class = "title-sec-color")
+          )
+        )
       ),
 
       #---
@@ -97,11 +103,11 @@ app_ui <- function(request) {
         # TIPs
         tippy::tippy_class(
           "tip-abastecimento", 
-          content = "Proporção de pessoas no município abastecidas por sistemas adequados."
+          content = "Proporção da população que utiliza serviços de água potável gerenciados de forma segura. Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
         ),
         tippy::tippy_class(
           "tip-esgotamento", 
-          content = "Proporção de pessoas no município servidas por rede de esgoto."
+          content = "Proporção da população que utiliza serviços de saneamento gerenciados de forma segura. Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
         )
       ),
       
@@ -137,9 +143,15 @@ golem_add_external_resources <- function(){
     bundle_resources(
       path = app_sys('app/www'),
       app_title = 'ODS6'
+    ),
+    tags$link(
+      rel = "preconnect",
+      href="https://fonts.gstatic.com"
+    ),
+    tags$link(
+      rel = "stylesheet",
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
     )
-    # Add here other external resources
-    # for example, you can add shinyalert::useShinyalert()
   )
 }
 
