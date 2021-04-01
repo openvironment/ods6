@@ -1,5 +1,3 @@
-## code to prepare `base_indicadores` dataset goes here
-
 # Dúvidas:
 # 3- por que não usar o fator nos anos censitários?
 
@@ -45,15 +43,14 @@ tab_fator_correcao <- base_agregada %>%
     )
   ) %>% 
   dplyr::mutate(
-    taxa_hab_domicilio = pop_total_2010 / domicilios_total_2010,
     abast_rede_fator_correcao = abast_rede_geral_2010 / ind_ag013,
     esgot_fator_correcao = 
       esgot_rede_geral_de_esgoto_ou_pluvial_2010 / ind_es008
   ) %>%
-  dplyr::mutate(dplyr::across(
-    dplyr::contains("fator_correcao"),
-    ~ifelse(munip_turistico == "sim", .x, 1)
-  )) %>% 
+  # dplyr::mutate(dplyr::across(
+  #   dplyr::contains("fator_correcao"),
+  #   ~ifelse(munip_turistico == "sim", .x, 1)
+  # )) %>% 
   dplyr::select(
     munip_cod,
     dplyr::contains("fator_correcao")
@@ -164,10 +161,13 @@ base_indicadores <- base_agregada %>%
     dplyr::starts_with("proj_"),
     dplyr::starts_with("pop_"),
     dplyr::starts_with("prop_"),
+    domicilios_total_2010,
     dplyr::starts_with("num"),
     dplyr::starts_with("taxa"),
     dplyr::starts_with("volume"),
-    consumo_medio_per_capita
+    consumo_medio_per_capita,
+    ind_ag013,
+    abast_rede_geral_ibge_2010 = abast_rede_geral_2010
   )
 
 readr::write_csv(base_agregada, "data-raw/base_agregada.csv")
