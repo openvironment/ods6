@@ -13,7 +13,7 @@ mod_aux_ind_od6_ui <- function(id, desc_onu, desc_br, text_pie_chart) {
     class = "munip-ind-ods6",
     fluidRow(
       column(
-        width = 5,
+        width = 6,
         div(
           class = "meta-desc",
           tags$p(
@@ -33,8 +33,8 @@ mod_aux_ind_od6_ui <- function(id, desc_onu, desc_br, text_pie_chart) {
         )
       ),
       column(
-        width = 7,
-        class = "d-flex  align-items-center",
+        width = 6,
+        class = "d-flex  align-items-center indicadorODS",
         uiOutput(ns("ind_valor"))
       )
     ),
@@ -42,7 +42,7 @@ mod_aux_ind_od6_ui <- function(id, desc_onu, desc_br, text_pie_chart) {
     fluidRow(
       class = "meta-ind-serie",
       column(
-        width = 8,
+        width = ifelse(isTruthy(text_pie_chart), 8, 12),
         class = "d-flex justify-content-center",
         highcharter::highchartOutput(
           ns("hc_serie_ind_ods"),
@@ -50,18 +50,22 @@ mod_aux_ind_od6_ui <- function(id, desc_onu, desc_br, text_pie_chart) {
           height = "250px"
         )
       ),
-      column(
-        width = 4,
-        highcharter::highchartOutput(
-          ns("hc_prop_rede"),
-          width = "100%",
-          height = "200px"
-        ),
-        tags$p(
-          class = "explicacao-hc-pie",
-          text_pie_chart
+      if(isTruthy(text_pie_chart)) {
+        column(
+          width = 4,
+          highcharter::highchartOutput(
+            ns("hc_prop_rede"),
+            width = "100%",
+            height = "200px"
+          ),
+          tags$p(
+            class = "explicacao-hc-pie",
+            text_pie_chart
+          )
         )
-      )
+      } else {
+        NULL
+      }
     )
   )
 }
@@ -71,7 +75,7 @@ mod_aux_ind_od6_ui <- function(id, desc_onu, desc_br, text_pie_chart) {
 #' @noRd 
 mod_aux_ind_od6_server <- function(id, base_filtrada, base_filtrada_contemp,
                                    indicador, nome_indicador_ods,
-                                   tipo_servicos) {
+                                   tipo_servicos, indicador_alerta = "") {
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
@@ -82,20 +86,22 @@ mod_aux_ind_od6_server <- function(id, base_filtrada, base_filtrada_contemp,
     
     output$ind_valor <- renderUI({
       
-      valor <- valor_ind()
-      prop <- formatar_porcentagem(valor)
+      unidade <- pegar_unidade_de_medida(indicador)
+      valor <- formatar_indicador(valor_ind(), unidade)
       
-      if (valor > 100) {
-        prop <- paste0(prop, "*")
-        alerta <- TRUE
-      } else {
-        alerta <- FALSE
+      if (stringr::str_detect(indicador, "^prop_")) {
+        unidade <- ""
+      }
+      
+      if(isTruthy(indicador_alerta)) {
+        nome_indicador_ods <- paste0(nome_indicador_ods, "*")
       }
       
       simple_value_box(
         titulo = nome_indicador_ods,
-        valor = prop,
-        alerta = alerta
+        valor = valor,
+        alerta = indicador_alerta,
+        unidade = unidade
       )
     })
     
@@ -105,7 +111,7 @@ mod_aux_ind_od6_server <- function(id, base_filtrada, base_filtrada_contemp,
       nome_formatado <- nome_indicador_ods
       
       base_filtrada() %>%
-        dplyr::select(ano, value = prop_pop_abast_sist_adequados) %>%
+        dplyr::select(ano, value = dplyr::one_of(indicador)) %>%
         dplyr::arrange(ano) %>%
         as.matrix() %>%
         hc_serie(nome_formatado, unidade_medida, text_color = "white") %>% 
@@ -118,56 +124,31 @@ mod_aux_ind_od6_server <- function(id, base_filtrada, base_filtrada_contemp,
     
     output$hc_prop_rede <- highcharter::renderHighchart({
       
-      tab <- base_filtrada_contemp() %>% 
-        dplyr::select(dplyr::one_of(tipo_servicos)) %>% 
-        tidyr::pivot_longer(
-          cols = dplyr::everything(), 
-          names_to = "name",
-          values_to = "y"
+      if (!is.null(tipo_servicos)) {
+        tab <- base_filtrada_contemp() %>% 
+          dplyr::select(dplyr::one_of(tipo_servicos)) %>% 
+          tidyr::pivot_longer(
+            cols = dplyr::everything(), 
+            names_to = "name",
+            values_to = "y"
+          ) %>% 
+          dplyr::mutate(name = formatar_nome_tipo_servico(name)) %>% 
+          highcharter::list_parse()
+        
+        hc_donut(
+          tab,
+          "Tipo de serviço",
+          cor = c("orange", "white"),
+          size = "210%"
         ) %>% 
-        dplyr::mutate(name = formatar_nome_tipo_servico(name)) %>% 
-        highcharter::list_parse()
-      
-      highcharter::highchart() %>% 
-        highcharter::hc_chart(
-          plotBackgroundColor = "transparent",
-          plotBorderWidth = 0,
-          plotShadow = FALSE
-        ) %>% 
-        highcharter::hc_series(
-          list(
-            data = tab, 
-            name = "Tipo de serviço",
-            type = "pie",
-            innerSize = "50%"
+          highcharter::hc_title(
+            text = "Tipo de serviço*",
+            style = list(color = "white")
           )
-        ) %>% 
-        highcharter::hc_plotOptions(
-          pie = list(
-            dataLabels = list(
-              enabled = TRUE,
-              distance = -10,
-              style = list(
-                fontWeight = "bold",
-                color = "white"
-              )
-            ),
-            startAngle = -90,
-            endAngle = 90,
-            center = c("50%", "95%"),
-            size = "210%"
-          )
-        ) %>% 
-        highcharter::hc_tooltip(
-          useHTML = TRUE,
-          headerFormat = "<small>{series.name}</small><br>",
-          pointFormat = "{point.name}: <b>{point.percentage:.1f}%</b>"
-        ) %>% 
-        highcharter::hc_colors(colors = c("orange", "white")) %>% 
-        highcharter::hc_title(
-          text = "Tipo de serviço*",
-          style = list(color = "white")
-        )
+      } else {
+        NULL
+      }
+        
     })
     
   })

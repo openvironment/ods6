@@ -1,3 +1,29 @@
+hc_custom_exporting <- function(hc, align = "right") {
+  highcharter::hc_exporting(
+    hc,
+    enabled = TRUE,
+    buttons = list(
+      contextButton = list(
+        align = align,
+        menuItems = c(
+          "printChart",
+          "downloadPNG",
+          "downloadJPEG",
+          "downloadPDF",
+          "separator",
+          "downloadCSV",
+          "downloadXLS"
+        )
+      )
+    ),
+    filename = "grafico-isdp"
+  )
+}
+
+# -------------------------------------------------------------------------
+
+
+
 hc_mapa <- function(tab, tab_geojson) {
   
   texto_tooltip <- paste0(
@@ -47,6 +73,11 @@ hc_cores_mapa <- c(
   "#993404"
 )
 
+
+# -------------------------------------------------------------------------
+
+
+
 custom_color_classes <- function(breaks = NULL, 
                                  colors = c("#440154", "#21908C", "#FDE725"),
                                  unit = 1) {
@@ -61,6 +92,11 @@ custom_color_classes <- function(breaks = NULL,
     )
   )
 }
+
+
+# -------------------------------------------------------------------------
+
+
 
 hc_mapa_calor <- function(tab, tab_geojson, variavel, unit = 0.1,
                           label = FALSE) {
@@ -126,27 +162,8 @@ hc_mapa_calor <- function(tab, tab_geojson, variavel, unit = 0.1,
   
 }
 
-hc_custom_exporting <- function(hc, align = "right") {
-  highcharter::hc_exporting(
-    hc,
-    enabled = TRUE,
-    buttons = list(
-      contextButton = list(
-        align = align,
-        menuItems = c(
-          "printChart",
-          "downloadPNG",
-          "downloadJPEG",
-          "downloadPDF",
-          "separator",
-          "downloadCSV",
-          "downloadXLS"
-        )
-      )
-    ),
-    filename = "grafico-isdp"
-  )
-}
+
+# -------------------------------------------------------------------------
 
 hc_serie <- function(dados, nome_formatado, unidade_de_medida, 
                      text_color = "#666666") {
@@ -189,4 +206,47 @@ hc_serie <- function(dados, nome_formatado, unidade_de_medida,
   
 }
 
+
+# -------------------------------------------------------------------------
+
+hc_donut <- function(tab, name, cor, size = "280%") {
+  highcharter::highchart() %>% 
+    highcharter::hc_chart(
+      plotBackgroundColor = "transparent",
+      plotBorderWidth = 0,
+      plotShadow = FALSE
+    ) %>% 
+    highcharter::hc_series(
+      list(
+        data = tab, 
+        name = name,
+        type = "pie",
+        innerSize = "50%"
+      )
+    ) %>% 
+    highcharter::hc_plotOptions(
+      pie = list(
+        dataLabels = list(
+          enabled = TRUE,
+          distance = -30,
+          format = "{point.name}: {point.percentage:.1f}%",
+          style = list(
+            fontWeight = "bold",
+            color = "white",
+            fontSize = "12px"
+          )
+        ),
+        startAngle = -90,
+        endAngle = 90,
+        center = c("50%", "95%"),
+        size = size
+      )
+    ) %>% 
+    highcharter::hc_tooltip(
+      useHTML = TRUE,
+      headerFormat = "<small>{series.name}</small><br>",
+      pointFormat = "{point.name}: <b>{point.percentage:.1f}%</b>"
+    ) %>% 
+    highcharter::hc_colors(colors = cor)
+}
 

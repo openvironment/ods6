@@ -15,38 +15,56 @@ selectInput_munip <- function(id, width = NULL) {
   )
 }
 
-valueDiv <- function(label, icon, ...) {
+valueDiv <- function(label, ..., classe = "", icon = NULL, 
+                     tooltip_class = NULL) {
+  if (!is.null(tooltip_class)) {
+    sobre <- icon(
+      "question-circle", 
+      class = paste("about-icon", tooltip_class, collapse = " ")
+    )
+  } else {
+    sobre <- NULL
+  }
+  
+  if (!is.null(icon)) {
+    icone <- icon(icon)
+  } else {
+    icone <- NULL
+  }
+  
   htmltools::div(
-    class = "valueDiv",
-    htmltools::span(label),
-    icon,
+    class = paste("valueDiv", classe, collapse = " "),
+    htmltools::span(class = "valueDiv-label", label),
+    sobre,
     htmltools::hr(align = "left"),
-    ...
+    htmltools::span(class = "valueDiv-icon", icone),
+    htmltools::div(class = "valueDiv-value", ...)
   )
 }
 
-card_indicadores <- function(id, ...) {
-  bs4Dash::bs4TabCard(
-    id = id,
+card_indicadores <- function(...) {
+  bs4Dash::bs4Card(
     width = 12,
     closable = FALSE,
     collapsible = FALSE,
     headerBorder = FALSE,
-    title = "",
     ...
   )
 }
 
-simple_value_box <- function(titulo, valor, unidade = "", alerta = FALSE) {
-  if (alerta) {
-    alerta_texto <- span(
-      class = "alerta100",
-      "*Indicador maior que 100% indica inconsistências nos dados declarados 
-          pelo município."
-    )
-  } else {
-    alerta_texto <- NULL
-  }
+tabCard_indicadores <- function(id, ...) {
+  bs4Dash::bs4TabCard(
+    id = id,
+    title = "",
+    width = 12,
+    closable = FALSE,
+    collapsible = FALSE,
+    headerBorder = FALSE,
+    ...
+  )
+}
+
+simple_value_box <- function(titulo, valor, unidade = "", alerta = NULL) {
   tagList(
     div(
       class = "meta-ind",
@@ -55,7 +73,8 @@ simple_value_box <- function(titulo, valor, unidade = "", alerta = FALSE) {
       span(class = "meta-ind-unidade", unidade)
     ),
     div(
-      alerta_texto
+      style = "text-align: center;",
+      alerta
     )
   )
   

@@ -14,10 +14,10 @@ mod_munip_incons_ui <- function(id){
       column(
         width = 12,
         h2("Inconsistências de nível 1"),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.")
+        p("Se referem aos indicadores de perdas totais de água e 
+          consumo médio per capita, cujos valores se encontram fora
+          da faixa considerada tolerável com base na prática e ou na 
+          literatura da área.")
       )
     ),
     br(),
@@ -27,15 +27,15 @@ mod_munip_incons_ui <- function(id){
       uiOutput(ns("ind_perdas_totais")),
       uiOutput(ns("ind_consumo"))
     ),
-    br(),
+    hr(),
     fluidRow(
       column(
         width = 12,
         h2("Inconsistências de nível 2"),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.")
+        p("se referem aos indicadores de acesso à água e acesso à
+          coleta de esgoto que apresentam valores superiores ou 
+          inferiores a 20% do registrado no ano imediatamente 
+          anterior.")
       )
     ),
     br(),
@@ -108,10 +108,12 @@ mod_munip_incons_server <- function(id, base_filtrada,
       card_inconsistencia(
         titulo = "3. Percentual de perdas totais entre 10 e 80%", 
         desc_ind = "Índice percentual de perdas de água na rede de distribuição", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
+        desc_validacao = "Considerando a realidade brasileira, é muito 
+        improvável que um município ou localidade apresente um índice 
+        de perdas totais menor do que 10% ou maior do que 80%. 
+        Portanto, valores de perdas totais menores que 10% e 
+        iguais ou maiores que 80% são considerados sob suspeição 
+        e devem ser considerados com reserva.", 
         valor = colocar_unidade_medida(valor, "prop_perdas_rede_dist"),
         status = status
       )
@@ -127,10 +129,15 @@ mod_munip_incons_server <- function(id, base_filtrada,
       card_inconsistencia(
         titulo = "4. Consumo médio per capita entre 100 e 400 litros/habitante/dia", 
         desc_ind = "Consumo médio per capito efetivo", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
+        desc_validacao = "A Organização Mundial da Saúde recomenda que 
+        cada pessoa deve ter no mínimo, 110 litros de água por dia para 
+        atender suas necessidades de consumo e higiene. O consumo per 
+        capita pode sofrer grandes variações dependendo do clima, 
+        aspectos culturais, tamanho da cidade, desperdício em vazamentos, 
+        falta ou deficiência de micromedição, entre outros fatores. 
+        Dificilmente, um município ou localidade apresenta um valor de 
+        consumo médio menor que 100 ou maior que 400 litros/ habitante/dia.
+        Portanto, valores fora desta faixa merecem atenção.", 
         valor = colocar_unidade_medida(valor, "consumo_medio_per_capita"),
         status = status
       )

@@ -14,7 +14,7 @@ app_ui <- function(request) {
     # List the first level UI elements here
     bs4Dash::bs4DashPage(
       sidebar_mini = TRUE,
-      title = "ODS6",
+      title = "Painel ODS6 | SP",
 
       #---
       navbar = bs4Dash::bs4DashNavbar(
@@ -22,7 +22,7 @@ app_ui <- function(request) {
           class = "app-title",
           h1(
             "Painel ODS6",
-            span("do Estado de São Paulo", class = "title-sec-color")
+            span("para o Estado de São Paulo", class = "title-sec-color")
           )
         )
       ),
@@ -47,14 +47,24 @@ app_ui <- function(request) {
               tabName = "munip_resumo"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
-              "Acesso a água",
+              "Acesso à água",
               icon = "water",
               tabName = "munip_abast"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
-              "Acesso a esgoto",
+              "Acesso à coleta de esgoto",
               icon = "toilet",
               tabName = "munip_esgot"
+            ),
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Tratamento de esgoto",
+              icon = "swimmer",
+              tabName = "munip_trat_esgoto"
+            ),
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Uso eficiente da água",
+              icon = "faucet",
+              tabName = "munip_uso_eficiente"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
               "Inconsistências",
@@ -90,6 +100,14 @@ app_ui <- function(request) {
           bs4Dash::bs4TabItem(
             tabName = "munip_esgot",
             mod_munip_esgot_ui("munip_esgot_ui_1")
+          ),
+          bs4Dash::bs4TabItem(
+            tabName = "munip_trat_esgoto",
+            mod_munip_trat_esgoto_ui("munip_trat_esgoto_ui_1")
+          ),
+          bs4Dash::bs4TabItem(
+            tabName = "munip_uso_eficiente",
+            mod_munip_uso_eficiente_ui("munip_uso_eficiente_ui_1")
           ),
           bs4Dash::bs4TabItem(
             tabName = "munip_incons",

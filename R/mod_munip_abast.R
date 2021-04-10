@@ -14,42 +14,25 @@ mod_munip_abast_ui <- function(id){
     fluidRow(
       column(
         width = 12,
-        h2("Indicadores de acesso a água"),
-        br(),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-          ea commodo consequat.")
+        h2("Indicador de acesso à água"),
+        p("O acesso universal à água segura é condição necessária 
+          para a realização de direitos fundamentais como o direito 
+          à vida, à saúde e à educação.")
       )
     ),
     br(),
     fluidRow(
       card_indicadores(
-        id = "tabcard-abast",
-        bs4Dash::bs4TabPanel(
-          tabName = "ODS 6.1", 
-          active = TRUE,
-          mod_aux_ind_od6_ui(
-            ns("aux_ind_od6_ui_1"),
-            desc_onu = "Até 2030, alcançar o acesso universal e 
+        title = "ODS 6.1.1",
+        mod_aux_ind_od6_ui(
+          ns("aux_ind_od6_ui_1"),
+          desc_onu = "Até 2030, alcançar o acesso universal e 
                   equitativo à água potável e segura para todos.",
-            desc_br = "Até 2030, alcançar o acesso universal e 
+          desc_br = "Até 2030, alcançar o acesso universal e 
                   equitativo à água para consumo humano, segura e acessível 
                   para todas e todos.",
-            text_pie_chart = "*Referente à população abastecidada por 
+          text_pie_chart = "*Referente à população abastecidada por 
               serviços de água potável gerenciados de forma segura."
-          )
-        ),
-        bs4Dash::bs4TabPanel(
-          tabName = "Outros indicadores", 
-          active = FALSE,
-          mod_aux_outros_indicadores_ui(
-            ns("aux_outros_indicadores_ui_1"),
-            indicadores = c(
-              "Consumo médio per capita" = "consumo_medio_per_capita",
-              "Perda na distribuição" = "prop_perdas_rede_dist"
-            )
-          )
         )
       )
     )
@@ -73,12 +56,7 @@ mod_munip_abast_server <- function(id, base_filtrada,
       serviços de água potável gerenciados de forma segura",
       tipo_servicos = c("pop_servida_abast_agua", "pop_servida_poco_nasc")
     )
-    
-    mod_aux_outros_indicadores_server(
-      "aux_outros_indicadores_ui_1",
-      base_filtrada,
-      base_filtrada_contemp
-    )
+
   })
 }
 

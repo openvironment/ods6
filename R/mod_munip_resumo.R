@@ -12,28 +12,23 @@ mod_munip_resumo_ui <- function(id) {
   tagList(
     fluidRow(
       column(
-        width = 12,
-        h2("Dados demográficos")
-      )
-    ),
-    br(),
-    fluidRow(
-      column(
-        width = 7,
+        width = 8,
+        h2("Localização do município"),
+        br(),
         plotOutput(ns("plot_mapa"), height = "360px")
       ),
       column(
-        offset = 1,
         width = 4,
-        fluidRow(
-          bs4Dash::bs4ValueBoxOutput(ns("pop_total"), width = 12)
+        h2("População"),
+        br(),
+        valueDiv(
+          label = "População total",
+          classe = "populacao",
+          tooltip_class = "tip-populacao",
+          icon = "users",
+          textOutput(ns("pop_total"))
         ),
-        fluidRow(
-          column(
-            width = 12,
-            highcharter::highchartOutput(ns("prop_populacao"), height = "200px")
-          )
-        )
+        highcharter::highchartOutput(ns("prop_populacao"), height = "200px")
       )
     ),
     br(),
@@ -48,8 +43,9 @@ mod_munip_resumo_ui <- function(id) {
       column(
         width = 3,
         valueDiv(
-          label = "Abastecimento",
-          icon = icon("question-circle", class = "tip-abastecimento"),
+          label = "Acesso à água",
+          icon = "water",
+          tooltip_class = "tip-abastecimento",
           textOutput(ns("prop_abastecimento"))
         )
       ),
@@ -57,27 +53,31 @@ mod_munip_resumo_ui <- function(id) {
         width = 3,
         valueDiv(
           label = "Esgotamento sanitário",
-          icon = icon("question-circle", class = "tip-esgotamento"),
+          icon = "toilet",
+          tooltip_class = "tip-esgotamento",
           textOutput(ns("prop_esgotamento"))
         )
       ),
       column(
         width = 3,
         valueDiv(
-          label = "Perda na distribuição",
-          icon = icon("question-circle", class = "tip-perda"),
-          textOutput(ns("prop_perda"))
+          label = "Esgoto produzido (m³/ano)",
+          icon = "ruler-vertical",
+          tooltip_class = "tip-esgoto-produzido",
+          textOutput(ns("prop_esgoto_produzido"))
         )
       ),
       column(
         width = 3,
         valueDiv(
           label = "Esgoto tratado",
-          icon = icon("question-circle", class = "tip-esgoto-tratado"),
+          icon = "swimmer",
+          tooltip_class = "tip-esgoto-tratado",
           textOutput(ns("prop_esgoto_tratado"))
         )
       )
     ),
+    br(),
     fluidRow(
       column(
         width = 12,
@@ -103,7 +103,10 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
     
     base_filtrada <- reactive({
       base_indicadores %>% 
-        dplyr::filter(munip_nome == municipio_selecionado(), ano == max(ano))
+        dplyr::filter(
+          munip_nome == municipio_selecionado(), 
+          ano == max(ano)
+        )
     })
     
     output$plot_mapa <- renderPlot(bg = "transparent", {
@@ -124,55 +127,33 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
       
     })
     
-    output$pop_rural <- bs4Dash::renderbs4ValueBox({
-      pop <- base_filtrada()$proj_pop_rural
-      pop_perc <- pop / base_filtrada()$proj_pop_total * 100
-      
-      valor <- paste0(
-        formatar_numero(pop, 1), 
-        " (", formatar_porcentagem(pop_perc), ")"
-      )
-      
-      bs4Dash::bs4ValueBox(
-        value = "População rural",
-        subtitle = valor,
-        icon = "tractor",
-        status = "primary",
-        footer = "Projeção SEADE"
-      )
-      
-    })
-    
-    output$pop_urbana <- bs4Dash::renderbs4ValueBox({
-      pop <- base_filtrada()$proj_pop_urbana
-      pop_perc <- pop / base_filtrada()$proj_pop_total * 100
-      
-      valor <- paste0(
-        formatar_numero(pop, 1), 
-        " (", formatar_porcentagem(pop_perc), ")"
-      )
-      
-      bs4Dash::bs4ValueBox(
-        value = "População urbana",
-        subtitle = valor,
-        icon = "city",
-        status = "primary",
-        footer = "Projeção SEADE"
-      )
-      
-    })
-    
-    output$pop_total <- bs4Dash::renderbs4ValueBox({
+    output$pop_total <- renderText({
       pop <- base_filtrada()$proj_pop_total
       
-      bs4Dash::bs4ValueBox(
-        value = "População total",
-        subtitle = formatar_numero(pop, 1),
-        icon = "users",
-        status = "primary",
-        footer = "Projeção SEADE"
-      )
+      formatar_numero(pop, 1)
       
+    })
+    
+    output$prop_populacao <- highcharter::renderHighchart({
+      tab <- base_filtrada() %>% 
+        dplyr::select("proj_pop_urbana", "proj_pop_rural") %>% 
+        tidyr::pivot_longer(
+          cols = dplyr::everything(), 
+          names_to = "name",
+          values_to = "y"
+        ) %>% 
+        dplyr::mutate(name = dplyr::case_when(
+          name == "proj_pop_urbana" ~ "URBANA",
+          TRUE ~ "RURAL"
+        )) %>% 
+        highcharter::list_parse()
+      
+      hc_donut(
+        tab, 
+        "População", 
+        cor = c("orange", "var(--verdeODS6)"),
+        size = "200%"
+      ) 
     })
     
     output$prop_abastecimento <- renderText({
@@ -187,10 +168,9 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
       formatar_porcentagem(prop)
     })
     
-    output$prop_perda <- renderText({
-      prop <- base_filtrada()$prop_perdas_rede_dist
-      
-      formatar_porcentagem(prop)
+    output$prop_esgoto_produzido <- renderText({
+      valor <- base_filtrada()$volume_esgoto_produzido
+      formatar_numero(valor, 1)
     })
     
     output$prop_esgoto_tratado <- renderText({
