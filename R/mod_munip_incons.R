@@ -56,11 +56,11 @@ mod_munip_incons_server <- function(id, base_filtrada,
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
+    
     # Acesso a água
     output$ind_acesso_agua <- renderUI({
       valor <- base_filtrada_contemp() %>% 
-        dplyr::pull(prop_pop_abast_sist_adequados) %>% 
-        formatar_porcentagem()
+        dplyr::pull(prop_pop_abast_sist_adequados)
       
       status <- ifelse(valor > 100, "warning", "success")
       
@@ -72,7 +72,7 @@ mod_munip_incons_server <- function(id, base_filtrada,
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
       ea commodo consequat.", 
-        valor = valor,
+        valor = formatar_porcentagem(valor),
         status = status
       )
     })
@@ -80,8 +80,7 @@ mod_munip_incons_server <- function(id, base_filtrada,
     # Acesso a esgoto
     output$ind_acesso_esgoto <- renderUI({
       valor <- base_filtrada_contemp() %>% 
-        dplyr::pull(prop_pop_servida_coleta_esgoto) %>% 
-        formatar_porcentagem()
+        dplyr::pull(prop_pop_servida_coleta_esgoto)
       
       status <- ifelse(valor > 100, "warning", "success")
       
@@ -93,7 +92,7 @@ mod_munip_incons_server <- function(id, base_filtrada,
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
       ea commodo consequat.", 
-        valor = valor,
+        valor = formatar_porcentagem(valor),
         status = status
       )
     })
@@ -148,17 +147,21 @@ mod_munip_incons_server <- function(id, base_filtrada,
       anos <- base_filtrada() %>% 
         dplyr::select(ano, ind = prop_pop_abast_sist_adequados) %>% 
         dplyr::mutate(var = ind - dplyr::lag(ind)) %>% 
-        dplyr::filter(var > 20) %>% 
+        dplyr::filter(abs(var) > 20) %>% 
         dplyr::pull(ano)
       
-      
-      if (length(anos) >= 1) {
+      if (length(anos) > 1) {
         status <- "warning"
-        valor <- paste("Anos: ", anos, collapse = ", ")
+        valor <- paste("Anos: ", paste(anos, collapse = ", "))
+      } 
+      else if (length(anos) == 1) {
+        status <- "warning"
+        valor <- paste("Ano: ", anos)
       } else {
         status <-  "success"
         valor <- "Nenhuma variação acima de 20%."
       }
+      
       card_inconsistencia(
         titulo = "1. Variações do indicador de acesso a esgoto", 
         desc_ind = "Proporção da população que utiliza 
@@ -177,17 +180,22 @@ mod_munip_incons_server <- function(id, base_filtrada,
       anos <- base_filtrada() %>% 
         dplyr::select(ano, ind = prop_pop_servida_coleta_esgoto) %>% 
         dplyr::mutate(var = ind - dplyr::lag(ind)) %>% 
-        dplyr::filter(var > 20) %>% 
+        dplyr::filter(abs(var) > 20) %>% 
         dplyr::pull(ano)
       
       
-      if (length(anos) >= 1) {
+      if (length(anos) > 1) {
         status <- "warning"
-        valor <- paste("Anos: ", anos, collapse = ", ")
+        valor <- paste("Anos: ", paste(anos, collapse = ", "))
+      } 
+      else if (length(anos) == 1) {
+        status <- "warning"
+        valor <- paste("Ano: ", anos)
       } else {
         status <-  "success"
         valor <- "Nenhuma variação acima de 20%."
       }
+      
       card_inconsistencia(
         titulo = "2. Variações do indicador de acesso a esgoto", 
         desc_ind = "Proporção da população que utiliza serviços de 
@@ -209,13 +217,18 @@ mod_munip_incons_server <- function(id, base_filtrada,
         dplyr::filter(abs(var) > 20) %>% 
         dplyr::pull(ano)
       
-      if (length(anos) >= 1) {
+      if (length(anos) > 1) {
         status <- "warning"
-        valor <- paste("Ano(s): ", anos, collapse = ", ")
+        valor <- paste("Anos: ", paste(anos, collapse = ", "))
+      } 
+      else if (length(anos) == 1) {
+        status <- "warning"
+        valor <- paste("Ano: ", anos)
       } else {
         status <-  "success"
         valor <- "Nenhuma variação acima de 20%."
       }
+      
       card_inconsistencia(
         titulo = "3. Variações do indicador de perdas totais", 
         desc_ind = "Índice percentual de perdas de água na rede de distribuição", 
@@ -236,13 +249,18 @@ mod_munip_incons_server <- function(id, base_filtrada,
         dplyr::filter(abs(var) > 0.2) %>% 
         dplyr::pull(ano)
       
-      if (length(anos) >= 1) {
+      if (length(anos) > 1) {
         status <- "warning"
-        valor <- paste("Ano(s): ", anos, collapse = ", ")
+        valor <- paste("Anos: ", paste(anos, collapse = ", "))
+      } 
+      else if (length(anos) == 1) {
+        status <- "warning"
+        valor <- paste("Ano: ", anos)
       } else {
         status <-  "success"
         valor <- "Nenhuma variação acima de 20%."
       }
+      
       card_inconsistencia(
         titulo = "4. Variações do indicador de consumo média per capita", 
         desc_ind = "Consumo médio per capito efetivo", 

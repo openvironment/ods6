@@ -34,6 +34,15 @@
   padding: 0 3rem;
 }
 
+a {
+  color: var(--azulODS6);
+}
+
+a:hover {
+  color: var(--verdeODS6);
+  text-decoration: none;
+}
+
 h1 {
   font-size: 1.8rem;
 }
@@ -188,6 +197,36 @@ aside {
 .main-footer a {
   color: #262829;
   font-size: 0.9em;
+}
+
+/**********************************
+  Sobre
+**********************************/
+
+.sobre .card-title {
+  font-size: 1.6rem;
+}
+
+.sobre .card-header {
+  background: var(--azulODS6);
+  color: white;
+}
+
+.sobre .nav-pills .nav-link.active {
+  color: var(--azulODS6);
+  background-color: white;
+}
+
+.sobre .nav-pills .nav-link {
+  color: white;
+}
+
+.sobre .nav-pills .nav-link:not(.active):hover {
+  color: #d6d6cc;
+}
+
+.sobre code {
+  color: orange;
 }
 
 /**********************************

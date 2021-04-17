@@ -74,8 +74,22 @@ app_ui <- function(request) {
           ),
           bs4Dash::bs4SidebarMenuItem(
             "Sobre",
-            tabName = "sobre",
-            icon = "info"
+            icon = "info",
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Este projeto",
+              tabName = "sobre_projeto",
+              icon = "database"
+            ),
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Dados",
+              tabName = "sobre_dados",
+              icon = "database"
+            ),
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Metodologia",
+              tabName = "sobre_metodologia",
+              icon = "pen"
+            )
           )
         ),
         img(src = "www/img_agua.jpeg", class = "logo-agua")
@@ -114,8 +128,16 @@ app_ui <- function(request) {
             mod_munip_incons_ui("munip_incons_ui_1")
           ),
           bs4Dash::bs4TabItem(
-            tabName = "sobre",
-            mod_sobre_ui("sobre_ui_1")
+            tabName = "sobre_projeto",
+            mod_sobre_projeto_ui("sobre_projeto_ui_1")
+          ),
+          bs4Dash::bs4TabItem(
+            tabName = "sobre_dados",
+            mod_sobre_dados_ui("sobre_dados_ui_1")
+          ),
+          bs4Dash::bs4TabItem(
+            tabName = "sobre_metodologia",
+            mod_sobre_metodologia_ui("sobre_metodologia_ui_1")
           )
         ),
         # TIPs

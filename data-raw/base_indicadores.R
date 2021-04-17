@@ -22,7 +22,7 @@ base_agregada <- seade %>%
   dplyr::left_join(snis, by = c("munip_cod", "ano")) %>% 
   dplyr::left_join(ibge, by = c("munip_cod")) %>% 
   dplyr::left_join(idh, by = c("munip_cod")) %>% 
-  dplyr::filter(ano <= 2018) %>% 
+  dplyr::filter(ano <= 2019) %>% 
   dplyr::relocate(
     dplyr::starts_with("munip"),
     ano
@@ -30,7 +30,7 @@ base_agregada <- seade %>%
 
 tab_fator_correcao <- base_agregada %>% 
   dplyr::filter(ano == 2010) %>%
-  dplyr::group_by(munip_cod, munip_turistico) %>% 
+  dplyr::group_by(munip_cod) %>% 
   dplyr::summarise(
     dplyr::across(
       c(pop_total_2010, domicilios_total_2010, abast_rede_geral_2010,
@@ -47,10 +47,6 @@ tab_fator_correcao <- base_agregada %>%
     esgot_fator_correcao = 
       esgot_rede_geral_de_esgoto_ou_pluvial_2010 / ind_es008
   ) %>%
-  # dplyr::mutate(dplyr::across(
-  #   dplyr::contains("fator_correcao"),
-  #   ~ifelse(munip_turistico == "sim", .x, 1)
-  # )) %>% 
   dplyr::select(
     munip_cod,
     dplyr::contains("fator_correcao")
@@ -170,10 +166,10 @@ base_indicadores <- base_agregada %>%
     abast_rede_geral_ibge_2010 = abast_rede_geral_2010
   )
 
-readr::write_csv(base_agregada, "data-raw/base_agregada.csv")
-writexl::write_xlsx(base_agregada, "data-raw/base_agregada.xlsx")
+readr::write_csv(base_agregada, "data-raw/csv/base_agregada.csv")
+writexl::write_xlsx(base_agregada, "data-raw/xlsx/base_agregada.xlsx")
 
-readr::write_csv(base_indicadores, "data-raw/base_indicadores.csv")
-writexl::write_xlsx(base_indicadores, "data-raw/base_indicadores.xlsx")
+readr::write_csv(base_indicadores, "data-raw/csv/base_indicadores.csv")
+writexl::write_xlsx(base_indicadores, "data-raw/xlsx/base_indicadores.xlsx")
 
 usethis::use_data(base_indicadores, overwrite = TRUE)
