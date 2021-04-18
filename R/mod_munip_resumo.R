@@ -97,7 +97,7 @@ mod_munip_resumo_ui <- function(id) {
 #' munip_resumo Server Functions
 #'
 #' @noRd 
-mod_munip_resumo_server <- function(id, municipio_selecionado) {
+mod_munip_resumo_server <- function(id, municipio_selecionado, tab_incons) {
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
@@ -177,6 +177,39 @@ mod_munip_resumo_server <- function(id, municipio_selecionado) {
       prop <- base_filtrada()$prop_esgoto_tratado
       
       formatar_porcentagem(prop)
+    })
+    
+    output$tab_incons <- reactable::renderReactable({
+      tab_incons() %>% 
+        dplyr::select(
+          titulo,
+          status
+        ) %>% 
+        dplyr::mutate(
+          titulo = stringr::str_remove(titulo, "[0-9]\\.")
+        ) %>% 
+        reactable::reactable(
+          sortable = FALSE,
+          pagination = FALSE,
+          columns = list(
+            titulo = reactable::colDef(
+              name = "Validação",
+              align = "left"
+            ),
+            status = reactable::colDef(
+              name = "",
+              align = "center",
+              width = 100,
+              cell = function(value) {
+                if (value == "success") {
+                  icon("check-circle", class = "incons-check")
+                } else {
+                  icon("exclamation-circle", class = "incons-alert")
+                }
+              }
+            )
+          )
+        )
     })
  
   })

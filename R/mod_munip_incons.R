@@ -51,225 +51,120 @@ mod_munip_incons_ui <- function(id){
 #' munip_incons Server Functions
 #'
 #' @noRd 
-mod_munip_incons_server <- function(id, base_filtrada,
-                                    base_filtrada_contemp){
+mod_munip_incons_server <- function(id, base_filtrada, tab_incons) {
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
     
     # Acesso a água
     output$ind_acesso_agua <- renderUI({
-      valor <- base_filtrada_contemp() %>% 
-        dplyr::pull(prop_pop_abast_sist_adequados)
-      
-      status <- ifelse(valor > 100, "warning", "success")
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 1)
       
       card_inconsistencia(
-        titulo = "1. Indicador de acesso a água menor que 100%", 
-        desc_ind = "Proporção da população que utiliza 
-      serviços de água potável gerenciados de forma segura.", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
-        valor = formatar_porcentagem(valor),
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Acesso a esgoto
     output$ind_acesso_esgoto <- renderUI({
-      valor <- base_filtrada_contemp() %>% 
-        dplyr::pull(prop_pop_servida_coleta_esgoto)
-      
-      status <- ifelse(valor > 100, "warning", "success")
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 2)
       
       card_inconsistencia(
-        titulo = "2. Indicador de acesso a esgoto menor que 100%", 
-        desc_ind = "Proporção da população que utiliza serviços de 
-        saneamento gerenciados de forma segura", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
-        valor = formatar_porcentagem(valor),
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Perdas totais
     output$ind_perdas_totais <- renderUI({
-      valor <- base_filtrada_contemp() %>% 
-        dplyr::pull(prop_perdas_rede_dist)
-        
-      status <- ifelse(valor < 10 | valor > 80, "warning", "success")
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 3)
       
       card_inconsistencia(
-        titulo = "3. Percentual de perdas totais entre 10 e 80%", 
-        desc_ind = "Índice percentual de perdas de água na rede de distribuição", 
-        desc_validacao = "Considerando a realidade brasileira, é muito 
-        improvável que um município ou localidade apresente um índice 
-        de perdas totais menor do que 10% ou maior do que 80%. 
-        Portanto, valores de perdas totais menores que 10% e 
-        iguais ou maiores que 80% são considerados sob suspeição 
-        e devem ser considerados com reserva.", 
-        valor = colocar_unidade_medida(valor, "prop_perdas_rede_dist"),
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Consumo per capita
     output$ind_consumo <- renderUI({
-      valor <- base_filtrada_contemp() %>% 
-        dplyr::pull(consumo_medio_per_capita)
-      
-      status <- ifelse(valor < 100 | valor > 400, "warning", "success")
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 4)
       
       card_inconsistencia(
-        titulo = "4. Consumo médio per capita entre 100 e 400 litros/habitante/dia", 
-        desc_ind = "Consumo médio per capito efetivo", 
-        desc_validacao = "A Organização Mundial da Saúde recomenda que 
-        cada pessoa deve ter no mínimo, 110 litros de água por dia para 
-        atender suas necessidades de consumo e higiene. O consumo per 
-        capita pode sofrer grandes variações dependendo do clima, 
-        aspectos culturais, tamanho da cidade, desperdício em vazamentos, 
-        falta ou deficiência de micromedição, entre outros fatores. 
-        Dificilmente, um município ou localidade apresenta um valor de 
-        consumo médio menor que 100 ou maior que 400 litros/ habitante/dia.
-        Portanto, valores fora desta faixa merecem atenção.", 
-        valor = colocar_unidade_medida(valor, "consumo_medio_per_capita"),
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Variação no indicador de acesso a água
     output$ind_var_acesso_agua <- renderUI({
-      anos <- base_filtrada() %>% 
-        dplyr::select(ano, ind = prop_pop_abast_sist_adequados) %>% 
-        dplyr::mutate(var = ind - dplyr::lag(ind)) %>% 
-        dplyr::filter(abs(var) > 20) %>% 
-        dplyr::pull(ano)
-      
-      if (length(anos) > 1) {
-        status <- "warning"
-        valor <- paste("Anos: ", paste(anos, collapse = ", "))
-      } 
-      else if (length(anos) == 1) {
-        status <- "warning"
-        valor <- paste("Ano: ", anos)
-      } else {
-        status <-  "success"
-        valor <- "Nenhuma variação acima de 20%."
-      }
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 5)
       
       card_inconsistencia(
-        titulo = "1. Variações do indicador de acesso a esgoto", 
-        desc_ind = "Proporção da população que utiliza 
-      serviços de água potável gerenciados de forma segura.", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
-        valor = valor,
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Variação no indicador de acesso a esgoto
     output$ind_var_acesso_esgoto <- renderUI({
-      anos <- base_filtrada() %>% 
-        dplyr::select(ano, ind = prop_pop_servida_coleta_esgoto) %>% 
-        dplyr::mutate(var = ind - dplyr::lag(ind)) %>% 
-        dplyr::filter(abs(var) > 20) %>% 
-        dplyr::pull(ano)
-      
-      
-      if (length(anos) > 1) {
-        status <- "warning"
-        valor <- paste("Anos: ", paste(anos, collapse = ", "))
-      } 
-      else if (length(anos) == 1) {
-        status <- "warning"
-        valor <- paste("Ano: ", anos)
-      } else {
-        status <-  "success"
-        valor <- "Nenhuma variação acima de 20%."
-      }
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 6)
       
       card_inconsistencia(
-        titulo = "2. Variações do indicador de acesso a esgoto", 
-        desc_ind = "Proporção da população que utiliza serviços de 
-        saneamento gerenciados de forma segura", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
-        valor = valor,
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Variação no indicador de perdas totais
     output$ind_var_perdas_totais <- renderUI({
-      anos <- base_filtrada() %>% 
-        dplyr::select(ano, ind = prop_perdas_rede_dist) %>% 
-        dplyr::mutate(var = ind - dplyr::lag(ind)) %>% 
-        dplyr::filter(abs(var) > 20) %>% 
-        dplyr::pull(ano)
-      
-      if (length(anos) > 1) {
-        status <- "warning"
-        valor <- paste("Anos: ", paste(anos, collapse = ", "))
-      } 
-      else if (length(anos) == 1) {
-        status <- "warning"
-        valor <- paste("Ano: ", anos)
-      } else {
-        status <-  "success"
-        valor <- "Nenhuma variação acima de 20%."
-      }
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 7)
       
       card_inconsistencia(
-        titulo = "3. Variações do indicador de perdas totais", 
-        desc_ind = "Índice percentual de perdas de água na rede de distribuição", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
-        valor = valor,
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     
     # Variação no indicador de consumo per capita
     output$ind_var_consumo <- renderUI({
-      anos <- base_filtrada() %>% 
-        dplyr::select(ano, ind = consumo_medio_per_capita) %>% 
-        dplyr::mutate(var = (ind - dplyr::lag(ind)) / dplyr::lag(ind)) %>% 
-        dplyr::filter(abs(var) > 0.2) %>% 
-        dplyr::pull(ano)
-      
-      if (length(anos) > 1) {
-        status <- "warning"
-        valor <- paste("Anos: ", paste(anos, collapse = ", "))
-      } 
-      else if (length(anos) == 1) {
-        status <- "warning"
-        valor <- paste("Ano: ", anos)
-      } else {
-        status <-  "success"
-        valor <- "Nenhuma variação acima de 20%."
-      }
+      tab <- tab_incons() %>% 
+        dplyr::filter(id == 8)
       
       card_inconsistencia(
-        titulo = "4. Variações do indicador de consumo média per capita", 
-        desc_ind = "Consumo médio per capito efetivo", 
-        desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
-        valor = valor,
-        status = status
+        titulo = tab$titulo, 
+        desc_ind = tab$desc_ind, 
+        desc_validacao = tab$desc_validacao, 
+        valor = tab$valor,
+        status = tab$status
       )
     })
     

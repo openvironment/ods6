@@ -79,6 +79,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 2em;
 }
 
+.incons-check {
+  color: var(--green);
+}
+
+.incons-alert {
+  color: var(--yellow);
+}
+
 /**********************************
   Navbar
 **********************************/
@@ -193,6 +201,10 @@ aside {
 /**********************************
   Footer
 **********************************/
+
+.main-footer {
+  margin-top: 40px;
+}
 
 .main-footer a {
   color: #262829;

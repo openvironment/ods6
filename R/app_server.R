@@ -28,7 +28,15 @@ app_server <- function(input, output, session) {
       dplyr::filter(ano == max(ano))
   })
   
-  mod_munip_resumo_server("munip_resumo_ui_1", municipio_selecionado)
+  tab_incons <- reactive({
+    verificar_inconsistencias(base_filtrada_contemp, base_filtrada)
+  })
+  
+  mod_munip_resumo_server(
+    "munip_resumo_ui_1",
+    municipio_selecionado,
+    tab_incons
+  )
   
   mod_munip_abast_server(
     "munip_abast_ui_1",
@@ -51,7 +59,7 @@ app_server <- function(input, output, session) {
   mod_munip_incons_server(
     "munip_incons_ui_1",
     base_filtrada,
-    base_filtrada_contemp
+    tab_incons
   )
   
   mod_munip_uso_eficiente_server(
