@@ -7,33 +7,19 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList 
-mod_aux_ind_od6_ui <- function(id, desc_onu, desc_br, text_pie_chart) {
+mod_aux_ind_od6_ui <- function(id, desc_ind, text_pie_chart) {
   ns <- NS(id)
   div(
     class = "munip-ind-ods6",
     fluidRow(
       column(
-        width = 6,
-        div(
-          class = "meta-desc",
-          tags$p(
-            span(
-              class = "meta-origem",
-              "Nações Unidas"
-            ),
-            desc_onu
-          ),
-          tags$p(
-            span(
-              class = "meta-origem",
-              "Brasil"
-            ),
-            desc_br
-          ),
+        width = 5,
+        tags$p(
+          desc_ind
         )
       ),
       column(
-        width = 6,
+        width = 7,
         class = "d-flex  align-items-center indicadorODS",
         uiOutput(ns("ind_valor"))
       )

@@ -10,14 +10,35 @@
 mod_munip_uso_eficiente_ui <- function(id){
   ns <- NS(id)
   div(
-    class = "card-indicadores",
+    class = "card-indicadores tabcard-indicadores",
     fluidRow(
       column(
         width = 12,
-        h2("Indicadores de uso eficiente da água"),
-        p("Segundo Organização Mundial da Saúde cada pessoa deve ter no 
-          mínimo 110 litros de água por dia para atender as suas 
-          necessidades de consumo e higiene.")
+        h2("Meta 6.4 - Uso eficiente da água"),
+        div(
+          class = "meta-desc",
+          tags$p(
+            span(
+              class = "meta-origem",
+              "Nações Unidas"
+            ),
+            "Até 2030, aumentar substancialmente a eficiência do 
+          uso da água em todos os setores e assegurar retiradas 
+          sustentáveis e o abastecimento de água doce para enfrentar 
+          a escassez de água, e reduzir substancialmente o número 
+          de pessoas que sofrem com a escassez de água."
+          ),
+          tags$p(
+            span(
+              class = "meta-origem",
+              "Brasil"
+            ),
+            "Até 2030, aumentar substancialmente a eficiência do 
+          uso da água em todos os setores, assegurando retiradas sustentáveis 
+          e o abastecimento de água doce para reduzir substancialmente o número 
+          de pessoas que sofrem com a escassez."
+          )
+        )
       )
     ),
     br(),
@@ -28,15 +49,9 @@ mod_munip_uso_eficiente_ui <- function(id){
           tabName = "Consumo médio per capita",
           mod_aux_ind_od6_ui(
             ns("aux_ind_od6_ui_1"),
-            desc_onu = "Até 2030, aumentar substancialmente a eficiência do 
-          uso da água em todos os setores e assegurar retiradas 
-          sustentáveis e o abastecimento de água doce para enfrentar 
-          a escassez de água, e reduzir substancialmente o número 
-          de pessoas que sofrem com a escassez de água.",
-            desc_br = "Até 2030, aumentar substancialmente a eficiência do 
-          uso da água em todos os setores, assegurando retiradas sustentáveis 
-          e o abastecimento de água doce para reduzir substancialmente o número 
-          de pessoas que sofrem com a escassez.",
+            desc_ind = "Segundo Organização Mundial da Saúde cada pessoa deve ter no 
+          mínimo 110 litros de água por dia para atender as suas 
+          necessidades de consumo e higiene.",
             text_pie_chart = ""
           )
         ),
@@ -44,15 +59,9 @@ mod_munip_uso_eficiente_ui <- function(id){
           tabName = "Perda na distribuição",
           mod_aux_ind_od6_ui(
             ns("aux_ind_od6_ui_2"),
-            desc_onu = "Até 2030, aumentar substancialmente a eficiência do 
-          uso da água em todos os setores e assegurar retiradas 
-          sustentáveis e o abastecimento de água doce para enfrentar 
-          a escassez de água, e reduzir substancialmente o número 
-          de pessoas que sofrem com a escassez de água.",
-            desc_br = "Até 2030, aumentar substancialmente a eficiência do 
-          uso da água em todos os setores, assegurando retiradas sustentáveis 
-          e o abastecimento de água doce para reduzir substancialmente o número 
-          de pessoas que sofrem com a escassez.",
+            desc_ind = "Segundo Organização Mundial da Saúde cada pessoa deve ter no 
+          mínimo 110 litros de água por dia para atender as suas 
+          necessidades de consumo e higiene.",
             text_pie_chart = ""
           )
         )

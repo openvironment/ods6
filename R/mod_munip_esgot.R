@@ -14,23 +14,38 @@ mod_munip_esgot_ui <- function(id){
     fluidRow(
       column(
         width = 12,
-        h2("Indicador de acesso à coleta de esgoto"),
-        p(" O acesso à coleta de esgoto é condição primordial para a
-          promoção da saúde e redução da vulnerabilidade social.")
+        h2("Meta 6.2 - Acesso à coleta de esgoto"),
+        div(
+          class = "meta-desc",
+          tags$p(
+            span(
+              class = "meta-origem",
+              "Nações Unidas"
+            ),
+            "Até 2030, alcançar o acesso a saneamento e 
+              higiene adequados e equitativos para todos, e acabar 
+              com a defecação a céu aberto, com especial atenção 
+              para as necessidades das mulheres e meninas e daqueles 
+              em situação de vulnerabilidade."
+          ),
+          tags$p(
+            span(
+              class = "meta-origem",
+              "Brasil"
+            ),
+            "Meta mantida sem alteração."
+          )
+        )
       )
     ),
     br(),
     fluidRow(
       card_indicadores(
-        title = "ODS 6.2.1", 
+        title = "Coleta de esgoto", 
         mod_aux_ind_od6_ui(
           ns("aux_ind_od6_ui_1"),
-          desc_onu = "Até 2030, alcançar o acesso a saneamento e 
-              higiene adequados e equitativos para todos, e acabar 
-              com a defecação a céu aberto, com especial atenção 
-              para as necessidades das mulheres e meninas e daqueles 
-              em situação de vulnerabilidade.",
-          desc_br = "Meta mantida sem alteração.",
+          desc_ind = "O acesso à coleta de esgoto é condição primordial para a
+          promoção da saúde e redução da vulnerabilidade social.",
           text_pie_chart = "*Referente à população servida por 
               serviços de saneamento gerenciados de forma segura."
         )
@@ -54,7 +69,10 @@ mod_munip_esgot_server <- function(id, base_filtrada,
       indicador = "prop_pop_servida_coleta_esgoto",
       nome_indicador_ods = "Proporção da população que utiliza 
       serviços de saneamento gerenciados de forma segura",
-      tipo_servicos = c("prop_pop_servida_rede_coleta", "prop_pop_fossa_septica")
+      tipo_servicos = c("prop_pop_servida_rede_coleta", "prop_pop_fossa_septica"),
+      indicador_alerta = "*Valores acima de 100% sugerem deficiência no
+      método proposto pelo SNIS para avaliação desse indicador ou 
+      inconsistência nos dados encaminhados pelo prestador de serviço."
     )
     
   })

@@ -15,7 +15,7 @@ mod_sobre_dados_ui <- function(id){
       column(
         width = 12,
         p("Abaixo descrevemos as fontes e o processo de importação dos dados 
-        utilizados neste projeto. Em seguida, também descrevemos o 
+        utilizados neste projeto. Em seguida, descrevemos o 
         processo de construção das bases que alimentam este painel."
         )
       ),

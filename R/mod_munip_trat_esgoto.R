@@ -14,30 +14,45 @@ mod_munip_trat_esgoto_ui <- function(id){
     fluidRow(
       column(
         width = 12,
-        h2("Indicador de tratamento de esgoto doméstico"),
-        p("O tratamento de esgoto doméstico é condição necessária para a 
-          promoção da saúde e a melhoria da qualidade dos recursos 
-          hídricos, em especial aqueles destinados ao abastecimento 
-          público.")
+        h2("Meta 6.3 - Tratamento de esgoto doméstico"),
+        div(
+          class = "meta-desc",
+          tags$p(
+            span(
+              class = "meta-origem",
+              "Nações Unidas"
+            ),
+            "Até 2030, melhorar a qualidade da água, reduzindo a 
+          poluição, eliminando despejo e minimizando a liberação de produtos 
+          químicos e materiais perigosos, reduzindo à metade a proporção de 
+          águas residuais não tratadas e aumentando substancialmente a 
+          reciclagem e reutilização segura globalmente."
+          ),
+          tags$p(
+            span(
+              class = "meta-origem",
+              "Brasil"
+            ),
+            "Até 2030, melhorar a qualidade da água nos corpos 
+          hídricos, reduzindo a poluição, eliminando despejos e minimizando
+          o lançamento de materiais e substâncias perigosas, reduzindo 
+          pela metade a proporção do lançamento de efluentes não tratados
+          e aumentando substancialmente o reciclo e reuso seguro 
+          localmente."
+          )
+        )
       )
     ),
     br(),
     fluidRow(
       card_indicadores(
-        title = "ODS 6.3.1",
+        title = "Esgoto tratado",
         mod_aux_ind_od6_ui(
           ns("aux_ind_od6_ui_1"),
-          desc_onu = "Até 2030, melhorar a qualidade da água, reduzindo a 
-          poluição, eliminando despejo e minimizando a liberação de produtos 
-          químicos e materiais perigosos, reduzindo à metade a proporção de 
-          águas residuais não tratadas e aumentando substancialmente a 
-          reciclagem e reutilização segura globalmente.",
-          desc_br = "Até 2030, melhorar a qualidade da água nos corpos 
-          hídricos, reduzindo a poluição, eliminando despejos e minimizando
-          o lançamento de materiais e substâncias perigosas, reduzindo 
-          pela metade a proporção do lançamento de efluentes não tratados
-          e aumentando substancialmente o reciclo e reuso seguro 
-          localmente.",
+          desc_ind = "O tratamento de esgoto doméstico é condição necessária para a 
+          promoção da saúde e a melhoria da qualidade dos recursos 
+          hídricos, em especial aqueles destinados ao abastecimento 
+          público.",
           text_pie_chart = ""
         )
       )

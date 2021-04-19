@@ -18,6 +18,7 @@
 
 :root {
   --azulODS6: #2aaee2;
+  --azulClaroODS6: #f2fafd;
   --primary: #2aaee2;
   --blue: #2aaee2;
   --cinzaODS6: #969586;
@@ -92,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 **********************************/
 
 .navbar-light {
-    background-color: #2aaee20f;
+  background-color: var(--azulClaroODS6);
 }
 
 .app-title {
@@ -214,6 +215,10 @@ aside {
 /**********************************
   Sobre
 **********************************/
+
+.sobre {
+  font-size: 1.1em;
+}
 
 .sobre .card-title {
   font-size: 1.6rem;
@@ -367,34 +372,8 @@ aside {
   font-size: 1.9rem;
 }
 
-.card-indicadores .nav-pills .nav-link.active {
-  color: #fff;
-  font-family: 'Oswald', sans-serif;
-  background-color: var(--azulODS6);
-  border: 0;
-  border-radius: 0;
-  font-size: 2em;
-}
-
-.card-indicadores .card-default .nav-item:first-child .nav-link.active {
-  border: 0;
-}
-
-.card-indicadores .nav-pills {
-  background-color: var(--azulODS6);
-}
-
-.card-indicadores .nav-pills .nav-link {
-  color: #fff;
-}
-
-.card-indicadores .nav-pills .nav-link:not(.active) {
-  padding-top: 22px;
-}
-
-.card-indicadores .nav-pills .nav-link:not(.active):hover {
-  text-decoration: underline;
-  color: white;
+.card-indicadores .card-body {
+  padding-top: 35px;
 }
 
 .card-indicadores .card-header {
@@ -405,9 +384,49 @@ aside {
   padding: 0 !important;
 }
 
-.munip-ind-ods6 .meta-origem {
+.card-indicadores .meta-origem {
   display: block;
   font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.card-indicadores h2 {
+  margin-bottom: 25px;
+}
+
+.tabcard-indicadores .card-header {
+  background-color: var(--azulClaroODS6);
+  border: 1px solid var(--azulODS6);
+  border-bottom: 1px solid white;
+}
+
+.tabcard-indicadores .nav-item {
+  font-family: 'Oswald', sans-serif;
+  background-color: var(--azulClaroODS6) !important;
+}
+
+.tabcard-indicadores .nav-pills .nav-link.active {
+  color: #fff;
+  background-color: var(--azulODS6);
+  border: 0;
+  border-radius: 0;
+  font-size: 1.9rem;
+}
+
+.tabcard-indicadores .nav-pills .nav-link {
+  color: var(--azulODS6);
+}
+
+.tabcard-indicadores .card-default .nav-item:first-child .nav-link.active {
+  border: 0;
+}
+
+.tabcard-indicadores .nav-pills .nav-link:not(.active) {
+  padding-top: 22px;
+}
+
+.tabcard-indicadores .nav-pills .nav-link:not(.active):hover {
+  text-decoration: underline;
 }
 
 .indicadorODS .shiny-html-output {
@@ -420,7 +439,8 @@ aside {
   border: 1px solid white;
   box-shadow: 0px 0px 4px 2px white;
   padding: 10px;
-  width: 80%;
+  width: 100%;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
@@ -428,10 +448,6 @@ aside {
 .meta-ind h4 {
   font-weight: bold;
   font-size: 1.1em;
-  text-align: center;
-}
-
-.meta-ind {
   text-align: center;
 }
 
@@ -443,6 +459,17 @@ aside {
 .meta-ind-unidade {
   font-size: 1.2em;
 }
+
+.ods-ind-alerta {
+  margin-top: 5px;
+  text-align: left;
+  font-size: 0.8em;
+}
+
+.explicacao-hc-pie {
+  font-size: 0.8em;
+}
+
 
 .munip-ind-ods6 hr {
   width: 90%;

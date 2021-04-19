@@ -73,7 +73,7 @@ simple_value_box <- function(titulo, valor, unidade = "", alerta = NULL) {
       span(class = "meta-ind-unidade", unidade)
     ),
     div(
-      style = "text-align: center;",
+      class = "ods-ind-alerta",
       alerta
     )
   )
