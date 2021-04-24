@@ -88,6 +88,10 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--yellow);
 }
 
+.sobre-metodologia h5 {
+  margin-top: 50px;
+}
+
 /**********************************
   Navbar
 **********************************/
@@ -337,6 +341,17 @@ aside {
   background-color: var(--verdeODS6);
 }
 
+.tag-pop {
+  padding: 5px;
+  border-radius: 10px;
+  width: 160px;
+  display: block;
+  margin: auto;
+  margin-top: 40px;
+  text-align: center;
+  background-color: orange;
+}
+
 .seletor-munip hr {
   width: 80%;
   border-top: 2px solid rgba(0,0,0,.1);
@@ -352,6 +367,13 @@ aside {
   }
   
   .tag-turistico {
+    padding: 3px;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 0.8em;
+  }
+  
+  .tag-pop {
     padding: 3px;
     border-radius: 10px;
     width: 120px;

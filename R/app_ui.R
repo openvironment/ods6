@@ -179,6 +179,7 @@ golem_add_external_resources <- function(){
   )
 
   tags$head(
+    tippy::use_tippy(),
     favicon(ext = "png"),
     bundle_resources(
       path = app_sys('app/www'),

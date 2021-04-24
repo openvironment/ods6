@@ -10,7 +10,14 @@
 mod_sobre_projeto_ui <- function(id){
   ns <- NS(id)
   tagList(
- 
+    fluidRow(
+      column(
+        width = 12,
+        includeMarkdown(
+          system.file("sobre_projeto.md", package = "ods6")
+        )
+      )
+    )
   )
 }
     

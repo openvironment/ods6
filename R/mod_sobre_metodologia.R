@@ -9,8 +9,42 @@
 #' @importFrom shiny NS tagList 
 mod_sobre_metodologia_ui <- function(id){
   ns <- NS(id)
-  tagList(
- 
+  div(
+    class = "sobre sobre-metodologia",
+    fluidRow(
+      column(
+        width = 12,
+        p("Abaixo descrevemos a metolodia de cálculo de todos os 
+          indicadores utilizados neste painel."
+        )
+      ),
+      bs4Dash::bs4TabCard(
+        id = "metodologia",
+        title = "",
+        width = 12,
+        side = "left",
+        closable = FALSE,
+        collapsible = FALSE,
+        bs4Dash::tabPanel(
+          tabName = "Indicadores",
+          includeMarkdown(
+            system.file("sobre_met_indicadores.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "Fator de correção",
+          includeMarkdown(
+            system.file("sobre_met_fator.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "Municípios turísticos",
+          includeMarkdown(
+            system.file("sobre_met_munip_turistico.md", package = "ods6")
+          )
+        )
+      )
+    )
   )
 }
     
@@ -24,8 +58,3 @@ mod_sobre_metodologia_server <- function(id){
   })
 }
     
-## To be copied in the UI
-# mod_sobre_metodologia_ui("sobre_metodologia_ui_1")
-    
-## To be copied in the server
-# mod_sobre_metodologia_server("sobre_metodologia_ui_1")
