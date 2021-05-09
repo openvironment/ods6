@@ -33,7 +33,9 @@ Imports:
     highcharter,
     tidyr,
     tippy,
-    sf
+    sf,
+    ggrepel,
+    glue
 Remotes: 
     Thinkr-open/golem
 RoxygenNote: 7.1.1
