@@ -36,12 +36,6 @@ mod_sobre_metodologia_ui <- function(id){
           includeMarkdown(
             system.file("sobre_met_fator.md", package = "ods6")
           )
-        ),
-        bs4Dash::tabPanel(
-          tabName = "Municípios turísticos",
-          includeMarkdown(
-            system.file("sobre_met_munip_turistico.md", package = "ods6")
-          )
         )
       )
     )

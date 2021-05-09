@@ -31,7 +31,8 @@ mod_select_munip_ui <- function(id){
         tippy::with_tippy(
           uiOutput(ns("tag_pop")),
           "O município possui mais de 100 mil habitantes."
-        )
+        ),
+        br(class = ".d-block .d-sm-none")
       )
     )
   )

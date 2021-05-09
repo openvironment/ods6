@@ -9,7 +9,8 @@
 #' @importFrom shiny NS tagList 
 mod_munip_incons_ui <- function(id){
   ns <- NS(id)
-  tagList(
+  div(
+    class = "inconsistencias",
     fluidRow(
       column(
         width = 12,

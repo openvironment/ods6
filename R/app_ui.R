@@ -7,9 +7,11 @@
 #'
 #' @noRd
 app_ui <- function(request) {
+  ano <- max(base_indicadores$ano)
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    shiny::withMathJax(),
     shinyjs::useShinyjs(),
     # List the first level UI elements here
     bs4Dash::bs4DashPage(
@@ -48,7 +50,7 @@ app_ui <- function(request) {
             ),
             bs4Dash::bs4SidebarMenuSubItem(
               "Acesso à água",
-              icon = "water",
+              icon = "hand-holding-water",
               tabName = "munip_abast"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
@@ -58,7 +60,7 @@ app_ui <- function(request) {
             ),
             bs4Dash::bs4SidebarMenuSubItem(
               "Tratamento de esgoto",
-              icon = "swimmer",
+              icon = "water",
               tabName = "munip_trat_esgoto"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
@@ -78,7 +80,7 @@ app_ui <- function(request) {
             bs4Dash::bs4SidebarMenuSubItem(
               "Este projeto",
               tabName = "sobre_projeto",
-              icon = "database"
+              icon = "info-circle"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
               "Dados",
@@ -143,12 +145,32 @@ app_ui <- function(request) {
         # TIPs
         tippy::tippy_class(
           "tip-abastecimento", 
-          content = "Proporção da população que utiliza serviços de água potável gerenciados de forma segura. Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
+          content = "Proporção da população que utiliza serviços de água 
+          potável gerenciados de forma segura.
+          Valores acima de 100% sugerem deficiência no método proposto
+          pelo SNIS para avaliação desse indicador ou inconsistência nos 
+          dados encaminhados pelo prestador de serviço."
         ),
         tippy::tippy_class(
           "tip-esgotamento", 
-          content = "Proporção da população que utiliza serviços de saneamento gerenciados de forma segura. Valores maiores que 100% sugerem inconsistências nos dados declarados pelo município."
-        )
+          content = "Proporção da população que utiliza serviços de 
+          saneamento gerenciados de forma segura. Valores acima de 100% 
+          sugerem deficiência no método proposto
+          pelo SNIS para avaliação desse indicador ou inconsistência nos 
+          dados encaminhados pelo prestador de serviço."
+        ),
+        tippy::tippy_class(
+          "tip-esgoto-tratado", 
+          content = "Proporção do fluxo de águas residuais doméstica e industrial tratadas de forma segura."
+        ),
+        tippy::tippy_class(
+          "tip-populacao",
+          content = glue::glue(
+            "População do município em {ano}. Em anos censitários,
+            estimativa do censo. Em anos não censitários, projeção do SEADE."
+          )
+        ),
+        
       ),
       
       #---
@@ -183,7 +205,7 @@ golem_add_external_resources <- function(){
     favicon(ext = "png"),
     bundle_resources(
       path = app_sys('app/www'),
-      app_title = 'ODS6'
+      app_title = 'Painel ODS6 | SP'
     ),
     tags$link(
       rel = "preconnect",

@@ -35,6 +35,7 @@
   padding: 0 3rem;
 }
 
+
 a {
   color: var(--azulODS6);
 }
@@ -120,12 +121,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-collapse .main-sidebar {
   margin-left: var(--marginSidebar);
-}
-
-@media (min-width: 576px) {
-  .content-wrapper, .main-footer, .main-header {
-    margin-left: var(--tamanhoSidebar);
-  }
 }
 
 aside {
@@ -224,6 +219,14 @@ aside {
   font-size: 1.1em;
 }
 
+.sobre h2 {
+  margin-bottom: 20px;
+}
+
+.sobre h2:not(:first-of-type) {
+  margin-top: 30px;
+}
+
 .sobre .card-title {
   font-size: 1.6rem;
 }
@@ -248,6 +251,17 @@ aside {
 
 .sobre code {
   color: orange;
+}
+
+.redes-sociais {
+  color: var(--azulODS6);
+  font-size: 1.2em;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.redes-sociais i {
+  margin-left: 10px;
 }
 
 /**********************************
@@ -357,29 +371,6 @@ aside {
   border-top: 2px solid rgba(0,0,0,.1);
 }
 
-@media (max-width: 575px) {
-  .seletor-munip .selectize-input {
-    font-size: 1.5em;
-  }
-  
-  .seletor-munip .item {
-    height: 40px;
-  }
-  
-  .tag-turistico {
-    padding: 3px;
-    border-radius: 10px;
-    width: 120px;
-    font-size: 0.8em;
-  }
-  
-  .tag-pop {
-    padding: 3px;
-    border-radius: 10px;
-    width: 120px;
-    font-size: 0.8em;
-  }
-}
 
 /**********************************
   Indicadores ODS6
@@ -402,10 +393,6 @@ aside {
   border-bottom: 1px solid white;
 }
 
-.card-indicadores .p-2 {
-  padding: 0 !important;
-}
-
 .card-indicadores .meta-origem {
   display: block;
   font-weight: bold;
@@ -416,39 +403,28 @@ aside {
   margin-bottom: 25px;
 }
 
-.tabcard-indicadores .card-header {
-  background-color: var(--azulClaroODS6);
-  border: 1px solid var(--azulODS6);
-  border-bottom: 1px solid white;
-}
-
 .tabcard-indicadores .nav-item {
   font-family: 'Oswald', sans-serif;
-  background-color: var(--azulClaroODS6) !important;
 }
 
 .tabcard-indicadores .nav-pills .nav-link.active {
-  color: #fff;
-  background-color: var(--azulODS6);
-  border: 0;
-  border-radius: 0;
-  font-size: 1.9rem;
+  color: var(--azulODS6);
+  background-color: white;
+  font-size: 1.6rem;
 }
 
 .tabcard-indicadores .nav-pills .nav-link {
-  color: var(--azulODS6);
-}
-
-.tabcard-indicadores .card-default .nav-item:first-child .nav-link.active {
-  border: 0;
+  color: white;
 }
 
 .tabcard-indicadores .nav-pills .nav-link:not(.active) {
-  padding-top: 22px;
+  font-size: 1.3em;
+  padding: 15px;
 }
 
 .tabcard-indicadores .nav-pills .nav-link:not(.active):hover {
   text-decoration: underline;
+  color: white;
 }
 
 .indicadorODS .shiny-html-output {
@@ -506,15 +482,78 @@ aside {
   margin-top: 20px;
 }
 
-
 .munip-abast-outros-ind .hc-outros-ind {
   margin-top: 20px;
 }
 
+/**********************************
+  Inconsistências
+**********************************/
+
+.inconsistencias .card {
+  margin-bottom: 42px!important;
+}
 
 
+/**********************************
+  Responsividade
+**********************************/
 
+@media (max-width: 575px) {
+  .app-title h1 {
+    font-size: 1.2em;
+  }
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  #munip_resumo_ui_1-plot_mapa {
+    margin-top: -100px;
+  }
+  .titulo-pop {
+    margin-top: -80px;
+  }
+  .content-wrapper>.content {
+    padding: 0 1rem;
+  }
+  .valueDiv {
+    text-align: center;
+  }
+  .valueDiv-icon {
+    font-size: 1.5em;
+  }
+  .valueDiv-value {
+    font-size: 1.2em;
+    margin-left: 5px;
+  }
+  .valueDiv hr {
+    width: 100%;
+  }
+  .seletor-munip .selectize-input {
+    font-size: 1.5em;
+  }
+  .seletor-munip .item {
+    height: 40px;
+  }
+  .tag-turistico {
+    padding: 3px;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 0.8em;
+  }
+  .tag-pop {
+    padding: 3px;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 0.8em;
+  }
+}
 
+@media (min-width: 576px) {
+  .content-wrapper, .main-footer, .main-header {
+    margin-left: var(--tamanhoSidebar);
+  }
+}
 
 
 

@@ -19,7 +19,7 @@ mod_munip_resumo_ui <- function(id) {
       ),
       column(
         width = 4,
-        h2("População"),
+        h2("População", class = "titulo-pop"),
         br(),
         valueDiv(
           label = "População total",
@@ -35,43 +35,34 @@ mod_munip_resumo_ui <- function(id) {
     fluidRow(
       column(
         width = 12,
-        h2("Indicadores de acesso a água e esgoto")
+        h2("Indicadores de acesso à água e à coleta de esgoto")
       )
     ),
     br(),
     fluidRow(
       column(
-        width = 3,
+        width = 4,
         valueDiv(
           label = "Acesso à água",
-          icon = "water",
+          icon = "hand-holding-water",
           tooltip_class = "tip-abastecimento",
           textOutput(ns("prop_abastecimento"))
         )
       ),
       column(
-        width = 3,
+        width = 4,
         valueDiv(
-          label = "Esgotamento sanitário",
+          label = "Coleta de esgoto",
           icon = "toilet",
           tooltip_class = "tip-esgotamento",
           textOutput(ns("prop_esgotamento"))
         )
       ),
       column(
-        width = 3,
-        valueDiv(
-          label = "Esgoto produzido (m³/ano)",
-          icon = "ruler-vertical",
-          tooltip_class = "tip-esgoto-produzido",
-          textOutput(ns("prop_esgoto_produzido"))
-        )
-      ),
-      column(
-        width = 3,
+        width = 4,
         valueDiv(
           label = "Esgoto tratado",
-          icon = "swimmer",
+          icon = "water",
           tooltip_class = "tip-esgoto-tratado",
           textOutput(ns("prop_esgoto_tratado"))
         )
@@ -81,7 +72,7 @@ mod_munip_resumo_ui <- function(id) {
     fluidRow(
       column(
         width = 12,
-        h2("Inconsistências nos dados"),
+        h2("Inconsistências"),
       )
     ),
     br(),
@@ -116,13 +107,29 @@ mod_munip_resumo_server <- function(id, municipio_selecionado, tab_incons) {
       sf::st_crs(tab_geo) <- 4674
       sf::st_crs(tab_geo$geom) <- 4674
       
+      tab_label <- tab_geo %>% 
+        dplyr::filter(munip_nome == municipio_selecionado())
+      
       tab_geo %>% 
         dplyr::mutate(
           value = ifelse(munip_nome == municipio_selecionado(), "1", "0")
         ) %>% 
-        ggplot2::ggplot(ggplot2::aes(fill = value)) +
-        ggplot2::geom_sf(show.legend = FALSE, size = 0.2, color = "#616161") +
-        ggplot2::scale_fill_manual(values = c("#f5e9e7", "#2aaee2")) +
+        ggplot2::ggplot() +
+        ggplot2::geom_sf(
+          ggplot2::aes(fill = value),
+          show.legend = FALSE, 
+          size = 0.2,
+          color = "#616161"
+        ) +
+        ggplot2::scale_fill_manual(values = c("#f5e9e7", "orange")) +
+        ggrepel::geom_label_repel(
+          data = tab_label,
+          ggplot2::aes(geometry = geom, label = munip_nome),
+          stat = "sf_coordinates",
+          size = 5,
+          nudge_x = 0.5, 
+          nudge_y = 0.5
+        ) +
         tema_gg_blank()
       
     })
@@ -166,11 +173,6 @@ mod_munip_resumo_server <- function(id, municipio_selecionado, tab_incons) {
       prop <- base_filtrada()$prop_pop_servida_coleta_esgoto
       
       formatar_porcentagem(prop)
-    })
-    
-    output$prop_esgoto_produzido <- renderText({
-      valor <- base_filtrada()$volume_esgoto_produzido
-      formatar_numero(valor, 1)
     })
     
     output$prop_esgoto_tratado <- renderText({
