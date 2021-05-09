@@ -100,7 +100,7 @@ card_inconsistencia <- function(titulo, desc_ind, desc_validacao, valor,
         class = "d-flex align-items-center",
         width = 4,
         div(
-          class = "text-center w-100 fs-1_5em",
+          class = "valor-incons text-center w-100 fs-1_5em",
           valor
         )
       )

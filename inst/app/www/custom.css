@@ -93,6 +93,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 50px;
 }
 
+.MathJax_Display {
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 15px 0;
+}
+
 /**********************************
   Navbar
 **********************************/
@@ -504,14 +510,14 @@ aside {
     font-size: 1.2em;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     text-align: center;
   }
   #munip_resumo_ui_1-plot_mapa {
-    margin-top: -100px;
+    margin-top: -60px;
   }
   .titulo-pop {
-    margin-top: -80px;
+    margin-top: -20px;
   }
   .content-wrapper>.content {
     padding: 0 1rem;
@@ -519,15 +525,20 @@ aside {
   .valueDiv {
     text-align: center;
   }
+  .valueDiv-label {
+    font-size: 1.2em;
+  }
   .valueDiv-icon {
-    font-size: 1.5em;
+    font-size: 1.8em;
   }
   .valueDiv-value {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin-left: 5px;
   }
   .valueDiv hr {
-    width: 100%;
+    width: 60%;
+    margin: auto;
+    display: block;
   }
   .seletor-munip .selectize-input {
     font-size: 1.5em;
@@ -546,6 +557,12 @@ aside {
     border-radius: 10px;
     width: 120px;
     font-size: 0.8em;
+  }
+  .valor-incons {
+    margin-top: 30px;
+  }
+  .sobre p {
+    text-align: justify;
   }
 }
 
