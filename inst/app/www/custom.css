@@ -25,6 +25,8 @@
   --verdeODS6: #4ca1469c;
   --tamanhoSidebar: 270px;
   --marginSidebar: -270px;
+  --success: #4ca1469c;
+  --green: #4ca1469c;
 }
 
 /**********************************
@@ -270,6 +272,12 @@ aside {
   margin-left: 10px;
 }
 
+.widget-user .card-footer {
+  height: 210px;
+  text-align: justify;
+  font-size: 0.9em;
+}
+
 /**********************************
   valueDiv
 **********************************/
@@ -498,6 +506,10 @@ aside {
 
 .inconsistencias .card {
   margin-bottom: 42px!important;
+}
+
+.card-success:not(.card-outline) > .card-header {
+  background-color: var(--success);
 }
 
 

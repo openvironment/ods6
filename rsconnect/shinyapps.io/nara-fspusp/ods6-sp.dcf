@@ -1,0 +1,13 @@
+name: ods6-sp
+title: ods6-sp
+username:
+account: nara-fspusp
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4104803
+bundleId: 4578031
+url: https://nara-fspusp.shinyapps.io/ods6-sp/
+when: 1620592854.51891
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rprofile|data-raw|docs

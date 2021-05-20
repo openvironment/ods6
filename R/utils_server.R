@@ -105,13 +105,12 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 1,
-    titulo = "1. Indicador de acesso a água menor que 100%",
+    titulo = "1. Indicador de acesso à água maior que 100%",
     desc_ind = "Proporção da população que utiliza 
       serviços de água potável gerenciados de forma segura.", 
-    desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.",
+    desc_validacao = "Valores acima de 100% sugerem deficiência no método 
+    proposto pelo SNIS para avaliação desse indicador ou inconsistência 
+    nos dados encaminhados pela prestadora de serviço.",
     valor = formatar_porcentagem(valor),
     status = status
   )
@@ -124,13 +123,12 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 2,
-    titulo = "2. Indicador de acesso a esgoto menor que 100%", 
+    titulo = "2. Indicador de acesso à coleta de esgoto maior que 100%", 
     desc_ind = "Proporção da população que utiliza serviços de 
         saneamento gerenciados de forma segura", 
-    desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
+    desc_validacao = "Valores acima de 100% sugerem deficiência no método 
+    proposto pelo SNIS para avaliação desse indicador ou inconsistência 
+    nos dados encaminhados pela prestadora de serviço.", 
     valor = formatar_porcentagem(valor),
     status = status
   )
@@ -144,13 +142,13 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 3,
-    titulo = "3. Percentual de perdas totais entre 10 e 80%", 
+    titulo = "3. Percentual de perdas totais fora da faixa de 10 a 80%", 
     desc_ind = "Índice percentual de perdas de água na rede de distribuição", 
     desc_validacao = "Considerando a realidade brasileira, é muito 
         improvável que um município ou localidade apresente um índice 
         de perdas totais menor do que 10% ou maior do que 80%. 
         Portanto, valores de perdas totais menores que 10% e 
-        iguais ou maiores que 80% são considerados sob suspeição 
+        maiores que 80% são considerados sob suspeição 
         e devem ser considerados com reserva.", 
     valor = colocar_unidade_medida(valor, "prop_perdas_rede_dist"),
     status = status
@@ -165,7 +163,8 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 4,
-    titulo = "4. Consumo médio per capita entre 100 e 400 litros/habitante/dia", 
+    titulo = "4. Consumo médio per capita fora da faixa de 100 a
+    400 litros/habitante/dia", 
     desc_ind = "Consumo médio per capito efetivo", 
     desc_validacao = "A Organização Mundial da Saúde recomenda que 
         cada pessoa deve ter no mínimo, 110 litros de água por dia para 
@@ -193,13 +192,12 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 5,
-    titulo = "1. Nenhuma variação acima de 20% no indicador de acesso à água", 
+    titulo = "1. Variação anual acima de 20% no indicador de acesso à água", 
     desc_ind = "Proporção da população que utiliza 
       serviços de água potável gerenciados de forma segura.", 
-    desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.",  
+    desc_validacao = "Variações entre dois anos consecutivos acima de 20% 
+    devem ser consideradas suspeitas pois é pouco provável que a cobertura 
+    da rede seja incrementada neste valor no período de 1 ano.",  
     valor = l$valor,
     status = l$status
   )
@@ -216,13 +214,13 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 6,
-    titulo = "2. Nenhuma variação acima de 20%  indicador de acesso à coleta de esgoto", 
+    titulo = "2. Variação anual acima de 20%  indicador de acesso à 
+    coleta de esgoto", 
     desc_ind = "Proporção da população que utiliza serviços de 
         saneamento gerenciados de forma segura", 
-    desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
+    desc_validacao = "Variações entre dois anos consecutivos acima de 20% 
+    devem ser consideradas suspeitas pois é pouco provável que 
+    esta variação seja real.", 
     valor = l$valor,
     status = l$status
   )
@@ -239,12 +237,11 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 7,
-    titulo = "3. Nenhuma variação acima de 20% no indicador de perdas totais", 
+    titulo = "3. Variação anual acima de 20% no indicador de perdas totais", 
     desc_ind = "Índice percentual de perdas de água na rede de distribuição", 
-    desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
+    desc_validacao = "Variações entre dois anos consecutivos acima de 20% devem
+    ser consideradas suspeitas pois é pouco provável que esta variação
+    seja real.", 
     valor = l$valor,
     status = l$status
   )
@@ -261,12 +258,12 @@ verificar_inconsistencias <- function(base_filtrada_contemp,
   tab_incons <- tibble::add_row(
     tab_incons,
     id = 8,
-    titulo = "4. Nenhuma variação acima de 20% no indicador de consumo média per capita", 
+    titulo = "4. Variação anual acima de 20% no indicador de 
+    consumo média per capita", 
     desc_ind = "Consumo médio per capito efetivo", 
-    desc_validacao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-      ea commodo consequat.", 
+    desc_validacao = "Variações entre dois anos consecutivos acima de 
+    20% devem ser consideradas suspeitas pois é pouco provável que 
+    esta variação seja real, excetuando em situações críticas.", 
     valor = l$valor,
     status = l$status
   )

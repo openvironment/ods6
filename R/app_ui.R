@@ -178,7 +178,7 @@ app_ui <- function(request) {
         copyrights = a(
           href = "https://www.curso-r.com/",
           target = "_blank", 
-          HTML("Desenvolvido pela equipe da Curso-R")
+          HTML("Desenvolvido em Shiny pela equipe da Curso-R")
         ),
         right_text = "2021 | FSP-USP"
       )
@@ -201,7 +201,6 @@ golem_add_external_resources <- function(){
   )
 
   tags$head(
-    tippy::use_tippy(),
     favicon(ext = "png"),
     bundle_resources(
       path = app_sys('app/www'),

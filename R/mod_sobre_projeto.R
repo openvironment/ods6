@@ -22,25 +22,40 @@ mod_sobre_projeto_ui <- function(id){
     br(),
     fluidRow(
       bs4Dash::bs4UserCard(
-        src = "www/user.jpeg",
+        src = "www/adelaide.jpg",
         title = "Adelaide Cassia Nardocci",
-        subtitle = "título",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-        tempor incididunt ut labore et dolore magna aliqua."
+        subtitle = "Professora e pesquisadora",
+        div(
+          "Doutora em Saúde Pública, Professora Associada do Departamento de 
+          Saúde Ambiental da Faculdade de Saúde Pública da USP."
+        )
       ),
       bs4Dash::bs4UserCard(
-        src = "www/user.jpeg",
+        src = "www/americo.jpg",
         title = "Americo Sampaio",
-        subtitle = "título",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-        tempor incididunt ut labore et dolore magna aliqua."
+        subtitle = "Engenheiro civil e sanitarista",
+        "Engenheiro Civil e Sanitarista, Mestre em hidráulica e saneamento pela 
+        escola de engenharia de São Carlos. Foi Superintendente de Pesquisa, 
+        Desenvolvimento Tecnológico e Inovação da Sabesp e Coordenador de
+        Saneamento da Secretaria de Saneamento e Recursos Hídricos do Estado 
+        de São Paulo."
       ),
       bs4Dash::bs4UserCard(
-        src = "www/user.jpeg",
+        src = "www/maria.png",
         title = "Maria Tereza Pepe Razzolini",
-        subtitle = "título",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-        tempor incididunt ut labore et dolore magna aliqua."
+        subtitle = "Professora e pesquisadora",
+        div(
+          "Doutora em Saúde Pública, Professora Associada do Departamento 
+          de Saúde Ambiental da Faculdade de Saúde Pública da USP.",
+          div(
+            class = "redes-sociais",
+            tags$a(
+              href = "http://lattes.cnpq.br/8467049839493963",
+              target = "_blank",
+              icon("map-marker")
+            ),
+          )
+        )
       ),
       bs4Dash::bs4UserCard(
         src = "www/william_amorim.jpg",

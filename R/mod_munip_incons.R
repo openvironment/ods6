@@ -18,7 +18,11 @@ mod_munip_incons_ui <- function(id){
         p("Se referem aos indicadores de perdas totais de água e 
           consumo médio per capita, cujos valores se encontram fora
           da faixa considerada tolerável com base na prática e ou na 
-          literatura da área.")
+          literatura da área. Caixas", 
+          span(style = "color: orange; font-weight: bold;", " laranjas "),
+          "representam presença da inconsistência, enquanto caixas",
+          span(style = "color: var(--verdeODS6); font-weight: bold;", " verdes "),
+          "representam ausência.")
       )
     ),
     br(),
@@ -36,7 +40,11 @@ mod_munip_incons_ui <- function(id){
         p("se referem aos indicadores de acesso à água e acesso à
           coleta de esgoto que apresentam valores superiores ou 
           inferiores a 20% do registrado no ano imediatamente 
-          anterior.")
+          anterior. Caixas",
+          span(style = "color: orange; font-weight: bold;", " laranjas "),
+          "representam presença da inconsistência, enquanto caixas",
+          span(style = "color: var(--verdeODS6); font-weight: bold;", " verdes "),
+          "representam ausência.")
       )
     ),
     br(),
