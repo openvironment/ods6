@@ -1,6 +1,0 @@
-book_filename: "temp"
-delete_merged_file: true
-output_dir: "./"
-language:
-  ui:
-    chapter_name: ""

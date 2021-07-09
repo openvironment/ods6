@@ -131,7 +131,7 @@ base_indicadores <- base_agregada %>%
     # Consumo médio per capita efetivo 
     consumo_medio_per_capita =
       volume_agua_efe_consumido / 
-      (proj_pop_total * prop_pop_servida_rede_coleta / 100) *
+      (proj_pop_total * prop_pop_servida_rede_publica_agua / 100) *
       (1e6 / 365),
     
     # Índice Percentual de Perdas de água na Rede de Distribuição

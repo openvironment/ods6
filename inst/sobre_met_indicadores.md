@@ -288,7 +288,7 @@ Consumo diário médio efetivo de água por habitante atendido. Corresponde à r
 - **Cálculo**:
 
 $$
-CMPE = \frac{VAEC}{(pPRE/100)\times PT} \times \frac{1.000.000}{365}
+CMPE = \frac{VAEC}{(pPAR/100)\times PT} \times \frac{1.000.000}{365}
 $$
 
 - **Unidade**: Litros/habitante/dia
