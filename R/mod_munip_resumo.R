@@ -44,7 +44,7 @@ mod_munip_resumo_ui <- function(id) {
         width = 4,
         valueDiv(
           label = "Acesso à água",
-          icon = "hand-holding-water",
+          icon = "shower",
           tooltip_class = "tip-abastecimento",
           textOutput(ns("prop_abastecimento"))
         )
@@ -62,7 +62,7 @@ mod_munip_resumo_ui <- function(id) {
         width = 4,
         valueDiv(
           label = "Esgoto tratado",
-          icon = "water",
+          icon = "hand-holding-water",
           tooltip_class = "tip-esgoto-tratado",
           textOutput(ns("prop_esgoto_tratado"))
         )

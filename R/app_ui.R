@@ -33,11 +33,6 @@ app_ui <- function(request) {
       sidebar = bs4Dash::bs4DashSidebar(
         skin = "light",
         bs4Dash::bs4SidebarMenu(
-          # bs4SidebarMenuItem(
-          #   "Informações gerais",
-          #   tabName = "informacoes_gerais",
-          #   icon = "bullseye"
-          # ),
           id = "tabs",
           bs4Dash::bs4SidebarMenuItem(
             "Análise por município",
@@ -50,7 +45,7 @@ app_ui <- function(request) {
             ),
             bs4Dash::bs4SidebarMenuSubItem(
               "Acesso à água",
-              icon = "hand-holding-water",
+              icon = "shower",
               tabName = "munip_abast"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
@@ -60,7 +55,7 @@ app_ui <- function(request) {
             ),
             bs4Dash::bs4SidebarMenuSubItem(
               "Tratamento de esgoto",
-              icon = "water",
+              icon = "hand-holding-water",
               tabName = "munip_trat_esgoto"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
@@ -72,6 +67,15 @@ app_ui <- function(request) {
               "Inconsistências",
               icon = "exclamation-circle",
               tabName = "munip_incons"
+            )
+          ),
+          bs4Dash::bs4SidebarMenuItem(
+            "Análise por UGRHI",
+            icon = "water",
+            bs4Dash::bs4SidebarMenuSubItem(
+              "Qualidade das águas",
+              icon = "flask",
+              tabName = "ugrhi_qualidade"
             )
           ),
           bs4Dash::bs4SidebarMenuItem(
@@ -128,6 +132,10 @@ app_ui <- function(request) {
           bs4Dash::bs4TabItem(
             tabName = "munip_incons",
             mod_munip_incons_ui("munip_incons_ui_1")
+          ),
+          bs4Dash::bs4TabItem(
+            tabName = "ugrhi_qualidade",
+            mod_ugrhi_qualidade_ui("ugrhi_qualidade_ui_1")
           ),
           bs4Dash::bs4TabItem(
             tabName = "sobre_projeto",

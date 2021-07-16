@@ -68,6 +68,8 @@ app_server <- function(input, output, session) {
     base_filtrada_contemp
   )
   
+  mod_ugrhi_qualidade_server("ugrhi_qualidade_ui_1")
+  
   mod_sobre_projeto_server("sobre_projeto_ui_1")
   mod_sobre_dados_server("sobre_dados_ui_1")
   mod_sobre_metodologia_server("sobre_metodologia_ui_1")
