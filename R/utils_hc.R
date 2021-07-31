@@ -250,3 +250,96 @@ hc_donut <- function(tab, name, cor, size = "280%") {
     highcharter::hc_colors(colors = cor)
 }
 
+
+# -------------------------------------------------------------------------
+
+cores_gauge <- function() {
+  c("#9e32e6", "#eb5294", "#f0f564", "#3fba6c", "#7697e8")
+}
+
+hc_gauge <- function(tab, indicador, faixas, cores) {
+  highcharter::highchart() |> 
+    highcharter::hc_series(
+      list(
+        name = toupper(indicador),
+        data = list(
+          list(
+            y = tab[[indicador]],
+            dataLabels = list(
+              padding = 17
+            )
+          )
+        )
+      )
+    ) |>
+    highcharter::hc_chart(
+      type = "gauge"
+    ) |> 
+    highcharter::hc_pane(
+      startAngle = -150,
+      endAngle = 150,
+      background = list(
+        backgroundColor = "transparent",
+        borderWidth = 0
+      )
+    ) |> 
+    highcharter::hc_yAxis(
+      min = min(faixas),
+      max = max(faixas),
+      minorTicks = FALSE,
+      tickPositions = faixas,
+      tickLength = 20,
+      title = list(
+        text = tab[[paste0(indicador, "_label")]],
+        style = list(
+          `font-size` = "25px",
+          color = "black"
+        )
+      ),
+      labels = list(
+        distance = -35,
+        style = list(fontSize = "12px")
+      ),
+      tickColor = "black",
+      plotBands = list(
+        list(
+          from = faixas[1],
+          to = faixas[2],
+          color = cores[1],
+          thickness = 20
+        ),
+        list(
+          from = faixas[2],
+          to = faixas[3],
+          color = cores[2],
+          thickness = 20
+        ),
+        list(
+          from = faixas[3],
+          to = faixas[4],
+          color = cores[3],
+          thickness = 20
+        ),
+        list(
+          from = faixas[4],
+          to = faixas[5],
+          color = cores[4],
+          thickness = 20
+        ),
+        list(
+          from = faixas[5],
+          to = faixas[6],
+          color = cores[5],
+          thickness = 20
+        )
+      )
+    ) |> 
+    highcharter::hc_plotOptions(
+      series =  list(
+        dataLabels = list(
+          style = list(fontSize = "20px")
+        )
+      )
+    )
+  
+}

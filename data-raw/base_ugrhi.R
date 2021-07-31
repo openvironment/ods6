@@ -27,7 +27,33 @@ base_ugrhi <- tab_iap |>
   dplyr::ungroup() |> 
   dplyr::left_join(tab_nomes, by = "ugrhi") |> 
   dplyr::relocate(nome, .after = ugrhi) |> 
-  dplyr::arrange(as.numeric(ugrhi), ano)
+  dplyr::arrange(as.numeric(ugrhi), ano) |> 
+  dplyr::mutate(
+    iqa_label = dplyr::case_when(
+      iqa <= 19 ~ "Péssimo",
+      iqa <= 36 ~ "Ruim",
+      iqa <= 51 ~ "Regular",
+      iqa <= 79 ~ "Bom",
+      TRUE ~ "Ótimo"
+    ),
+    iap_label = dplyr::case_when(
+      iap <= 19 ~ "Péssimo",
+      iap <= 36 ~ "Ruim",
+      iap <= 51 ~ "Regular",
+      iap <= 79 ~ "Bom",
+      TRUE ~ "Ótimo"
+    ),
+    iva_label = dplyr::case_when(
+      iva <= 2.5 ~ "Ótimo",
+      iva <= 3.3 ~ "Bom",
+      iva <= 4.5 ~ "Regular",
+      iva <= 6.7 ~ "Ruim",
+      TRUE ~ "Péssimo"
+    ),
+    iqa = round(iqa),
+    iap = round(iap),
+    iva = round(iva, 1)
+  )
 
 usethis::use_data(base_ugrhi, overwrite = TRUE)
 

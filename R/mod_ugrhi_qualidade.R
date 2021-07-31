@@ -68,7 +68,7 @@ mod_ugrhi_qualidade_ui <- function(id){
         ),
         column(
           width = 6,
-          highcharter::highchartOutput(ns("hc_rosca_iqa"))
+          highcharter::highchartOutput(ns("hc_gauge_iqa"))
         )
       ),
       hr(class = "hr-50"),
@@ -85,7 +85,7 @@ mod_ugrhi_qualidade_ui <- function(id){
         ),
         column(
           width = 6,
-          highcharter::highchartOutput(ns("hc_rosca_ipa"))
+          highcharter::highchartOutput(ns("hc_gauge_iap"))
         )
       ),
       hr(class = "hr-50"),
@@ -103,7 +103,7 @@ mod_ugrhi_qualidade_ui <- function(id){
         ),
         column(
           width = 6,
-          highcharter::highchartOutput(ns("hc_rosca_iva"))
+          highcharter::highchartOutput(ns("hc_gauge_iva"))
         )
       )
     )
@@ -125,6 +125,24 @@ mod_ugrhi_qualidade_server <- function(id) {
     base_filtrada_contemp <- reactive({
       base_filtrada() %>% 
         dplyr::filter(ano == max(ano))
+    })
+    
+    output$hc_gauge_iqa <- highcharter::renderHighchart({
+      base_filtrada() |> 
+        dplyr::filter(ano == max(ano)) |> 
+        hc_gauge("iqa", c(0, 19, 36, 51, 79, 100), cores_gauge())
+    })
+    
+    output$hc_gauge_iap <- highcharter::renderHighchart({
+      base_filtrada() |> 
+        dplyr::filter(ano == max(ano)) |> 
+        hc_gauge("iap", c(0, 19, 36, 51, 79, 100), cores_gauge())
+    })
+    
+    output$hc_gauge_iva <- highcharter::renderHighchart({
+      base_filtrada() |> 
+        dplyr::filter(ano == max(ano)) |> 
+        hc_gauge("iva", c(0, 2.5, 3.3, 4.5, 6.7, 10), rev(cores_gauge()))
     })
     
   })
