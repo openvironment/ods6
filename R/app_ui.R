@@ -73,6 +73,11 @@ app_ui <- function(request) {
             "Análise por UGRHI",
             icon = "water",
             bs4Dash::bs4SidebarMenuSubItem(
+              "Disponibilidade hídrica",
+              icon = "flask",
+              tabName = "ugrhi_disp"
+            ),
+            bs4Dash::bs4SidebarMenuSubItem(
               "Qualidade das águas",
               icon = "flask",
               tabName = "ugrhi_qualidade"
@@ -104,11 +109,8 @@ app_ui <- function(request) {
       #---
       body = bs4Dash::bs4DashBody(
         mod_select_munip_ui("select_munip_ui_1"),
+        mod_select_ugrhi_ui("select_ugrhi_ui_1"),
         bs4Dash::bs4TabItems(
-          # bs4TabItem(
-          #   tabName = "informacoes_gerais",
-          #   mod_informacoes_gerais_ui("informacoes_gerais_ui_1")
-          # ),
           bs4Dash::bs4TabItem(
             tabName = "munip_resumo",
             mod_munip_resumo_ui("munip_resumo_ui_1")
@@ -132,6 +134,10 @@ app_ui <- function(request) {
           bs4Dash::bs4TabItem(
             tabName = "munip_incons",
             mod_munip_incons_ui("munip_incons_ui_1")
+          ),
+          bs4Dash::bs4TabItem(
+            tabName = "ugrhi_disp",
+            mod_ugrhi_disp_ui("ugrhi_disp_ui_1")
           ),
           bs4Dash::bs4TabItem(
             tabName = "ugrhi_qualidade",

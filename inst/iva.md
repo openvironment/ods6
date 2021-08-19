@@ -1,0 +1,3 @@
+## Índices de Qualidade das Águas para Proteção da Vida Aquática  e de Comunidades Aquáticas — IVA
+
+Tem o objetivo de avaliar a qualidade das águas para fins  de proteção da fauna e flora em geral. O IVA leva em consideração  a presença e concentração de contaminantes químicos tóxicos,  seu efeito sobre os organismos aquáticos (toxicidade) e duas  das variáveis consideradas essenciais para a biota (pH e  oxigênio dissolvido).

@@ -96,8 +96,6 @@ custom_color_classes <- function(breaks = NULL,
 
 # -------------------------------------------------------------------------
 
-
-
 hc_mapa_calor <- function(tab, tab_geojson, variavel, unit = 0.1,
                           label = FALSE) {
   
@@ -166,7 +164,8 @@ hc_mapa_calor <- function(tab, tab_geojson, variavel, unit = 0.1,
 # -------------------------------------------------------------------------
 
 hc_serie <- function(dados, nome_formatado, unidade_de_medida, 
-                     text_color = "#666666") {
+                     text_color = "#666666", type = "line", xlab = "",
+                     ylab = "") {
   
   perc <- ifelse(
     stringr::str_detect(formatar_indicador(1, unidade_de_medida), "%"),
@@ -186,17 +185,17 @@ hc_serie <- function(dados, nome_formatado, unidade_de_medida,
       list(
         data = dados, 
         name = nome_formatado, 
-        type = "line"
+        type = type
       )
     ) %>% 
     highcharter::hc_xAxis(
       type = "date",
       labels = list(style = list(color = text_color)),
-      title = list(style = list(color = text_color))
+      title = list(text = xlab, style = list(color = text_color))
     ) %>%
     highcharter::hc_yAxis(
       labels = list(style = list(color = text_color)),
-      title = list(style = list(color = text_color))
+      title = list(text = ylab, style = list(color = text_color))
     ) %>%
     highcharter::hc_tooltip(
       pointFormat = texto_tooltip,

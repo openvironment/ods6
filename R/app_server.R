@@ -10,11 +10,21 @@ app_server <- function(input, output, session) {
     id = "select_munip_ui_1"
   )
   
-  observe({
+  observe(priority = 1,{
     shinyjs::toggle(
       id = "div_select_munip", 
-      anim = TRUE,
+      anim = FALSE,
       condition = stringr::str_detect(input$tabs, "munip_")
+    )
+  })
+  
+  ugrhi <- mod_select_ugrhi_server("select_ugrhi_ui_1")
+  
+  observe(priority = 2, {
+    shinyjs::toggle(
+      id = "div_select_ugrhi", 
+      anim = FALSE,
+      condition = stringr::str_detect(input$tabs, "ugrhi_")
     )
   })
   
@@ -68,7 +78,9 @@ app_server <- function(input, output, session) {
     base_filtrada_contemp
   )
   
-  mod_ugrhi_qualidade_server("ugrhi_qualidade_ui_1")
+  mod_ugrhi_disp_server("ugrhi_disp_ui_1", ugrhi)
+  mod_ugrhi_qualidade_server("ugrhi_qualidade_ui_1", ugrhi)
+  
   
   mod_sobre_projeto_server("sobre_projeto_ui_1")
   mod_sobre_dados_server("sobre_dados_ui_1")
