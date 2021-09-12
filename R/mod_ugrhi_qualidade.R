@@ -97,12 +97,23 @@ mod_ugrhi_qualidade_server <- function(id, ugrhi) {
     })
     
     output$hc_gauge_iqa <- highcharter::renderHighchart({
-      base_filtrada() |> 
-        dplyr::filter(ano == max(ano)) |> 
+      
+      validate(need(
+        nrow(tidyr::drop_na(base_filtrada_contemp(), iqa)) > 0,
+        "Não há dados disponíveis."
+      ))
+      
+      base_filtrada_contemp() |> 
         hc_gauge("iqa", c(0, 19, 36, 51, 79, 100), cores_gauge())
     })
     
     output$hc_serie_iqa <- highcharter::renderHighchart({
+      
+      validate(need(
+        nrow(tidyr::drop_na(base_filtrada(), iqa)) > 0,
+        "Não há dados disponíveis."
+      ))
+      
       base_filtrada() |>
         dplyr::mutate(ano = as.numeric(ano)) |> 
         dplyr::select(ano, value = iqa) |> 
@@ -119,12 +130,23 @@ mod_ugrhi_qualidade_server <- function(id, ugrhi) {
     })
     
     output$hc_gauge_iap <- highcharter::renderHighchart({
-      base_filtrada() |> 
-        dplyr::filter(ano == max(ano)) |> 
+      
+      validate(need(
+        nrow(tidyr::drop_na(base_filtrada_contemp(), iap)) > 0,
+        "Não há dados disponíveis."
+      ))
+      
+      base_filtrada_contemp() |> 
         hc_gauge("iap", c(0, 19, 36, 51, 79, 100), cores_gauge())
     })
     
     output$hc_serie_iap <- highcharter::renderHighchart({
+      
+      validate(need(
+        nrow(tidyr::drop_na(base_filtrada(), iap)) > 0,
+        "Não há dados disponíveis."
+      ))
+      
       base_filtrada() |>
         dplyr::mutate(ano = as.numeric(ano)) |> 
         dplyr::select(ano, value = iap) |> 
@@ -141,12 +163,23 @@ mod_ugrhi_qualidade_server <- function(id, ugrhi) {
     })
     
     output$hc_gauge_iva <- highcharter::renderHighchart({
-      base_filtrada() |> 
-        dplyr::filter(ano == max(ano)) |> 
+      
+      validate(need(
+        nrow(tidyr::drop_na(base_filtrada_contemp(), iva)) > 0,
+        "Não há dados disponíveis."
+      ))
+      
+      base_filtrada_contemp() |> 
         hc_gauge("iva", c(0, 2.5, 3.3, 4.5, 6.7, 10), rev(cores_gauge()))
     })
     
     output$hc_serie_iva <- highcharter::renderHighchart({
+      
+      validate(need(
+        nrow(tidyr::drop_na(base_filtrada(), iva)) > 0,
+        "Não há dados disponíveis."
+      ))
+      
       base_filtrada() |>
         dplyr::mutate(ano = as.numeric(ano)) |> 
         dplyr::select(ano, value = iva) |> 
