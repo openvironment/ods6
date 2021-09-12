@@ -8,7 +8,21 @@ tab_nomes <- readxl::read_excel(
 ) |> 
   janitor::clean_names() |> 
   dplyr::select(ugrhi, nome) |> 
-  dplyr::mutate(ugrhi = as.character(ugrhi))
+  dplyr::mutate(
+    ugrhi = as.character(ugrhi)
+  )
+
+tab_disp <- readxl::read_excel(
+  "data-raw/xlsx/planilha disponibilidade hidrica.xlsx",
+  skip = 4
+) |> 
+  dplyr::select(-dplyr::starts_with("...")) |> 
+  dplyr::filter(!is.na(ano)) |> 
+  janitor::clean_names() |> 
+  dplyr::mutate(
+    dplyr::across(.fns = as.numeric),
+    ugrhi = as.character(ugrhi)
+  )
 
 base_ugrhi <- tab_iap |> 
   dplyr::select(-(jan:dez), iap = media) |> 
@@ -22,9 +36,9 @@ base_ugrhi <- tab_iap |>
   ) |> 
   dplyr::group_by(ugrhi, ano) |> 
   dplyr::summarise(
-    dplyr::across(c(iqa, iap, iva), mean, na.rm = TRUE)
+    dplyr::across(c(iqa, iap, iva), mean, na.rm = TRUE),
+    .groups = "drop"
   ) |> 
-  dplyr::ungroup() |> 
   dplyr::left_join(tab_nomes, by = "ugrhi") |> 
   dplyr::relocate(nome, .after = ugrhi) |> 
   dplyr::arrange(as.numeric(ugrhi), ano) |> 
@@ -52,12 +66,16 @@ base_ugrhi <- tab_iap |>
     ),
     iqa = round(iqa),
     iap = round(iap),
-    iva = round(iva, 1)
-  )
+    iva = round(iva, 1),
+    ano = as.numeric(ano)
+  ) |> 
+  dplyr::left_join(tab_disp, by = c("ano", "ugrhi"))
+
 
 usethis::use_data(base_ugrhi, overwrite = TRUE)
 
 writexl::write_xlsx(base_ugrhi, "data-raw/xlsx/base_ugrhi.xlsx")
+readr::write_csv(base_ugrhi, "data-raw/csv/base_ugrhi.csv")
 
 base_ugrhi |> 
   dplyr::select(-iap, -iva) |> 

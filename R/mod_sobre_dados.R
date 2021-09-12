@@ -21,7 +21,7 @@ mod_sobre_dados_ui <- function(id){
       ),
       bs4Dash::bs4TabCard(
         id = "sobre_fonte_dados",
-        title = "Fonte de dados",
+        title = "Fonte dos dados",
         width = 12,
         side = "right",
         closable = FALSE,
@@ -65,6 +65,12 @@ mod_sobre_dados_ui <- function(id){
           tabName = "Base de indicadores",
           includeMarkdown(
             system.file("sobre_dados_indicadores.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "Base das UGRHIs",
+          includeMarkdown(
+            system.file("sobre_dados_ugrhis.md", package = "ods6")
           )
         )
       )

@@ -14,7 +14,7 @@ mod_sobre_metodologia_ui <- function(id){
     fluidRow(
       column(
         width = 12,
-        p("Abaixo descrevemos a metolodia de cálculo de todos os 
+        p("Abaixo definimos e/ou descrevemos a metolodia de cálculo de todos os 
           indicadores utilizados neste painel."
         )
       ),
@@ -26,7 +26,7 @@ mod_sobre_metodologia_ui <- function(id){
         closable = FALSE,
         collapsible = FALSE,
         bs4Dash::tabPanel(
-          tabName = "Indicadores",
+          tabName = "Água e esgoto",
           includeMarkdown(
             system.file("sobre_met_indicadores.md", package = "ods6")
           )
@@ -35,6 +35,12 @@ mod_sobre_metodologia_ui <- function(id){
           tabName = "Fator de correção",
           includeMarkdown(
             system.file("sobre_met_fator.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "UGRHIs",
+          includeMarkdown(
+            system.file("sobre_met_ugrhis.md", package = "ods6")
           )
         )
       )

@@ -74,7 +74,7 @@ app_ui <- function(request) {
             icon = "water",
             bs4Dash::bs4SidebarMenuSubItem(
               "Disponibilidade hídrica",
-              icon = "flask",
+              icon = "ruler-vertical",
               tabName = "ugrhi_disp"
             ),
             bs4Dash::bs4SidebarMenuSubItem(
