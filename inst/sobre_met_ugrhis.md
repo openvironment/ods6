@@ -2,9 +2,98 @@
 
 Nas seções a seguir, definimos os indicadores de disponibilidade hídrica utilizados neste Painel.
 
+##### Qmédio
+
+Representa a vazão média de água presente na bacia durante o ano. É considerado um volume menos restritivo ou conservador e são valores mais representativos em bacias que possuem regularização de vazão (SSRH/CRHi, 2011). 
+
+Os valores anuais foram obtidos dos Relatório de qualidade ambiental de cada ano elaborados pela da Secretaria de Infraestrutura e Meio Ambiente (SIMA), Coordenadoria de Planejamento Ambiental e disponibilizados em [Publicações | Coordenadoria de Planejamento Ambiental](https://www.infraestruturameioambiente.sp.gov.br/cpla/category/pub/).
+
+**Unidade**: m3/ano
+
+##### Disponibilidade hídrica per capita
+
+Corresponde à avaliação da quantidade de água disponível por habitante e refere-se a vazão média (Qmédio) em relação à população total no ano de referência. 
+
+**Unidade**: m³/hab/ano
+
+A disponibilidade hídrica per capita segue a seguinte classificação:
+
+- **Boa**: valores maiores que 2.500 m³/hab/ano
+
+- **Atenção**: de 1.500 m³/hab/ano a 2.500 m³/hab/ano
+
+- **Crítico**: valores menores que 1.500 m³/hab/ano
+
+##### Vazão superficial outorgada
+
+Representa a vazão de água superficial dos rios estaduais informadas pelo DAEE.
+
+Valores anuais foram obtidos dos Relatório de qualidade ambiental de cada ano elaborados pela da Secretaria de Infraestrutura e Meio Ambiente (SIMA), Coordenadoria de Planejamento Ambiental e disponibilizados em [Publicações | Coordenadoria de Planejamento Ambiental](https://www.infraestruturameioambiente.sp.gov.br/cpla/category/pub/).
+
+##### Q7,10
+
+Representa a vazão superficial mínima registrada em 7 dias consecutivos em um período de retorno de 10 anos, considerado um volume restritivo e conservador.
+
+Valores anuais foram obtidos dos Relatório de qualidade ambiental de cada ano elaborados pela da Secretaria de Infraestrutura e Meio Ambiente (SIMA), Coordenadoria de Planejamento Ambiental e disponibilizados em [Publicações | Coordenadoria de Planejamento Ambiental](https://www.infraestruturameioambiente.sp.gov.br/cpla/category/pub/).
+
+
+##### Balanço entre a vazão de água superficial outorgada e a vazão superficial mínima
+
+Razão entre a vazão de água superficial outorgada e a vazão superficial mínima (Q7,10) multiplicado por 100. 
+
+**Cálculo**: (Vazão superficial outorgada / Q7,10) * 100
+
+**Unidade**: %
+
+Esse indicador segue a seguinte classificação:
+
+- **Excelente**: menor ou igual a 5%
+
+- **Confortável**: de 5% (exclusive) a 30%
+
+- **Preocupante**: de 30% (exclusive) a 50%
+
+- **Crítico**: de 50% (exclusive) a 100%
+
+- **Muito Crítico**: maior que 100%
+
+##### Vazão total outorgada
+
+Representa a vazão de água superficial outorgada representa a vazão de água superficial dos rios estaduais e as vazões de água subterrâneas informadas pelo DAEE. 
+
+Valores anuais foram obtidos dos Relatório de qualidade ambiental de cada ano elaborados pela da Secretaria de Infraestrutura e Meio Ambiente (SIMA), Coordenadoria de Planejamento Ambiental e disponibilizados em [Publicações | Coordenadoria de Planejamento Ambiental](https://www.infraestruturameioambiente.sp.gov.br/cpla/category/pub/).
+
+##### Q95%
+
+Representa a vazão disponível em 95% do tempo da bacia. A representação da disponibilidade, neste parâmetro, corresponde à vazão “natural” (sem interferência) das bacias.
+
+Valores anuais foram obtidos dos Relatório de qualidade ambiental de cada ano elaborados pela da Secretaria de Infraestrutura e Meio Ambiente (SIMA), Coordenadoria de Planejamento Ambiental e disponibilizados em [Publicações | Coordenadoria de Planejamento Ambiental](https://www.infraestruturameioambiente.sp.gov.br/cpla/category/pub/).
+
+##### Balanço entre a vazão total outorgada (superficial + subterrânea) e a vazão disponível (Q95%)
+
+Razão entre a vazão de água total outorgada e a vazão disponível (Q95%) multiplicada por 100. 
+
+**Cálculo**: (Vazão total outorgada (superficial + subterrânea) / Q95%) * 100
+
+**Unidade**: %
+
+- **Excelente**: menor ou igual a 5%
+
+- **Confortável**: de 5% (exclusive) a 30%
+
+- **Preocupante**: de 30% (exclusive) a 50%
+
+- **Crítico**: de 50% (exclusive) a 100%
+
+- **Muito Crítico**: maior que 100%
+
 ---
 
 ## Qualidade das águas
+
+A qualidade das águas superficiais do Estado de São Paulo é monitorada pela Companhia Ambiental do Estado de São Paulo – CETESB em diversos pontos de monitoramento distribuídos em todas as bacias hidrográficas. Os índices de qualidade das águas superficiais são estimados para cada ponto de monitoramento e são compostos por diversos dos parâmetros avaliados, de acordo com o objetivo de cada um deles.
+
+Os valores dos índices apresentados neste Painel são os **valores médios anuais de todos os pontos de monitoramento agregados por UGHRIs**. Maiores informações sobre os índices também podem ser obtidas nos relatórios da CETESB.
 
 Nas seções a seguir, definimos os indicadores de qualidade das águas utilizados neste Painel.
 

@@ -7,3 +7,5 @@
 ##### Brasil
   
   Até 2030, melhorar a qualidade da água nos corpos hídricos, reduzindo a poluição, eliminando despejos e minimizando o lançamento de materiais e substâncias perigosas, reduzindo pela metade a proporção do lançamento de efluentes não tratados e aumentando substancialmente o reciclo e reuso seguro localmente.
+  
+Todos os valores apresentados a seguir foram obtidos dos relatórios de qualidade de águas interiores publicados anualmente pela CETESB e disponibilizados em: https://cetesb.sp.gov.br/aguas-interiores/publicacoes-e-relatorios/.

@@ -43,6 +43,18 @@ mod_sobre_dados_ui <- function(id){
           includeMarkdown(
             system.file("sobre_dados_snis.md", package = "ods6")
           )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "CETESB",
+          includeMarkdown(
+            system.file("sobre_dados_cetesb.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "SIMA",
+          includeMarkdown(
+            system.file("sobre_dados_sima.md", package = "ods6")
+          )
         )
       )
     ),

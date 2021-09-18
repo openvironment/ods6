@@ -1,3 +1,7 @@
-## Indicador xxxx
+## Balanço entre a vazão de água superficial outorgada e a vazão superficial mínima
 
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet.
+Razão entre a vazão de água superficial outorgada e a vazão superficial mínima (Q7,10)  multiplicado por 100.
+
+A vazão de água superficial outorgada representa a vazão de água superficial dos rios estaduais informadas pelo DAEE.
+
+O Q7,10 representa a vazão superficial mínima registrada em 7 dias consecutivos em um período de retorno de 10 anos, considerado um volume restritivo e conservador.

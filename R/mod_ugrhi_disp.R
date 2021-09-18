@@ -49,16 +49,16 @@ mod_ugrhi_disp_ui <- function(id){
       fluidRow(
         column(
           width = 6,
-          includeMarkdown("inst/disp_qmedio.md")
+          includeMarkdown("inst/disp_demanda_per_capita.md")
         ),
         column(
           offset = 2,
           width = 4,
           br(),
           valueDiv(
-            label = "Q médio",
+            label = "Demanda per capita",
             icon = "water",
-            textOutput(ns("qmedio"))
+            textOutput(ns("demanda_per_capita"))
           )
         )
       ),
@@ -66,7 +66,7 @@ mod_ugrhi_disp_ui <- function(id){
       fluidRow(
         column(
           width = 12,
-          highcharter::highchartOutput(ns("hc_serie_qmedio"), height = "300px")
+          highcharter::highchartOutput(ns("hc_serie_per_capita"), height = "300px")
         )
       ),
       hr(class = "hr-50"),
@@ -80,7 +80,7 @@ mod_ugrhi_disp_ui <- function(id){
           width = 4,
           br(),
           valueDiv(
-            label = "Q7.10",
+            label = "Balanço entre a vazão de água superficial outorgada e a vazão superficial mínima",
             icon = "water",
             textOutput(ns("q7"))
           )
@@ -104,7 +104,7 @@ mod_ugrhi_disp_ui <- function(id){
           width = 4,
           br(),
           valueDiv(
-            label = "Q95",
+            label = "Balanço entre a vazão total outorgada (superficial  + subterrânea) e a vazão disponível",
             icon = "water",
             textOutput(ns("q95"))
           )
@@ -160,27 +160,27 @@ mod_ugrhi_disp_server <- function(id, ugrhi) {
         highcharter::hc_colors(colors = "orange")
     })
     
-    output$qmedio <- renderText({
-      base_filtrada_contemp() |> 
-        dplyr::pull(demanda_total_qmedio) |> 
-        formatar_numero() |> 
-        paste("%")
-    })
+    # output$demanda_per_capita <- renderText({
+    #   base_filtrada_contemp() |> 
+    #     dplyr::pull(demanda_per_capita) |> 
+    #     formatar_numero() |> 
+    #     paste("%")
+    # })
     
-    output$hc_serie_qmedio <- highcharter::renderHighchart({
-      base_filtrada() |>
-        dplyr::select(ano, value = demanda_total_qmedio) |> 
-        dplyr::arrange(ano) |> 
-        as.matrix() |> 
-        hc_serie(
-          nome_formatado = "Q medio",
-          unidade_de_medida = "",
-          text_color = "black",
-          ylab = "qmedio (%)",
-          xlab = "Ano"
-        ) |> 
-        highcharter::hc_colors(colors = "orange")
-    })
+    # output$hc_serie_per_capita <- highcharter::renderHighchart({
+    #   base_filtrada() |>
+    #     dplyr::select(ano, value = demanda_per_capita) |> 
+    #     dplyr::arrange(ano) |> 
+    #     as.matrix() |> 
+    #     hc_serie(
+    #       nome_formatado = "Q medio",
+    #       unidade_de_medida = "",
+    #       text_color = "black",
+    #       ylab = "Demanda per capita (m³/hab/ano)",
+    #       xlab = "Ano"
+    #     ) |> 
+    #     highcharter::hc_colors(colors = "orange")
+    # })
  
     output$q7 <- renderText({
       base_filtrada_contemp() |>
