@@ -106,6 +106,20 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
+.ind-classificacao {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.ind-classificacao span {
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.text-center .reactable {
+  margin: auto;
+}
+
 /**********************************
   Navbar
 **********************************/

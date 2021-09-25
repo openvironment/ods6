@@ -287,3 +287,105 @@ formatar_incons_ano <- function(x) {
   return(list(valor = valor, status = status))
 }
 
+class_disp_pc <- function(value) {
+  if (value == "Boa") {
+    bgcolor <- "#3cab3c"
+    color <- "white"
+  } else if (value == "Atenção") {
+    bgcolor <- "#f9f906"
+    color <- "black"
+  } else if (value == "Crítica") {
+    bgcolor <- "#ef5757"
+    color <- "white"
+  } else {
+    bgcolor <- "white"
+    color <- "black"
+  }
+  
+  htmltools::css(
+    color = color,
+    backgroundColor = bgcolor
+  )
+}
+
+tabela_class_disp_pc <- function() {
+  tibble::tribble(
+    ~ "Intervalo", ~ "Classificação",
+    "> 2.500 m³/hab/ano", "Boa",
+    "≥ 1.500 e ≤ 2.500 m³/hab/ano", "Atenção",
+    "≤ 1.500 m³/hab/ano", "Crítica"
+  ) |> 
+    reactable::reactable(
+      sortable = FALSE,
+      fullWidth = FALSE,
+      width = "500px",
+      defaultColDef = reactable::colDef(
+        align = "center",
+        style = class_disp_pc
+      ),
+      theme = reactable::reactableTheme(
+        headerStyle = list(
+          backgroundColor = "grey",
+          color = "white"
+        )
+      )
+    )
+}
+
+
+class_balanco <- function(value) {
+  value <- tolower(value)
+  if (stringr::str_detect(value, "excelente")) {
+    bgcolor <- "lightblue"
+    color <- "black"
+  } else if (stringr::str_detect(value, "confortável")) {
+    bgcolor <- "#3cab3c"
+    color <- "white"
+  } else if (stringr::str_detect(value, "preocupante")) {
+    bgcolor <- "#f9f906"
+    color <- "black"
+  } else if (stringr::str_detect(value, "muito crítica")) {
+    bgcolor <- "purple"
+    color <- "white"
+  } else if (stringr::str_detect(value, "crítica")) {
+    bgcolor <- "#ef5757"
+    color <- "white"
+  } else {
+    bgcolor <- "white"
+    color <- "black"
+  }
+  
+  htmltools::css(
+    color = color,
+    backgroundColor = bgcolor
+  )
+}
+
+tabela_class_disp_balanco <- function() {
+  tibble::tribble(
+    ~ "Intervalo", ~ "Classificação",
+    "≤ 5%", "Excelente. Pouca ou nenhuma atividade de gerenciamento é necessária.",
+    "> 5% e ≤ 30%", "A situação é confortável, podendo exigir gerenciamento para
+    solução de problemas locais de abastecimento.",
+    "> 30% e ≤ 50%", "Preocupante. A atividade de gerenciamento é indispensável,
+    exigindo a realização de investimentos médios.",
+    "> 50% e ≤ 100%", "A situação é crítica, exigindo atividade de gerenciamento 
+    e grandes investimentos.",
+    "> 100%", "A situação é muito crítica."
+  ) |> 
+    reactable::reactable(
+      sortable = FALSE,
+      fullWidth = FALSE,
+      width = "600px",
+      defaultColDef = reactable::colDef(
+        align = "center",
+        style = class_balanco
+      ),
+      theme = reactable::reactableTheme(
+        headerStyle = list(
+          backgroundColor = "grey",
+          color = "white"
+        )
+      )
+    )
+}

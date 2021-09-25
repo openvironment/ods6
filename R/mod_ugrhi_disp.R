@@ -58,8 +58,17 @@ mod_ugrhi_disp_ui <- function(id){
           valueDiv(
             label = "Demanda per capita",
             icon = "water",
-            textOutput(ns("demanda_per_capita"))
+            textOutput(ns("demanda_per_capita")),
+            htmlOutput(ns("demanda_per_capita_class"))
           )
+        )
+      ),
+      br(),
+      fluidRow(
+        column(
+          class = "text-center",
+          width = 12,
+          tabela_class_disp_pc()
         )
       ),
       br(),
@@ -82,8 +91,18 @@ mod_ugrhi_disp_ui <- function(id){
           valueDiv(
             label = "Balanço entre a vazão de água superficial outorgada e a vazão superficial mínima",
             icon = "water",
-            textOutput(ns("q7"))
+            textOutput(ns("q7")),
+            br(),
+            htmlOutput(ns("q7_class"))
           )
+        )
+      ),
+      br(),
+      fluidRow(
+        column(
+          class = "text-center",
+          width = 12,
+          tabela_class_disp_balanco()
         )
       ),
       br(),
@@ -106,8 +125,18 @@ mod_ugrhi_disp_ui <- function(id){
           valueDiv(
             label = "Balanço entre a vazão total outorgada (superficial  + subterrânea) e a vazão disponível",
             icon = "water",
-            textOutput(ns("q95"))
+            textOutput(ns("q95")),
+            br(),
+            htmlOutput(ns("q95_class"))
           )
+        )
+      ),
+      br(),
+      fluidRow(
+        column(
+          class = "text-center",
+          width = 12,
+          tabela_class_disp_balanco()
         )
       ),
       br(),
@@ -163,8 +192,27 @@ mod_ugrhi_disp_server <- function(id, ugrhi) {
     output$demanda_per_capita <- renderText({
       base_filtrada_contemp() |>
         dplyr::pull(demanda_per_capita) |>
-        formatar_numero() |>
+        formatar_numero(accuracy = 1) |>
         paste("m³/hab/ano")
+    })
+    
+    output$demanda_per_capita_class <- renderUI({
+      valor <- base_filtrada_contemp() |>
+        dplyr::pull(demanda_per_capita) |> 
+        round(1)
+      
+      classificacao <- dplyr::case_when(
+        valor > 2500 ~ "Boa",
+        valor < 1500 ~ "Crítica",
+        TRUE ~ "Atenção"
+      )
+      
+      cor <- class_disp_pc(classificacao)
+      
+      div(
+        class = "ind-classificacao",
+        span(classificacao, style = cor)
+      )
     })
 
     output$hc_serie_per_capita <- highcharter::renderHighchart({
@@ -189,6 +237,26 @@ mod_ugrhi_disp_server <- function(id, ugrhi) {
         paste("%")
     })
     
+    output$q7_class <- renderUI({
+      valor <- base_filtrada_contemp() |>
+        dplyr::pull(demanda_superficial_q7_10)
+      
+      classificacao <- dplyr::case_when(
+        valor < 5 ~ "Excelente",
+        valor <= 30 ~ "Confortável",
+        valor <= 50 ~ "Preocupante",
+        valor <= 100 ~ "Crítica",
+        TRUE ~ "Muito crítica"
+      )
+      
+      cor <- class_balanco(classificacao)
+      
+      div(
+        class = "ind-classificacao",
+        span(classificacao, style = cor)
+      )
+    })
+    
     output$hc_serie_q7 <- highcharter::renderHighchart({
       base_filtrada() |>
         dplyr::select(ano, value = demanda_superficial_q7_10) |> 
@@ -209,6 +277,26 @@ mod_ugrhi_disp_server <- function(id, ugrhi) {
         dplyr::pull(demanda_total_q95_percent) |> 
         formatar_numero() |> 
         paste("%")
+    })
+    
+    output$q95_class <- renderUI({
+      valor <- base_filtrada_contemp() |>
+        dplyr::pull(demanda_total_q95_percent)
+      
+      classificacao <- dplyr::case_when(
+        valor < 5 ~ "Excelente",
+        valor <= 30 ~ "Confortável",
+        valor <= 50 ~ "Preocupante",
+        valor <= 100 ~ "Crítica",
+        TRUE ~ "Muito crítica"
+      )
+      
+      cor <- class_balanco(classificacao)
+      
+      div(
+        class = "ind-classificacao",
+        span(classificacao, style = cor)
+      )
     })
     
     output$hc_serie_q95 <- highcharter::renderHighchart({
