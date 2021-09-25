@@ -35,7 +35,7 @@ mod_munip_resumo_ui <- function(id) {
     fluidRow(
       column(
         width = 12,
-        h2("Indicadores de acesso à água e à coleta de esgoto")
+        h2("Indicadores de acesso à água, coleta e tratamento de esgoto")
       )
     ),
     br(),

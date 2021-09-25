@@ -41,7 +41,7 @@ mod_munip_esgot_ui <- function(id){
     br(),
     fluidRow(
       card_indicadores(
-        title = "Coleta de esgoto", 
+        title = "Acesso à coleta de esgoto", 
         mod_aux_ind_od6_ui(
           ns("aux_ind_od6_ui_1"),
           desc_ind = "O acesso à coleta de esgoto é condição primordial para a

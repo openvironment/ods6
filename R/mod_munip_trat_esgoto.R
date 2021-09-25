@@ -73,8 +73,7 @@ mod_munip_trat_esgoto_server <- function(id, base_filtrada,
       base_filtrada,
       base_filtrada_contemp,
       indicador = "prop_esgoto_tratado",
-      nome_indicador_ods = "Proporção do fluxo de águas residuais doméstica e 
-      industrial tratadas de forma segura.",
+      nome_indicador_ods = "Porcentagem de esgoto sanitário tratado em relação ao produzido",
       tipo_servicos = NULL
     )
  

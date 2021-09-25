@@ -14,11 +14,40 @@ mod_sobre_dados_ui <- function(id){
     fluidRow(
       column(
         width = 12,
-        p("Abaixo descrevemos as fontes e o processo de importação dos dados 
-        utilizados neste projeto. Em seguida, descrevemos o 
-        processo de construção das bases que alimentam este painel."
+        p("Abaixo descrevemos o processo de construção das bases que alimentam 
+        este painel. Em seguida, descrevemos as fontes e o processo de importação 
+        dos dados utilizados na construção dessas bases."
         )
       ),
+      bs4Dash::bs4TabCard(
+        id = "sobre_dados_construidos",
+        title = "Bases construídas",
+        width = 12,
+        side = "right",
+        closable = FALSE,
+        collapsible = FALSE,
+        bs4Dash::tabPanel(
+          tabName = "Base agregada",
+          includeMarkdown(
+            system.file("sobre_dados_agregados.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "Base de indicadores",
+          includeMarkdown(
+            system.file("sobre_dados_indicadores.md", package = "ods6")
+          )
+        ),
+        bs4Dash::tabPanel(
+          tabName = "Base das UGRHIs",
+          includeMarkdown(
+            system.file("sobre_dados_ugrhis.md", package = "ods6")
+          )
+        )
+      )
+    ),
+    br(),
+    fluidRow(
       bs4Dash::bs4TabCard(
         id = "sobre_fonte_dados",
         title = "Fonte dos dados",
@@ -54,35 +83,6 @@ mod_sobre_dados_ui <- function(id){
           tabName = "SIMA",
           includeMarkdown(
             system.file("sobre_dados_sima.md", package = "ods6")
-          )
-        )
-      )
-    ),
-    br(),
-    fluidRow(
-      bs4Dash::bs4TabCard(
-        id = "sobre_dados_construidos",
-        title = "Bases construídas",
-        width = 12,
-        side = "right",
-        closable = FALSE,
-        collapsible = FALSE,
-        bs4Dash::tabPanel(
-          tabName = "Base agregada",
-          includeMarkdown(
-            system.file("sobre_dados_agregados.md", package = "ods6")
-          )
-        ),
-        bs4Dash::tabPanel(
-          tabName = "Base de indicadores",
-          includeMarkdown(
-            system.file("sobre_dados_indicadores.md", package = "ods6")
-          )
-        ),
-        bs4Dash::tabPanel(
-          tabName = "Base das UGRHIs",
-          includeMarkdown(
-            system.file("sobre_dados_ugrhis.md", package = "ods6")
           )
         )
       )

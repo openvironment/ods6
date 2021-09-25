@@ -160,27 +160,27 @@ mod_ugrhi_disp_server <- function(id, ugrhi) {
         highcharter::hc_colors(colors = "orange")
     })
     
-    # output$demanda_per_capita <- renderText({
-    #   base_filtrada_contemp() |> 
-    #     dplyr::pull(demanda_per_capita) |> 
-    #     formatar_numero() |> 
-    #     paste("%")
-    # })
-    
-    # output$hc_serie_per_capita <- highcharter::renderHighchart({
-    #   base_filtrada() |>
-    #     dplyr::select(ano, value = demanda_per_capita) |> 
-    #     dplyr::arrange(ano) |> 
-    #     as.matrix() |> 
-    #     hc_serie(
-    #       nome_formatado = "Q medio",
-    #       unidade_de_medida = "",
-    #       text_color = "black",
-    #       ylab = "Demanda per capita (m³/hab/ano)",
-    #       xlab = "Ano"
-    #     ) |> 
-    #     highcharter::hc_colors(colors = "orange")
-    # })
+    output$demanda_per_capita <- renderText({
+      base_filtrada_contemp() |>
+        dplyr::pull(demanda_per_capita) |>
+        formatar_numero() |>
+        paste("m³/hab/ano")
+    })
+
+    output$hc_serie_per_capita <- highcharter::renderHighchart({
+      base_filtrada() |>
+        dplyr::select(ano, value = demanda_per_capita) |>
+        dplyr::arrange(ano) |>
+        as.matrix() |>
+        hc_serie(
+          nome_formatado = "Demanda per capita",
+          unidade_de_medida = "",
+          text_color = "black",
+          ylab = "Demanda per capita (m³/hab/ano)",
+          xlab = "Ano"
+        ) |>
+        highcharter::hc_colors(colors = "orange")
+    })
  
     output$q7 <- renderText({
       base_filtrada_contemp() |>

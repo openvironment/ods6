@@ -8,11 +8,11 @@ Representa a vazão média de água presente na bacia durante o ano. É consider
 
 Os valores anuais foram obtidos dos Relatório de qualidade ambiental de cada ano elaborados pela da Secretaria de Infraestrutura e Meio Ambiente (SIMA), Coordenadoria de Planejamento Ambiental e disponibilizados em [Publicações | Coordenadoria de Planejamento Ambiental](https://www.infraestruturameioambiente.sp.gov.br/cpla/category/pub/).
 
-**Unidade**: m3/ano
+**Unidade**: m3/s
 
 ##### Disponibilidade hídrica per capita
 
-Corresponde à avaliação da quantidade de água disponível por habitante e refere-se a vazão média (Qmédio) em relação à população total no ano de referência. 
+Corresponde à avaliação da quantidade de água disponível por habitante e refere-se à vazão média (Qmédio) em relação à população total no ano de referência. 
 
 **Unidade**: m³/hab/ano
 

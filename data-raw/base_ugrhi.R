@@ -12,6 +12,29 @@ tab_nomes <- readxl::read_excel(
     ugrhi = as.character(ugrhi)
   )
 
+tab_munip <- foreign::read.dbf("data-raw/dbf/munic_bacias.dbf") |> 
+  janitor::clean_names() |> 
+  tibble::as_tibble() |> 
+  dplyr::distinct(cod_ugrhi, codigo) |> 
+  dplyr::mutate(codigo = stringr::str_sub(codigo, 1, 6))
+
+tab_pop <- base_indicadores |> 
+  dplyr::select(ano, codigo = munip_cod, pop = proj_pop_total) |> 
+  dplyr::left_join(
+    tab_munip,
+    by = "codigo"
+  ) |> 
+  dplyr::group_by(ano, codigo) |> 
+  dplyr::mutate(
+    n = dplyr::n(),
+    pop = pop / n
+  ) |> 
+  dplyr::group_by(ano, ugrhi = cod_ugrhi) |> 
+  dplyr::summarise(
+    pop = sum(pop)
+  ) |> 
+  dplyr::ungroup()
+
 tab_disp <- readxl::read_excel(
   "data-raw/xlsx/planilha disponibilidade hidrica.xlsx",
   skip = 4
@@ -69,7 +92,11 @@ base_ugrhi <- tab_iap |>
     iva = round(iva, 1),
     ano = as.numeric(ano)
   ) |> 
-  dplyr::left_join(tab_disp, by = c("ano", "ugrhi"))
+  dplyr::left_join(tab_disp, by = c("ano", "ugrhi")) |> 
+  dplyr::left_join(tab_pop, by = c("ano", "ugrhi")) |> 
+  dplyr::mutate(
+    demanda_per_capita = qmedio / pop / (1 / 60 / 60 / 24 / 365)
+  )
 
 
 usethis::use_data(base_ugrhi, overwrite = TRUE)

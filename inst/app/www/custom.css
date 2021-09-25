@@ -318,6 +318,13 @@ aside {
   margin-left: 10px;
 }
 
+.ugrhi-disp .valueDiv-value {
+  font-size: 2em;
+}
+
+.ugrhi-disp .valueDiv-icon {
+  font-size: 2em;
+}
 
 .valueDiv-value, .valueDiv-value > div {
   display: inline;

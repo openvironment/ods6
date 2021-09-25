@@ -59,9 +59,10 @@ mod_munip_uso_eficiente_ui <- function(id){
           tabName = "Perda na distribuição",
           mod_aux_ind_od6_ui(
             ns("aux_ind_od6_ui_2"),
-            desc_ind = "Segundo Organização Mundial da Saúde cada pessoa deve ter no 
-          mínimo 110 litros de água por dia para atender as suas 
-          necessidades de consumo e higiene.",
+            desc_ind = "Não existe valores de perdas aceitáveis estabelecidos para o 
+            Estado de São Paulo. Os valores praticados variam entre os países e 
+            são função de boas práticas de gestão das empresas. Assim, é 
+            importante que se estabeleçam metas de redução sistemática das perdas.",
             text_pie_chart = ""
           )
         )

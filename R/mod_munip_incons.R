@@ -15,20 +15,36 @@ mod_munip_incons_ui <- function(id){
       column(
         width = 12,
         h2("Inconsistências de nível 1"),
-        p("Se referem aos indicadores de perdas totais de água e 
-          consumo médio per capita, cujos valores se encontram fora
-          da faixa considerada tolerável com base na prática e ou na 
-          literatura da área. Caixas", 
+        p("Se referem aos indicadores de percentuais da população com acesso a 
+          sistemas seguros de abastecimento de água e coleta de esgoto sanitário 
+          que superem o valor de 100%. Caixas", 
           span(style = "color: orange; font-weight: bold;", " laranjas "),
-          "representam presença da inconsistência, enquanto caixas",
+          "representam presença da inconsistência. Caixas",
           span(style = "color: var(--verdeODS6); font-weight: bold;", " verdes "),
-          "representam ausência.")
+          "representam ausência da inconsistência.")
       )
     ),
     br(),
     fluidRow(
       uiOutput(ns("ind_acesso_agua")),
-      uiOutput(ns("ind_acesso_esgoto")),
+      uiOutput(ns("ind_acesso_esgoto"))
+    ),
+    hr(),
+    fluidRow(
+      column(
+        width = 12,
+        h2("Inconsistências de nível 2"),
+        p("Indicadores de perda total no sistema de distribuição de água e de 
+          consumo médio per capita cujos valores estejam fora das faixas 
+          convencionais. Caixas", 
+          span(style = "color: orange; font-weight: bold;", " laranjas "),
+          "representam presença da inconsistência. Caixas",
+          span(style = "color: var(--verdeODS6); font-weight: bold;", " verdes "),
+          "representam ausência da inconsistência.")
+      )
+    ),
+    br(),
+    fluidRow(
       uiOutput(ns("ind_perdas_totais")),
       uiOutput(ns("ind_consumo"))
     ),
@@ -36,15 +52,15 @@ mod_munip_incons_ui <- function(id){
     fluidRow(
       column(
         width = 12,
-        h2("Inconsistências de nível 2"),
+        h2("Inconsistências de nível 3"),
         p("se referem aos indicadores de acesso à água e acesso à
           coleta de esgoto que apresentam valores superiores ou 
           inferiores a 20% do registrado no ano imediatamente 
-          anterior. Caixas",
+          anterior. Caixas", 
           span(style = "color: orange; font-weight: bold;", " laranjas "),
-          "representam presença da inconsistência, enquanto caixas",
+          "representam presença da inconsistência. Caixas",
           span(style = "color: var(--verdeODS6); font-weight: bold;", " verdes "),
-          "representam ausência.")
+          "representam ausência da inconsistência.")
       )
     ),
     br(),

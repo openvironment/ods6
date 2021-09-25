@@ -5,10 +5,10 @@ account: nara-fspusp
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4104803
-bundleId: 4901267
+bundleId: 5046769
 url: https://nara-fspusp.shinyapps.io/ods6-sp/
-when: 1628443709.24146
-lastSyncTime: 1628443709.24147
+when: 1631981704.6578
+lastSyncTime: 1631981704.65781
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .Rprofile
